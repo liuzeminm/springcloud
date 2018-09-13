@@ -19,7 +19,7 @@ import org.springframework.util.PropertyPlaceholderHelper;
 /**
  * Saturn抽象父类
  *
- * @author linzhaoming
+ * @author laixiangqun
  */
 public abstract class AbstractSaturnJob extends AbstractElasticJob {
 

@@ -9,7 +9,7 @@ import java.security.Security;
 /**
  * 对称算法AES
  *
- * @author liangxianyong
+ * @author laixiangqun
  * @date 2018年5月21日
  * @time 上午10:27:27
  */

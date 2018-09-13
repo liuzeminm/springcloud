@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author liangxianyong
+ * @author laixiangqun
  * @date 2018年5月3日
  * @time 上午10:34:21
  */
@@ -71,7 +71,7 @@ public class DateTimeUtil {
      * @param startDate
      * @param minute
      * @return
-     * @author liangxianyong  2016年7月4日 下午1:06:47
+     * @author laixiangqun  2016年7月4日 下午1:06:47
      */
     public static Date addTime(final Date startDate, final int minute) {
         long millis = startDate.getTime();
@@ -86,7 +86,7 @@ public class DateTimeUtil {
      * @param date
      * @param daynum
      * @return
-     * @author liangxianyong  2016年7月4日 下午1:06:51
+     * @author laixiangqun  2016年7月4日 下午1:06:51
      */
     public static Date addDate(final Date date, final int daynum) {
         int minute = daynum * 60 * 24;

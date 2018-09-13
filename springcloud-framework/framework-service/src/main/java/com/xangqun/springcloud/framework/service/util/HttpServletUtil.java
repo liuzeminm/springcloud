@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Servlet Utility
  *
- * @author gaoyanlong
+ * @author laixiangqun
  * @since 2018年1月22日
  */
 public class HttpServletUtil {

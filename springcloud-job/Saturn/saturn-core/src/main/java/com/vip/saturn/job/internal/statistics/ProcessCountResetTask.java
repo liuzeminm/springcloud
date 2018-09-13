@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 执行统计信息清零的动作
  * 
- * @author linzhaoming
+ * @author laixiangqun
  *
  */
 public class ProcessCountResetTask extends TimerTask {

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Header
  *
- * @author wanghongben
+ * @author laixiangqun
  * @since 2018年1月24日
  */
 public class Header {

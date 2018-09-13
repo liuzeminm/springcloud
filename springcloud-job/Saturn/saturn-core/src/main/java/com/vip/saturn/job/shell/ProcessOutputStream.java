@@ -7,7 +7,7 @@ import com.vip.saturn.job.utils.LRUList;
 /**
  * 封装子进程的输出信息
  * 
- * @author linzhaoming
+ * @author laixiangqun
  *
  */
 public class ProcessOutputStream extends LogOutputStream {

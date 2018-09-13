@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * 处理通用Script的调度(也支持PHP)
  *
- * @author linzhaoming
+ * @author laixiangqun
  */
 public class SaturnScriptJob extends CrondJob {
 

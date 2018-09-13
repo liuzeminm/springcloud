@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * @author linzhaoming
+ * @author laixiangqun
  */
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 

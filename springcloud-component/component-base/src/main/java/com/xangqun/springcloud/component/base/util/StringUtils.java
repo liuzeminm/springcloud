@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/jeespring">jeespring</a> All rights reserved.
+ * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/laixiangqun">laixiangqun</a> All rights reserved.
  */
 package com.xangqun.springcloud.component.base.util;
 
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 /**
  * 字符串工具类, 继承org.apache.commons.lang3.StringUtils类
  *
- * @author 黄炳桂 516821420@qq.com
+ * @author laixiangqun
  * @version 2013-05-22
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {

@@ -7,7 +7,7 @@ import java.util.Comparator;
  * 希尔排序算法
  *
  * @param <E>
- * @author jzj
+ * @author laixiangqun
  * @date 2009-12-5
  */
 public class ShelltSort<E extends Comparable<E>> extends Sort<E> {

@@ -6,7 +6,7 @@ package com.xangqun.springcloud.framework.service.exception;
 /**
  * 异常基类，各个模块的运行期异常均继承与该类
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @version 2016-05-24
  */
 public class BaseException extends RuntimeException {

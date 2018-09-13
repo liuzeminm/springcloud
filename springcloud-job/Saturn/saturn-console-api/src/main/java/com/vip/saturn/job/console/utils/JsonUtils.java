@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Json Utils
  *
- * @author linzhaoming
+ * @author laixiangqun
  */
 public class JsonUtils {
 

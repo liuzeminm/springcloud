@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * HttpClient Utility
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @since 2018年1月15日
  */
 public class HttpClientUtils {

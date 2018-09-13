@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 1000万：480,12,40.0%<p>
  * 100万：50,10,5.0%<p>
  *
- * @author lry
+ * @author laixiangqun
  */
 public class SystemClock {
     private final long period;

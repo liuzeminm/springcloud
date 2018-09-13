@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Json Utils
  *
- * @author linzhaoming
+ * @author laixiangqun
  */
 public class JsonUtils {
 	static Logger log = LoggerFactory.getLogger(JsonUtils.class);

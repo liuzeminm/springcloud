@@ -6,7 +6,7 @@ import java.util.Comparator;
  * 快速排序算法
  *
  * @param <E>
- * @author jzj
+ * @author laixiangqun
  * @date 2009-12-9
  */
 public class QuickSort<E extends Comparable<E>> extends Sort<E> {

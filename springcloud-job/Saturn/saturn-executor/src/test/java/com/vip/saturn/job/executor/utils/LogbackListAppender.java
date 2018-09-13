@@ -19,7 +19,7 @@ import java.util.List;
  *
  * 在测试开始前, 使用任意一种addToLogger()方法将此appender添加到需要侦听的logger中.
  *
- * @author calvin
+ * @author laixiangqun
  */
 public class LogbackListAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 

@@ -20,7 +20,7 @@ import java.util.Set;
 /**
  * Bean Utility
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @since 2018年1月15日
  */
 public class BeanUtils {

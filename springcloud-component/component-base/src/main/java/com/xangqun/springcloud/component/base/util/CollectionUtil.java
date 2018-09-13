@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author guofeng
+ * @author laixiangqun
  * @since 2018年1月18日
  */
 public class CollectionUtil {

@@ -7,7 +7,7 @@ import java.util.Comparator;
  * 归并排序算法
  *
  * @param <E>
- * @author jzj
+ * @author laixiangqun
  * @date 2009-12-11
  */
 public class MergeSort<E extends Comparable<E>> extends Sort<E> {

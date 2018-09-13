@@ -11,7 +11,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.stereotype.Component;
 
 /**
- * @author songjie
+ * @author laixiangqun
  * @since 2018年2月8日
  */
 @Component

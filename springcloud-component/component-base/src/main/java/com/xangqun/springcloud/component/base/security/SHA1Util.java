@@ -12,7 +12,7 @@ import java.util.Base64;
 /**
  * hash算法 SHA1
  *
- * @author liangxianyong
+ * @author laixiangqun
  * @date 2018年5月21日
  * @time 上午10:27:14
  */

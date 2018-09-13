@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Byte Utility
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @since 2018年1月15日
  */
 public class ByteUtil {

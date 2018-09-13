@@ -15,7 +15,7 @@ import java.util.Enumeration;
 /**
  * ip工具类
  *
- * @author songjie
+ * @author laixiangqun
  * @since 2018年1月17日
  */
 public class IPUtils {

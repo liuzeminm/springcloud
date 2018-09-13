@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by owen on 2017/9/10.
+ * Created by laixiangqun on 2017/9/10.
  */
 @Component
 public class AccessFilter extends ZuulFilter {

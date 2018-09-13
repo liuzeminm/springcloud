@@ -19,7 +19,7 @@ import com.vip.saturn.job.console.utils.SessionAttributeKeys;
  * Record the last url visited.
  * 
  * 
- * @author linzhaoming
+ * @author laixiangqun
  *
  */
 public class RecordLastVisit implements Filter {

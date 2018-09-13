@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 用于处理Shell的相关pid功能
  *
- * @author linzhaoming
+ * @author laixiangqun
  */
 public class ScriptPidUtils {
 

@@ -19,7 +19,7 @@ import java.net.URLEncoder;
  * 3.Commons-Lang的xml/html escape
  * 4.JDK提供的URLEncoder
  *
- * @author calvin
+ * @author laixiangqun
  * @version 2013-01-15
  */
 public class Encodes {

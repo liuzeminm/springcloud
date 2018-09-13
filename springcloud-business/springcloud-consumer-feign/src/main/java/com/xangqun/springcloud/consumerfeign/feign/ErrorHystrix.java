@@ -3,7 +3,7 @@ package com.xangqun.springcloud.consumerfeign.feign;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by shmily on 2018/5/28.
+ * Created by laixiangqun on 2018/5/28.
  */
 @Component
 public class ErrorHystrix implements SpringDemoFeignService {

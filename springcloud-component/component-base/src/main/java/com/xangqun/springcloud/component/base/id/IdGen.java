@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/jeespring">jeespring</a> All rights reserved.
+ * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/laixiangqun">laixiangqun</a> All rights reserved.
  */
 package com.xangqun.springcloud.component.base.id;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * 封装各种生成唯一性ID算法的工具类.
  *
- * @author 黄炳桂 516821420@qq.com
+ * @author laixiangqun
  * @version 2013-01-15
  */
 @Service

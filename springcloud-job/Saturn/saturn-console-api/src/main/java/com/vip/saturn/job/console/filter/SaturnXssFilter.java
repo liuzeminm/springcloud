@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 过滤防止xss攻击
  *
- * @author linzhaoming
+ * @author laixiangqun
  */
 public class SaturnXssFilter implements Filter {
 

@@ -20,7 +20,7 @@ import com.vip.saturn.job.threads.SaturnThreadFactory;
 /**
  * 分片监听管理器.
  *
- * @author linzhaoming
+ * @author laixiangqun
  *
  */
 public class ShardingListenerManager extends AbstractListenerManager {

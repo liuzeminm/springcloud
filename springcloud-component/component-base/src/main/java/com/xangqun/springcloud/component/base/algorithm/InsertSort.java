@@ -7,7 +7,7 @@ import java.util.Comparator;
  * 直接插入排序算法
  *
  * @param <E>
- * @author jzj
+ * @author laixiangqun
  * @date 2009-12-5
  */
 public class InsertSort<E extends Comparable<E>> extends Sort<E> {

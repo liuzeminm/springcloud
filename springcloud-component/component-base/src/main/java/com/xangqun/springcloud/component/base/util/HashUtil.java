@@ -11,7 +11,7 @@ import org.apache.commons.codec.digest.DigestUtils;
  * TODO。
  * </pre>
  *
- * @author HeShuyuan@foresee.com.cn
+ * @author laixiangqun
  * @version 1.00.00
  *
  * <pre>

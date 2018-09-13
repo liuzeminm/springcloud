@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * BaseBusinessDto
  *
- * @author wanghongben
+ * @author laixiangqun
  * @since 2018年1月24日
  */
 public class BaseBusinessDto implements Serializable {

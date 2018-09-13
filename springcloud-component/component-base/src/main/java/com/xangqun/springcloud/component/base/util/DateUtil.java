@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * The common date/time utils.
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @since 2018年1月15日
  */
 public class DateUtil {

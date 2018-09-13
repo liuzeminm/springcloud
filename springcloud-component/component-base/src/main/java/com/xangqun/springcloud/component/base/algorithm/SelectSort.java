@@ -6,7 +6,7 @@ import java.util.Comparator;
  * 简单选择排序算法
  *
  * @param <E>
- * @author jzj
+ * @author laixiangqun
  * @date 2009-12-5
  */
 public class SelectSort<E extends Comparable<E>> extends Sort<E> {

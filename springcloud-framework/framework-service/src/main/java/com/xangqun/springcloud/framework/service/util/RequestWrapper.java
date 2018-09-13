@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * @author gaoyanlong
+ * @author laixiangqun
  * @since 2018年2月25日
  */
 public class RequestWrapper extends HttpServletRequestWrapper {

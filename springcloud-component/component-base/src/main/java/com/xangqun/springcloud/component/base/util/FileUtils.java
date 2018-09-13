@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/jeespring">jeespring</a> All rights reserved.
+ * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/laixiangqun">laixiangqun</a> All rights reserved.
  */
 package com.xangqun.springcloud.component.base.util;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * 文件操作工具类
  * 实现文件的创建、删除、复制、压缩、解压以及目录的创建、删除、复制、压缩解压等功能
  *
- * @author 黄炳桂 516821420@qq.com
+ * @author laixiangqun
  * @version 2015-3-16
  */
 public class FileUtils extends org.apache.commons.io.FileUtils {

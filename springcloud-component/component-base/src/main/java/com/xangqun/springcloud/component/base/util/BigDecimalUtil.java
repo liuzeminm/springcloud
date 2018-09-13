@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 /**
  * BigDecimal Utility
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @since 2018年1月15日
  */
 public class BigDecimalUtil {

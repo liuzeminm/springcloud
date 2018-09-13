@@ -13,7 +13,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author gaoyanlong
+ * @author laixiangqun
  * @Class Name MessageUtils
  * @since 2018年1月3日
  */

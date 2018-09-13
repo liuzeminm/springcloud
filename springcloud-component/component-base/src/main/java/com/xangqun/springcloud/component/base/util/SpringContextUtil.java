@@ -20,7 +20,7 @@ import java.util.Map.Entry;
 /**
  * 用于获取spring的applicationContext
  *
- * @author liangxianyong
+ * @author laixiangqun
  * @date 2018年4月24日
  * @time 上午10:44:49
  */

@@ -3,7 +3,7 @@ package com.vip.saturn.it;
 /**
  * 代表执行作业的类型
  * 
- * @author linzhaoming
+ * @author laixiangqun
  *
  */
 public enum JobType {

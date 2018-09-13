@@ -3,7 +3,7 @@ package com.xangqun.springcloud.component.base.util;
 /**
  * 字符串比较
  *
- * @author Administrator
+ * @author laixiangqun
  */
 public class CompareStringUtil {
 

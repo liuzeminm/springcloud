@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/jeespring">jeespring</a> All rights reserved.
+ * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/laixiangqun">laixiangqun</a> All rights reserved.
  */
 package com.xangqun.springcloud.component.base.http;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 用户代理字符串识别工具
  *
- * @author 黄炳桂 516821420@qq.com
+ * @author laixiangqun
  * @version 2014-6-13
  */
 public class UserAgentUtils {

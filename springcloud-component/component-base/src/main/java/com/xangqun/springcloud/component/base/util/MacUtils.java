@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/jeespring">jeespring</a> All rights reserved.
+ * Copyright &copy; 2012-2016 <a href="https://github.com/HuangBingGui/laixiangqun">laixiangqun</a> All rights reserved.
  */
 package com.xangqun.springcloud.component.base.util;
 
@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 /**
  * MAC地址工具
  *
- * @author 黄炳桂 516821420@qq.com
+ * @author laixiangqun
  * @version 2013-12-21
  */
 public class MacUtils {

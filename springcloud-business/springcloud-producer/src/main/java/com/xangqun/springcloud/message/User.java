@@ -2,7 +2,7 @@ package com.xangqun.springcloud.message;
 
 
 /**
- * @author shmilyahu
+ * @author laixiangqun
  * @date 2018/7/3 23:11
  */
 public class User {

@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * BaseWebController
  *
- * @author wanghongben
+ * @author laixiangqun
  * @since 2018年1月24日
  */
 public class BaseWebController {

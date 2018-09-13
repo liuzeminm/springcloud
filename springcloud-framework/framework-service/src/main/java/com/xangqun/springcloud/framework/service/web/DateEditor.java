@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * DateEditor扩展
  *
- * @author wanghongben
+ * @author laixiangqun
  * @since 2018年1月24日
  */
 public class DateEditor extends PropertyEditorSupport {

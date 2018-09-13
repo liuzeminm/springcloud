@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * RequestDto
  *
  * @param <T>
- * @author wanghongben
+ * @author laixiangqun
  * @since 2018年1月24日
  */
 public class RequestDto<T extends BaseBusinessDto> {

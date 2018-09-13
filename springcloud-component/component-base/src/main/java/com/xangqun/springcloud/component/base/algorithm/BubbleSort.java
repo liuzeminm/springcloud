@@ -6,7 +6,7 @@ import java.util.Comparator;
  * 冒泡排序算法
  *
  * @param <E>
- * @author jzj
+ * @author laixiangqun
  * @date 2009-12-9
  */
 public class BubbleSort<E extends Comparable<E>> extends Sort<E> {

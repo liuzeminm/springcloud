@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Watchdog for shell job process, provide this function that kill process when timeout or forceStop.
  *
- * @author linzhaoming
+ * @author laixiangqun
  * @author hebelala
  */
 public class SaturnExecuteWatchdog extends ExecuteWatchdog {

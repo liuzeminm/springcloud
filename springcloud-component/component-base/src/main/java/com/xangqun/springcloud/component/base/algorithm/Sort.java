@@ -9,7 +9,7 @@ import java.util.Random;
  * 元素要具有比较能力，即数组元素已实现了Comparable接口
  *
  * @param <E>
- * @author jzj
+ * @author laixiangqun
  * @date 2009-12-5
  */
 public abstract class Sort<E extends Comparable<E>> {

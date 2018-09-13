@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * RSA Utility
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @since 2018年1月15日
  */
 public class RSAUtils {
@@ -42,7 +42,6 @@ public class RSAUtils {
      * 公钥加密
      *
      * @param data
-     * @param publicKey
      * @return
      * @throws NoSuchPaddingException
      * @throws NoSuchAlgorithmException
@@ -75,7 +74,6 @@ public class RSAUtils {
      * 私钥解密
      *
      * @param data
-     * @param privateKey
      * @return
      * @throws Exception
      */

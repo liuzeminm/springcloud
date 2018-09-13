@@ -21,7 +21,7 @@ import org.springframework.util.StringUtils;
 /**
  * redis配置类
  *
- * @author songjie
+ * @author laixiangqun
  * @since 2018年1月17日
  */
 @Configuration

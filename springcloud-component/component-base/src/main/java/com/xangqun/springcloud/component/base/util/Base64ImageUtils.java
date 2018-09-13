@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by zhangwenchao on 2017/9/29.
+ * Created by laixiangqun on 2017/9/29.
  * 本地或者网络图片资源转为Base64字符串
  */
 public class Base64ImageUtils {

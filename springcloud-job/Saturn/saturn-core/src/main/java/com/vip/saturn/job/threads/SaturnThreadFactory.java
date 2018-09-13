@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Saturn的作业执行Factory
  * 
- * @author linzhaoming
+ * @author laixiangqun
  *
  */
 public class SaturnThreadFactory implements ThreadFactory {

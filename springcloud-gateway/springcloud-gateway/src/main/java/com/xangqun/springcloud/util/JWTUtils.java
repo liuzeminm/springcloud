@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * JWT Utility
  *
- * @author douguoqiang
+ * @author laixiangqun
  * @since 2018年1月15日
  */
 public class JWTUtils {

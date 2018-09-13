@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Record the last url visited.
  *
- * @author linzhaoming
+ * @author laixiangqun
  */
 public class RecordLastVisit implements Filter {
 
