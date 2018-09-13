@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: apollo-portal
+  profiles:
+    active: ${apollo_profile}
+#  resources:
+#    cache-period: 3600
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 5
+    url: jdbc:mysql://localhost:3306/ApolloPortalDB?characterEncoding=utf8&useSSL=false
+eureka:
+  instance:
+    hostname: ${hostname:localhost}
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    healthcheck:
+      enabled: true
+    eurekaServiceUrlPollIntervalSeconds: 60
+
+server:
+  port: 8070
+  
+logging:
+  file: /opt/logs/100003173/apollo-portal.log
+
+endpoints:
+  health:
+    sensitive: false
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+env: dev
+dev.meta: http://${eureka.instance.hostname}:8761
+

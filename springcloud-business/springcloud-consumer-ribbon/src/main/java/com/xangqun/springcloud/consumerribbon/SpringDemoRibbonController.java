@@ -1,0 +1,53 @@
+package com.xangqun.springcloud.consumerribbon;
+import java.util.Date;
+
+import com.xangqun.springcloud.mapper.UserMapper;
+import com.xangqun.springcloud.mapper.entity.User;
+import com.xangqun.springcloud.properties.MessageSourceUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class SpringDemoRibbonController {
+
+    @Autowired
+    SpringDemoRibbonService springDemoRibbonService;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private MessageSourceUtil messageSourceUtil;
+
+
+    @GetMapping("hellox")
+    public String hellox( int index) {
+        User user=new User();
+        user.setId(Long.valueOf(index));
+        user.setUserName("xanuqn"+index);
+        user.setPassword("xanuqn"+index);
+        user.setRealName("xanuqn"+index);
+        user.setEmployeeId("");
+        user.setEmail("");
+        user.setCreatedBy("admin");
+        user.setCreateTime(new Date());
+        user.setLastUpdatedBy("");
+        user.setLastUpdateTime(new Date());
+        user.setIsDeleted((byte)0);
+        userMapper.insert(user);
+//        String UserName = userMapper.selectByPrimaryKey(7L).getUserName();
+        return "水电费";
+    }
+
+    @RequestMapping("port")
+    public String port() {
+        messageSourceUtil.getMessage("welcome");
+        return springDemoRibbonService.port();
+    }
+
+    @RequestMapping("/arg1")
+    public String arg1(@RequestParam("name") String name) {
+        return "hello: " + name;
+    }
+}

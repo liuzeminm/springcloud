@@ -1,0 +1,68 @@
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+    #租期更新时间间隔（默认30秒）
+    leaseRenewalIntervalInSeconds: 10
+    #租期到期时间（默认90秒）
+    leaseExpirationDurationInSeconds: 30
+    statusPageUrlPath: /swagger-ui.html
+  client:
+    serviceUrl:
+      # 向每个注册中心注册
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    #开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    eurekaServiceUrlPollIntervalSeconds: 60
+    # 是否从eureka上获取注册信息
+    fetch-registry: true
+    #  如果项目配置有 server.servlet.context-path 属性，想要被 spring boot admin 监控，就要配置以下属性
+#    metadata-map:
+#      management:
+#        context-path: ${server.servlet.context-path}/actuator
+#    health-check-url: http://localhost:${server.port}${server.servlet.context-path}/actuator/health
+#    status-page-url: http://localhost:${server.port}${server.servlet.context-path}/actuator/info
+#    home-page-url: http://localhost:${server.port}/
+
+server:
+  port: 8384
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    include: dev
+  application:
+    name: spring-demo-service-scala
+  zipkin:
+    #Zipkin Server 的 ip:port，这里换成自己的 Zipkin Server 的 IP 即可
+    #    base-url: http://192.168.174.128:9411/
+    #为了测试 rabbitmq 的集成，修改为错误指向
+    base-url: http://localhost:8004/
+  #这里把抽样百分比设置为1，即信息全部采集
+  sleuth:
+    sampler:
+      probability: 1.0
+
+feign:
+  hystrix:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS
+info:
+  version: 1.0.0
+
+#日志
+logging:
+#日志配置文件位置
+  config: classpath:logback.xml
+#日志打印位置，这里是默认在项目根路径下
+  path: log/spring-boot-log

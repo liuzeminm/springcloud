@@ -1,0 +1,45 @@
+server:
+  port: 8761
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: springcloud-eureka
+  cloud:
+    inetutils:
+      #指定使用的网络地址
+      preferred-networks: 192.168
+    #consul客户端配置
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        register: true
+        hostname: localhost
+        serviceName: ${spring.application.name}
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+        tags: urlprefix-/${spring.application.name}
+        instanceId: ${spring.application.name}:${spring.cloud.consul.host}:${spring.cloud.consul.port}
+archaius:
+  deployment:
+    environment: hello
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+  security:
+    enabled: true
+#
+#security:
+#  basic:
+#    enabled: false

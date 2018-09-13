@@ -1,0 +1,39 @@
+server:
+  port: 8002
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: springcloud-hystrix-dashboard
+
+eureka:
+  instance:
+    hostname: ${hostname:localhost}
+    preferIpAddress: true
+    #租期更新时间间隔（默认30秒）
+    leaseRenewalIntervalInSeconds: 10
+    #租期到期时间（默认90秒）
+    leaseExpirationDurationInSeconds: 30
+    statusPageUrlPath: /swagger-ui.html
+  client:
+    serviceUrl:
+      # 向每个注册中心注册
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    #开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    eurekaServiceUrlPollIntervalSeconds: 60
+    # 是否从eureka上获取注册信息
+    fetch-registry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+  server:
+    servlet:
+      context-path: /

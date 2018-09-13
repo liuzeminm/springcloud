@@ -1,0 +1,237 @@
+eureka:
+  instance:
+    hostname: ${hostname:localhost}
+    preferIpAddress: true
+    #租期更新时间间隔（默认30秒）
+    leaseRenewalIntervalInSeconds: 10
+    #租期到期时间（默认90秒）
+    leaseExpirationDurationInSeconds: 30
+    #非安全通信端口
+#    nonSecurePort: 80
+    #是否启用非安全端口接受请求
+#    nonSecurePortEnabled: true
+    #安全通信端口
+#    securePort: 443
+    #是否启用安全端口接受请求
+#    securePortEnabled: true
+    statusPageUrlPath: /swagger-ui.html
+  client:
+    serviceUrl:
+      # 向每个注册中心注册
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    #开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    eurekaServiceUrlPollIntervalSeconds: 60
+    #从注册中心获取注册信息的时间间隔
+    registryFetchIntervalSeconds: 5
+    eureka-server-connect-timeout-seconds: 15
+    eureka-server-read-timeout-seconds: 10
+    # 是否从eureka上获取注册信息
+    fetch-registry: true
+
+server:
+  port: 8381
+
+spring:
+  pid:
+    file: /var/log/app.pid
+  application:
+    name: spring-consumer-service-ribbon
+  zipkin:
+    #Zipkin Server 的 ip:port，这里换成自己的 Zipkin Server 的 IP 即可
+    #    base-url: http://192.168.174.128:9411/
+    #为了测试 rabbitmq 的集成，修改为错误指向
+    base-url: http://localhost:8004/
+  #这里把抽样百分比设置为1，即信息全部采集
+  sleuth:
+    sampler:
+      probability: 1.0
+  #redis配置
+  redis:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+    cluster:
+      nodes: 10.101.70.158:7000,10.101.70.158:7001,10.101.70.158:7002,10.101.70.158:7003,10.101.70.158:7004,10.101.70.158:7005
+  #邮件配置
+  mail:
+    host: smtp.126.com
+    username: xangqun@126.com
+    password: qq294595601
+    protocol: smtp
+    properties.mail.smtp.auth: false
+    properties.mail.smtp.port: 994 #465或者994
+    properties.mail.display.sendmail: Javen
+    properties.mail.display.sendname: xangqun
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
+    from: xangqun@126.com
+  #国际化配置
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    cache-duration:
+      seconds: 3600
+  #重试机制开启为true，关闭为false
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+
+#熔断
+hystrix:
+  threadpool:
+    default:
+      coreSize: 10 #设置核心线程池大小。
+      maximumSize: 100 #设置线程池最大值。这个是在不开始拒绝HystrixCommand的情况下支持的最大并发数。这个属性起作用的前提是设置了allowMaximumSizeToDrivergeFromCoreSize。1.5.9之前，核心线程池大小和最大线程池大小总是相同的。
+      maxQueueSize: -1 #设置BlockingQueue最大的队列值。 如果设置为-1，那么使用SynchronousQueue，否则正数将会使用LinkedBlockingQueue。
+      queueSizeRejectionThreshold: 5 #设置队列拒绝的阈值——一个人为设置的拒绝访问的最大队列值，即使maxQueueSize还没有达到。如果maxQueueSize设置为-1，该属性不可用
+      keepAliveTimeMinutes: 1 #设置存活时间，单位分钟。如果coreSize小于maximumSize，那么该属性控制一个线程从实用完成到被释放的时间。
+      allowMaximumSizeToDivergeFromCoreSize: false #该属性允许maximumSize起作用。属性值可以等于或者大于coreSize值，设置coreSize小于maximumSize的线程池能够支持maximumSize的并发数，但是会将不活跃的线程返回到系统中去
+      metrics:
+        rollingStats: #”metrics.rollingStats.timeInMilliseconds % metrics.rollingStats.numBuckets == 0"必须为true，否则会抛出异常
+          timeInMilliseconds: 10000 #设置统计的滚动窗口的时间段大小。该属性是线程池保持指标时间长短。
+          numBuckets: 10 #设置滚动的统计窗口被分成的桶（bucket）的数目
+  collapser:
+    default:
+      maxRequestsInBatch: 100000 #设置触发批处理执行之前，在批处理中允许的最大请求数。 默认值：Integer.MAX_VALUE
+      timerDelayInMilliseconds: 10 #设置批处理创建到执行之间的毫秒数。
+      requestCache:
+        enabled: true #设置请求缓存是否对HystrixCollapser.execute()和HystrixCollapser.queue()的调用起作用。默认值：true
+  command:
+    default:
+      fallback:
+        enabled: true #该属性决定当故障或者拒绝发生时，一个调用将会去尝试HystrixCommand.getFallback()。
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 10 # 最大的并发调用getFallback()
+      circuitBreaker:
+        forceOpen: false #如果该属性设置为true，强制断路器进入打开状态，将会拒绝所有的请求。
+        forceClosed: false #如果该属性设置为true，强制断路器进入关闭状态，将会允许所有的请求，无视错误率。
+        enabled: true #设置断路器是否起作用
+        errorThresholdPercentage: 50 #容器窗口的错误占比，百分制 设置打开回路并启动回退逻辑的错误比率。
+        requestVolumeThreshold: 20 #熔断窗口时间的标本数量 设置在一个滚动窗口中，打开断路器的最少请求数
+        sleepWindowInMilliseconds: 5000 #熔断时间 设置在回路被打开，拒绝请求到再次尝试请求并决定回路是否继续打开的时间。
+      execution:
+        isolation:
+          strategy: THREAD #SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 60000   #设置hystrix超时时间
+            interruptOnTimeout: true #设置HystrixCommand.run()的执行是否在超时发生时被中断
+            interruptOnCancel: false #设置HystrixCommand.run()的执行但取消动作发生时候可以响应中断。
+          semaphore:
+            maxConcurrentRequests: 10 #设置当使用ExecutionIsolationStrategy.SEMAPHORE时，HystrixCommand.run()方法允许的最大请求数。如果达到最大并发数时，后续请求会被拒绝
+        timeout:
+          enabled: true # 设置HystrixCommand.run()的执行是否有超时限制 开启hystrix容错，默认是不开启的，目前应用还未加入容错机制
+      metrics:
+        rollingPercentile:
+          bucketSize: 100 #hystrix窗口期内监控上报的并发上限
+        rollingStats:
+          timeInMilliseconds: 10000 #熔断窗口时间
+      requestCache:
+        enabled: true #设置HystrixCommand.getCacheKey()是否启用，由HystrixRequestCache通过请求缓存提供去重复数据功能。
+      requestLog:
+        enabled: true #设置HystrixCommand执行和事件是否要记录日志到HystrixRequestLog
+
+
+#负载均衡
+ribbon:
+  eureka:
+    enabled: true #以下配置全局有效
+  ConnectTimeout: 60000 #建立连接超时时间，原1000
+  MaxAutoRetries: 1 #单个节点重试最大值
+  MaxAutoRetriesNextServer: 10 #重试发生，更换节点数最大值
+  OkToRetryOnAllOperations: true #所有操作都重试
+  ReadTimeout: 60000 #请求处理的超时时间，5分钟
+
+
+spring-demo-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    chaosmonkey:
+      enabled: true #混合测试配置
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#日志
+logging:
+  #日志配置文件位置
+  config: classpath:logback.xml
+  #日志打印位置，这里是默认在项目根路径下
+  path: /log/spring-boot-log
+
+#读写分离
+#sharding:
+#   jdbc:
+#    data-sources:
+#      ds_master:
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/job?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#        username: root
+#        password: 123456
+#      ds_slave_0:
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/job_slave?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#        username: root
+#        password: 123456
+#    master-slave-rule:
+#      name: ds_ms
+#      master-data-source-name: ds_master
+#      slave-data-source-names: ds_slave_0
+#      load-balance-algorithm-type: round_robin
+
+#分库分表
+sharding:
+  jdbc:
+    shardingRule:
+      default-database-strategy:
+        inline:
+          algorithm-expression: ds${id % 2}
+          sharding-column: id
+      tables:
+          user:
+            actual-data-nodes: ds${0..1}.user_${0..1}
+            key-generator-column-name: id
+            table-strategy:
+              inline:
+                algorithm-expression: user_${id % 2}
+                sharding-column: id
+    data-sources:
+      ds0:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: 123456
+        url: jdbc:mysql://localhost:3306/job?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+      ds1:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: 123456
+        url: jdbc:mysql://localhost:3306/job_slave?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+#混合测试配置
+chaos:
+  monkey:
+    assaults: FastJsonHttpMessageConverter
+    level:
+      latencyRangeStart: 1000
+      latencyRangeEnd: 10000
+      exceptionsActive: true
+      killApplicationActive: true
+    watcher:
+      repository: true
+      restController: true
+#value test
+custom:
+  name: anoyi
+

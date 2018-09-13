@@ -1,0 +1,81 @@
+eureka:
+  instance:
+    hostname: ${hostname:localhost}
+    preferIpAddress: true
+    #租期更新时间间隔（默认30秒）
+    leaseRenewalIntervalInSeconds: 10
+    #租期到期时间（默认90秒）
+    leaseExpirationDurationInSeconds: 30
+    #非安全通信端口
+    nonSecurePort: 80
+    #是否启用非安全端口接受请求
+    nonSecurePortEnabled: true
+    #安全通信端口
+    securePort: 443
+    #是否启用安全端口接受请求
+    securePortEnabled: true
+    statusPageUrlPath: /swagger-ui.html
+  client:
+    serviceUrl:
+      # 向每个注册中心注册
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    #开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    eurekaServiceUrlPollIntervalSeconds: 60
+    #从注册中心获取注册信息的时间间隔
+    registryFetchIntervalSeconds: 5
+    eureka-server-connect-timeout-seconds: 15
+    eureka-server-read-timeout-seconds: 10
+    # 是否从eureka上获取注册信息
+    fetch-registry: true
+
+server:
+  port: 8004
+
+spring:
+  pid:
+    file: /var/log/app.pid
+  application:
+    name: spring-zipkin
+
+zipkin:
+  storage:
+    type: mysql
+sleuth:
+  enabled: false
+
+management:
+#  metrics:
+#    web:
+#      server:
+#        auto-time-requests: false
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level.com: debug
+#读写分离
+sharding:
+   jdbc:
+    data-sources:
+      ds_master:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/job?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
+      ds_slave_0:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/job_slave?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
+    master-slave-rule:
+      name: ds_ms
+      master-data-source-name: ds_master
+      slave-data-source-names: ds_slave_0
+      load-balance-algorithm-type: round_robin

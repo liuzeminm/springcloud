@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: springcloud-eureka
+  cloud:
+    inetutils:
+      #指定使用的网络地址
+      preferred-networks: 192.168
+  datasource:
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 5
+    url: jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8&useSSL=false
+
+server:
+  port: 8761
+  servlet:
+    context-path: /
+
+
+archaius:
+  deployment:
+    environment: test
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+  security:
+    enabled: true
+endpoints:
+  health:
+    sensitive: false
+#
+#security:
+#  basic:
+#    enabled: false

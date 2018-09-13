@@ -1,0 +1,67 @@
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+    #租期更新时间间隔（默认30秒）
+    leaseRenewalIntervalInSeconds: 10
+    #租期到期时间（默认90秒）
+    leaseExpirationDurationInSeconds: 30
+    statusPageUrlPath: /swagger-ui.html
+  client:
+    serviceUrl:
+      # 向每个注册中心注册
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    #开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    eurekaServiceUrlPollIntervalSeconds: 60
+    # 是否从eureka上获取注册信息
+    fetch-registry: true
+    #  如果项目配置有 server.servlet.context-path 属性，想要被 spring boot admin 监控，就要配置以下属性
+#    metadata-map:
+#      management:
+#        context-path: ${server.servlet.context-path}/actuator
+#    health-check-url: http://localhost:${server.port}${server.servlet.context-path}/actuator/health
+#    status-page-url: http://localhost:${server.port}${server.servlet.context-path}/actuator/info
+#    home-page-url: http://localhost:${server.port}/
+
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    include: dev
+  application:
+    name: sentinel-dashboard
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS
+info:
+  version: 1.0.0
+
+#日志
+logging:
+  file: /logs/csp/sentinel-dashboard.log
+  level:
+    com:
+      taobao:
+        csp: debug
+    org:
+      springframework:
+        web: INFO
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
