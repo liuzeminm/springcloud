@@ -17,12 +17,12 @@ class HttpApiController {
   @ResponseBody
   def debugTest(@RequestParam(value = "url") url: String,
                 @RequestParam(value = "method") method: String,
-                @RequestParam(value = "paramJson") paramJson: String):String = {
+                @RequestParam(value = "paramJson") paramJson: String): String = {
     if (StringUtils.isEmpty(url)) return "url cannot be empty"
 
     if (StringUtils.isEmpty(method)) return "method cannot be empty"
 
-    var  result = "method should be GET or POST"
+    var result = "method should be GET or POST"
     return result
   }
 }

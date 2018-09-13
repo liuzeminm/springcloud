@@ -34,6 +34,7 @@ public class BaseControllerAdvice {
 
 
     private static final String CONTEXT_ATTRIBUTE = WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE;
+
     /**
      * 用于处理BaseException异常
      */
@@ -41,7 +42,7 @@ public class BaseControllerAdvice {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     protected Object baseException(BaseException baseException, HttpServletRequest request,
-                               HttpServletResponse response) {
+                                   HttpServletResponse response) {
         logger.error("got a Exception", baseException);
         String message = "";
         String exceptionCode, uri = request.getRequestURI();
@@ -67,7 +68,7 @@ public class BaseControllerAdvice {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     protected Object methodArgumentNotValidException(MethodArgumentNotValidException exception, HttpServletRequest request,
-                               HttpServletResponse response) {
+                                                     HttpServletResponse response) {
         logger.error("got a Exception", exception);
         String message = "";
         ServletContext servletContext = request.getServletContext();

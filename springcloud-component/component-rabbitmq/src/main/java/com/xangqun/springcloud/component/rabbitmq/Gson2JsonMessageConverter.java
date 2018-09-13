@@ -3,9 +3,7 @@
  */
 package com.xangqun.springcloud.component.rabbitmq;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
+import com.google.gson.Gson;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.Message;
@@ -15,7 +13,8 @@ import org.springframework.amqp.support.converter.ClassMapper;
 import org.springframework.amqp.support.converter.DefaultClassMapper;
 import org.springframework.amqp.support.converter.MessageConversionException;
 
-import com.google.gson.Gson;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author laixiangqun
@@ -25,7 +24,7 @@ public class Gson2JsonMessageConverter extends AbstractJsonMessageConverter {
 
     private static Log log = LogFactory.getLog(Gson2JsonMessageConverter.class);
 
-    private static  ClassMapper classMapper =  new DefaultClassMapper();
+    private static ClassMapper classMapper = new DefaultClassMapper();
 
     private static Gson gson = new Gson();
 
@@ -40,8 +39,7 @@ public class Gson2JsonMessageConverter extends AbstractJsonMessageConverter {
         try {
             String jsonString = gson.toJson(object);
             bytes = jsonString.getBytes(getDefaultCharset());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new MessageConversionException(
                     "Failed to convert Message content", e);
         }
@@ -50,7 +48,7 @@ public class Gson2JsonMessageConverter extends AbstractJsonMessageConverter {
         if (bytes != null) {
             messageProperties.setContentLength(bytes.length);
         }
-        classMapper.fromClass(object.getClass(),messageProperties);
+        classMapper.fromClass(object.getClass(), messageProperties);
         return new Message(bytes, messageProperties);
     }
 
@@ -71,13 +69,11 @@ public class Gson2JsonMessageConverter extends AbstractJsonMessageConverter {
                             message.getMessageProperties());
                     content = convertBytesToObject(message.getBody(),
                             encoding, targetClass);
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     throw new MessageConversionException(
                             "Failed to convert Message content", e);
                 }
-            }
-            else {
+            } else {
                 log.warn("Could not convert incoming message with content-type ["
                         + contentType + "]");
             }

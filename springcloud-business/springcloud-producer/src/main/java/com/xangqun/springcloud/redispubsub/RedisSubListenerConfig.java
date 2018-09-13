@@ -17,8 +17,10 @@ import java.util.concurrent.CountDownLatch;
 public class RedisSubListenerConfig {
     //通道名称
     public static final String CHANNEL = "test_channel";
+
     /**
      * 初始化监听器
+     *
      * @param connectionFactory
      * @param listenerAdapter
      * @return
@@ -34,6 +36,7 @@ public class RedisSubListenerConfig {
 
     /**
      * 绑定消息监听者和接收监听的方法
+     *
      * @param redisReceiver
      * @return
      */
@@ -52,6 +55,7 @@ public class RedisSubListenerConfig {
 
     /**
      * 注册订阅者
+     *
      * @param latch
      * @return
      */
@@ -62,6 +66,7 @@ public class RedisSubListenerConfig {
 
     /**
      * 计数器，用来控制线程
+     *
      * @return
      */
     @Bean

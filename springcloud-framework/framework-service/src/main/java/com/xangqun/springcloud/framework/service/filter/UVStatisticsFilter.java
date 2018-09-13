@@ -4,7 +4,6 @@
 package com.xangqun.springcloud.framework.service.filter;
 
 import com.xangqun.springcloud.component.base.util.NetworkUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -29,6 +28,7 @@ public class UVStatisticsFilter extends OncePerRequestFilter {
 
     /**
      * 使用Redis的HeyperLog统计PV，HeyperLog提供的去重功能较之zset有较小的数据偏差，但能节省90%以上的空间
+     *
      * @param request
      * @param response
      * @param filterChain
@@ -44,7 +44,7 @@ public class UVStatisticsFilter extends OncePerRequestFilter {
 
         stringRedisTemplate.opsForHyperLogLog().add("pv:" + format.format(new Date()), ip);
 
-        filterChain.doFilter(request,response );
+        filterChain.doFilter(request, response);
 
     }
 

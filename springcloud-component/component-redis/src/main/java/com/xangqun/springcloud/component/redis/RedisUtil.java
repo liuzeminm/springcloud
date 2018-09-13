@@ -30,8 +30,6 @@ public class RedisUtil {
     public static final long NOT_EXPIRE = -1;
 
 
-
-
     public boolean existsKey(String key) {
         return redisTemplate.hasKey(key);
     }
@@ -126,7 +124,6 @@ public class RedisUtil {
     public void persistKey(String key) {
         redisTemplate.persist(key);
     }
-
 
 
     public void setRedisTemplate(RedisTemplate redisTemplate) {

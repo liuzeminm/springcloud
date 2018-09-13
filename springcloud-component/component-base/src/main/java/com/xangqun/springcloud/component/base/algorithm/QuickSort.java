@@ -3,194 +3,197 @@ package com.xangqun.springcloud.component.base.algorithm;
 import java.util.Comparator;
 
 /**
- * ¿ìËÙÅÅĞòËã·¨
- * @author laixiangqun
- * @date 2009-12-9
+ * å¿«é€Ÿæ’åºç®—æ³•
  *
  * @param <E>
+ * @author jzj
+ * @date 2009-12-9
  */
 public class QuickSort<E extends Comparable<E>> extends Sort<E> {
 
-	/**
-	 * ÅÅĞòËã·¨µÄÊµÏÖ£¬¶ÔÊı×éÖĞÖ¸¶¨µÄÔªËØ½øĞĞÅÅĞò
-	 * @param array ´ıÅÅĞòµÄÊı×é
-	 * @param from ´ÓÄÄÀï¿ªÊ¼ÅÅĞò
-	 * @param end ÅÅµ½ÄÄÀï
-	 * @param c ±È½ÏÆ÷
-	 */
-	@Override
-	public void sort(E[] array, int from, int end, Comparator<E> c) {
-		quickSort(array, from, end, c);
-	}
+    /**
+     * æ’åºç®—æ³•çš„å®ç°ï¼Œå¯¹æ•°ç»„ä¸­æŒ‡å®šçš„å…ƒç´ è¿›è¡Œæ’åº
+     *
+     * @param array å¾…æ’åºçš„æ•°ç»„
+     * @param from  ä»å“ªé‡Œå¼€å§‹æ’åº
+     * @param end   æ’åˆ°å“ªé‡Œ
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    @Override
+    public void sort(E[] array, int from, int end, Comparator<E> c) {
+        quickSort(array, from, end, c);
+    }
 
-	/**
-	 * µİ¹é¿ìËÙÅÅĞòÊµÏÖ
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param low µÍÖ¸Õë
-	 * @param high ¸ßÖ¸Õë
-	 * @param c ±È½ÏÆ÷
-	 */
-	private void quickSort(E[] array, int low, int high, Comparator<E> c) {
-		/*
-		 * Èç¹û·ÖÇøÖĞµÄµÍÖ¸ÕëĞ¡ÓÚ¸ßÖ¸ÕëÊ±Ñ­»·£»Èç¹ûlow=higthËµÃ÷Êı×éÖ»ÓĞÒ»¸öÔªËØ£¬ÎŞĞèÔÙ´¦Àí£»
-		 * Èç¹ûlow > higth£¬ÔòËµÃ÷ÉÏ´ÎÊàÅ¦ÔªËØµÄÎ»ÖÃpivot¾ÍÊÇlow»òÕßÊÇhigth£¬´ËÖÖÇé¿ö
-		 * ÏÂ·ÖÇø²»´æ£¬Ò²²»Ğè´¦Àí
-		 */
-		if (low < high) {
-			//¶Ô·ÖÇø½øĞĞÅÅĞòÕûÀí
-			int pivot = partition1(array, low, high, c);
-			/*
-			 * ÒÔpivotÎª±ß½ç£¬°ÑÊı×é·Ö³ÉÈı²¿·Ö[low, pivot - 1]¡¢[pivot]¡¢[pivot + 1, high]
-			 * ÆäÖĞ[pivot]ÎªÊàÅ¦ÔªËØ£¬²»Ğè´¦Àí£¬ÔÙ¶Ô[low, pivot - 1]Óë[pivot + 1, high]
-			 * ¸÷×Ô½øĞĞ·ÖÇøÅÅĞòÕûÀíÓë½øÒ»²½·ÖÇø
-			 */
-			quickSort(array, low, pivot - 1, c);
-			quickSort(array, pivot + 1, high, c);
-		}
+    /**
+     * é€’å½’å¿«é€Ÿæ’åºå®ç°
+     *
+     * @param array å¾…æ’åºæ•°ç»„
+     * @param low   ä½æŒ‡é’ˆ
+     * @param high  é«˜æŒ‡é’ˆ
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    private void quickSort(E[] array, int low, int high, Comparator<E> c) {
+        /*
+         * å¦‚æœåˆ†åŒºä¸­çš„ä½æŒ‡é’ˆå°äºé«˜æŒ‡é’ˆæ—¶å¾ªç¯ï¼›å¦‚æœlow=higthè¯´æ˜æ•°ç»„åªæœ‰ä¸€ä¸ªå…ƒç´ ï¼Œæ— éœ€å†å¤„ç†ï¼›
+         * å¦‚æœlow > higthï¼Œåˆ™è¯´æ˜ä¸Šæ¬¡æ¢çº½å…ƒç´ çš„ä½ç½®pivotå°±æ˜¯lowæˆ–è€…æ˜¯higthï¼Œæ­¤ç§æƒ…å†µ
+         * ä¸‹åˆ†åŒºä¸å­˜ï¼Œä¹Ÿä¸éœ€å¤„ç†
+         */
+        if (low < high) {
+            //å¯¹åˆ†åŒºè¿›è¡Œæ’åºæ•´ç†
+            int pivot = partition1(array, low, high, c);
+            /*
+             * ä»¥pivotä¸ºè¾¹ç•Œï¼ŒæŠŠæ•°ç»„åˆ†æˆä¸‰éƒ¨åˆ†[low, pivot - 1]ã€[pivot]ã€[pivot + 1, high]
+             * å…¶ä¸­[pivot]ä¸ºæ¢çº½å…ƒç´ ï¼Œä¸éœ€å¤„ç†ï¼Œå†å¯¹[low, pivot - 1]ä¸[pivot + 1, high]
+             * å„è‡ªè¿›è¡Œåˆ†åŒºæ’åºæ•´ç†ä¸è¿›ä¸€æ­¥åˆ†åŒº
+             */
+            quickSort(array, low, pivot - 1, c);
+            quickSort(array, pivot + 1, high, c);
+        }
 
-	}
+    }
 
-	/**
-	 * ÊµÏÖÒ»
-	 *
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param low µÍÖ¸Õë
-	 * @param high ¸ßÖ¸Õë
-	 * @param c ±È½ÏÆ÷
-	 * @return int µ÷ÕûºóÖĞÊàÎ»ÖÃ
-	 */
-	private int partition1(E[] array, int low, int high, Comparator<E> c) {
-		E pivotElem = array[low];//ÒÔµÚÒ»¸öÔªËØÎªÖĞÊàÔªËØ
-		//´ÓÇ°ÏòºóÒÀ´ÎÖ¸Ïò±ÈÖĞÊàÔªËØĞ¡µÄÔªËØ£¬¸Õ¿ªÊ¼Ê±Ö¸ÏòÖĞÊà£¬Ò²ÊÇĞ¡ÓÚÓë´óĞ¡ÖĞÊàµÄÔªËØµÄ·Ö½çµã
-		int border = low;
+    /**
+     * å®ç°ä¸€
+     *
+     * @param array å¾…æ’åºæ•°ç»„
+     * @param low   ä½æŒ‡é’ˆ
+     * @param high  é«˜æŒ‡é’ˆ
+     * @param c     æ¯”è¾ƒå™¨
+     * @return int è°ƒæ•´åä¸­æ¢ä½ç½®
+     */
+    private int partition1(E[] array, int low, int high, Comparator<E> c) {
+        E pivotElem = array[low];//ä»¥ç¬¬ä¸€ä¸ªå…ƒç´ ä¸ºä¸­æ¢å…ƒç´ 
+        //ä»å‰å‘åä¾æ¬¡æŒ‡å‘æ¯”ä¸­æ¢å…ƒç´ å°çš„å…ƒç´ ï¼Œåˆšå¼€å§‹æ—¶æŒ‡å‘ä¸­æ¢ï¼Œä¹Ÿæ˜¯å°äºä¸å¤§å°ä¸­æ¢çš„å…ƒç´ çš„åˆ†ç•Œç‚¹
+        int border = low;
 
-		/*
-		 * ÔÚÖĞÊàÔªËØºóÃæµÄÔªËØÖĞ²éÕÒĞ¡ÓÚÖĞÊàÔªËØµÄËùÓĞÔªËØ£¬²¢ÒÀ´Î´ÓµÚ¶ş¸öÎ»ÖÃ´ÓÇ°Íùºó´æ·Å
-		 * ×¢£¬ÕâÀï×îºÃÊ¹ÓÃiÀ´ÒÆ¶¯£¬Èç¹ûÖ±½ÓÒÆ¶¯lowµÄ»°£¬×îºó²»ÖªµÀÊı×éµÄ±ß½çÁË£¬µ«ºóÃæĞèÒª
-		 * ÖªµÀÊı×éµÄ±ß½ç
-		 */
-		for (int i = low + 1; i <= high; i++) {
-			//Èç¹ûÕÒµ½Ò»¸ö±ÈÖĞÊàÔªËØĞ¡µÄÔªËØ
-			if (c.compare(array[i], pivotElem) < 0) {
-				swap(array, ++border, i);//borderÇ°ÒÆ£¬±íÊ¾ÓĞĞ¡ÓÚÖĞÊàÔªËØµÄÔªËØ
-			}
-		}
-		/*
-		 * Èç¹ûborderÃ»ÓĞÒÆ¶¯Ê±ËµÃ÷ËµÃ÷ºóÃæµÄÔªËØ¶¼±ÈÖĞÊàÔªËØÒª´ó£¬borderÓëlowÏàµÈ£¬´ËÊ±ÊÇ
-		 * Í¬Ò»Î»ÖÃ½»»»£¬ÊÇ·ñ½»»»¶¼Ã»¹ØÏµ£»µ±borderÒÆµ½ÁËhighÊ±ËµÃ÷ËùÓĞÔªËØ¶¼Ğ¡ÓÚÖĞÊàÔªËØ£¬´Ë
-		 * Ê±½«ÖĞÊàÔªËØÓë×îºóÒ»¸öÔªËØ½»»»¼´¿É£¬¼´lowÓëhigh½øĞĞ½»»»£¬´óµÄÖĞÊàÔªËØÒÆµ½ÁË ĞòÁĞ×î
-		 * ºó£»Èç¹û low <minIndex< high£¬±í Ã÷ÖĞÊàºóÃæµÄÔªËØÇ°²¿·ÖĞ¡ÓÚÖĞÊàÔªËØ£¬¶øºó²¿·Ö´óÓÚ
-		 * ÖĞÊàÔªËØ£¬´ËÊ±ÖĞÊàÔªËØÓëÇ°²¿·ÖÊı×éÖĞ×îºóÒ»¸öĞ¡ÓÚËüµÄÔªËØ½»»»Î»ÖÃ£¬Ê¹µÃÖĞÊàÔªËØ·ÅÖÃÔÚ
-		 * ÕıÈ·µÄÎ»ÖÃ
-		 */
-		swap(array, border, low);
-		return border;
-	}
+        /*
+         * åœ¨ä¸­æ¢å…ƒç´ åé¢çš„å…ƒç´ ä¸­æŸ¥æ‰¾å°äºä¸­æ¢å…ƒç´ çš„æ‰€æœ‰å…ƒç´ ï¼Œå¹¶ä¾æ¬¡ä»ç¬¬äºŒä¸ªä½ç½®ä»å‰å¾€åå­˜æ”¾
+         * æ³¨ï¼Œè¿™é‡Œæœ€å¥½ä½¿ç”¨iæ¥ç§»åŠ¨ï¼Œå¦‚æœç›´æ¥ç§»åŠ¨lowçš„è¯ï¼Œæœ€åä¸çŸ¥é“æ•°ç»„çš„è¾¹ç•Œäº†ï¼Œä½†åé¢éœ€è¦
+         * çŸ¥é“æ•°ç»„çš„è¾¹ç•Œ
+         */
+        for (int i = low + 1; i <= high; i++) {
+            //å¦‚æœæ‰¾åˆ°ä¸€ä¸ªæ¯”ä¸­æ¢å…ƒç´ å°çš„å…ƒç´ 
+            if (c.compare(array[i], pivotElem) < 0) {
+                swap(array, ++border, i);//borderå‰ç§»ï¼Œè¡¨ç¤ºæœ‰å°äºä¸­æ¢å…ƒç´ çš„å…ƒç´ 
+            }
+        }
+        /*
+         * å¦‚æœborderæ²¡æœ‰ç§»åŠ¨æ—¶è¯´æ˜è¯´æ˜åé¢çš„å…ƒç´ éƒ½æ¯”ä¸­æ¢å…ƒç´ è¦å¤§ï¼Œborderä¸lowç›¸ç­‰ï¼Œæ­¤æ—¶æ˜¯
+         * åŒä¸€ä½ç½®äº¤æ¢ï¼Œæ˜¯å¦äº¤æ¢éƒ½æ²¡å…³ç³»ï¼›å½“borderç§»åˆ°äº†highæ—¶è¯´æ˜æ‰€æœ‰å…ƒç´ éƒ½å°äºä¸­æ¢å…ƒç´ ï¼Œæ­¤
+         * æ—¶å°†ä¸­æ¢å…ƒç´ ä¸æœ€åä¸€ä¸ªå…ƒç´ äº¤æ¢å³å¯ï¼Œå³lowä¸highè¿›è¡Œäº¤æ¢ï¼Œå¤§çš„ä¸­æ¢å…ƒç´ ç§»åˆ°äº† åºåˆ—æœ€
+         * åï¼›å¦‚æœ low <minIndex< highï¼Œè¡¨ æ˜ä¸­æ¢åé¢çš„å…ƒç´ å‰éƒ¨åˆ†å°äºä¸­æ¢å…ƒç´ ï¼Œè€Œåéƒ¨åˆ†å¤§äº
+         * ä¸­æ¢å…ƒç´ ï¼Œæ­¤æ—¶ä¸­æ¢å…ƒç´ ä¸å‰éƒ¨åˆ†æ•°ç»„ä¸­æœ€åä¸€ä¸ªå°äºå®ƒçš„å…ƒç´ äº¤æ¢ä½ç½®ï¼Œä½¿å¾—ä¸­æ¢å…ƒç´ æ”¾ç½®åœ¨
+         * æ­£ç¡®çš„ä½ç½®
+         */
+        swap(array, border, low);
+        return border;
+    }
 
-	/**
-	 * ÊµÏÖ¶ş
-	 *
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param low ´ıÅÅĞòÇøµÍÖ¸Õë
-	 * @param high ´ıÅÅĞòÇø¸ßÖ¸Õë
-	 * @param c ±È½ÏÆ÷
-	 * @return int µ÷ÕûºóÖĞÊàÎ»ÖÃ
-	 */
-	private int partition2(E[] array, int low, int high, Comparator<E> c) {
-		int pivot = low;//ÖĞÊàÔªËØÎ»ÖÃ£¬ÎÒÃÇÒÔµÚÒ»¸öÔªËØÎªÖĞÊàÔªËØ
-		//ÍË³öÌõ¼şÕâÀïÖ»¿ÉÄÜÊÇ low = high
-		while (true) {
-			if (pivot != high) {//Èç¹ûÖĞÊàÔªËØÔÚµÍÖ¸ÕëÎ»ÖÃÊ±£¬ÎÒÃÇÒÆ¶¯¸ßÖ¸Õë
-				//Èç¹û¸ßÖ¸ÕëÔªËØĞ¡ÓÚÖĞÊàÔªËØÊ±£¬ÔòÓëÖĞÊàÔªËØ½»»»
-				if (c.compare(array[high], array[pivot]) < 0) {
-					swap(array, high, pivot);
-					//½»»»ºóÖĞÊàÔªËØÔÚ¸ßÖ¸ÕëÎ»ÖÃÁË
-					pivot = high;
-				} else {//Èç¹ûÎ´ÕÒµ½Ğ¡ÓÚÖĞÊàÔªËØ£¬Ôò¸ßÖ¸ÕëÇ°ÒÆ¼ÌĞøÕÒ
-					high--;
-				}
-			} else {//·ñÔòÖĞÊàÔªËØÔÚ¸ßÖ¸ÕëÎ»ÖÃ
-				//Èç¹ûµÍÖ¸ÕëÔªËØ´óÓÚÖĞÊàÔªËØÊ±£¬ÔòÓëÖĞÊàÔªËØ½»»»
-				if (c.compare(array[low], array[pivot]) > 0) {
-					swap(array, low, pivot);
-					//½»»»ºóÖĞÊàÔªËØÔÚµÍÖ¸ÕëÎ»ÖÃÁË
-					pivot = low;
-				} else {//Èç¹ûÎ´ÕÒµ½´óÓÚÖĞÊàÔªËØ£¬ÔòµÍÖ¸ÕëºóÒÆ¼ÌĞøÕÒ
-					low++;
-				}
-			}
-			if (low == high) {
-				break;
-			}
-		}
-		//·µ»ØÖĞÊàÔªËØËùÔÚÎ»ÖÃ£¬ÒÔ±ãÏÂ´Î·ÖÇø
-		return pivot;
-	}
+    /**
+     * å®ç°äºŒ
+     *
+     * @param array å¾…æ’åºæ•°ç»„
+     * @param low   å¾…æ’åºåŒºä½æŒ‡é’ˆ
+     * @param high  å¾…æ’åºåŒºé«˜æŒ‡é’ˆ
+     * @param c     æ¯”è¾ƒå™¨
+     * @return int è°ƒæ•´åä¸­æ¢ä½ç½®
+     */
+    private int partition2(E[] array, int low, int high, Comparator<E> c) {
+        int pivot = low;//ä¸­æ¢å…ƒç´ ä½ç½®ï¼Œæˆ‘ä»¬ä»¥ç¬¬ä¸€ä¸ªå…ƒç´ ä¸ºä¸­æ¢å…ƒç´ 
+        //é€€å‡ºæ¡ä»¶è¿™é‡Œåªå¯èƒ½æ˜¯ low = high
+        while (true) {
+            if (pivot != high) {//å¦‚æœä¸­æ¢å…ƒç´ åœ¨ä½æŒ‡é’ˆä½ç½®æ—¶ï¼Œæˆ‘ä»¬ç§»åŠ¨é«˜æŒ‡é’ˆ
+                //å¦‚æœé«˜æŒ‡é’ˆå…ƒç´ å°äºä¸­æ¢å…ƒç´ æ—¶ï¼Œåˆ™ä¸ä¸­æ¢å…ƒç´ äº¤æ¢
+                if (c.compare(array[high], array[pivot]) < 0) {
+                    swap(array, high, pivot);
+                    //äº¤æ¢åä¸­æ¢å…ƒç´ åœ¨é«˜æŒ‡é’ˆä½ç½®äº†
+                    pivot = high;
+                } else {//å¦‚æœæœªæ‰¾åˆ°å°äºä¸­æ¢å…ƒç´ ï¼Œåˆ™é«˜æŒ‡é’ˆå‰ç§»ç»§ç»­æ‰¾
+                    high--;
+                }
+            } else {//å¦åˆ™ä¸­æ¢å…ƒç´ åœ¨é«˜æŒ‡é’ˆä½ç½®
+                //å¦‚æœä½æŒ‡é’ˆå…ƒç´ å¤§äºä¸­æ¢å…ƒç´ æ—¶ï¼Œåˆ™ä¸ä¸­æ¢å…ƒç´ äº¤æ¢
+                if (c.compare(array[low], array[pivot]) > 0) {
+                    swap(array, low, pivot);
+                    //äº¤æ¢åä¸­æ¢å…ƒç´ åœ¨ä½æŒ‡é’ˆä½ç½®äº†
+                    pivot = low;
+                } else {//å¦‚æœæœªæ‰¾åˆ°å¤§äºä¸­æ¢å…ƒç´ ï¼Œåˆ™ä½æŒ‡é’ˆåç§»ç»§ç»­æ‰¾
+                    low++;
+                }
+            }
+            if (low == high) {
+                break;
+            }
+        }
+        //è¿”å›ä¸­æ¢å…ƒç´ æ‰€åœ¨ä½ç½®ï¼Œä»¥ä¾¿ä¸‹æ¬¡åˆ†åŒº
+        return pivot;
+    }
 
-	/**
-	 * ÊµÏÖÈı
-	 *
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param low ´ıÅÅĞòÇøµÍÖ¸Õë
-	 * @param high ´ıÅÅĞòÇø¸ßÖ¸Õë
-	 * @param c ±È½ÏÆ÷
-	 * @return int µ÷ÕûºóÖĞÊàÎ»ÖÃ
-	 */
-	private int partition3(E[] array, int low, int high, Comparator<E> c) {
-		int pivot = low;//ÖĞÊàÔªËØÎ»ÖÃ£¬ÎÒÃÇÒÔµÚÒ»¸öÔªËØÎªÖĞÊàÔªËØ
-		low++;
-		//----µ÷Õû¸ßµÍÖ¸ÕëËùÖ¸ÏòµÄÔªËØË³Ğò£¬°ÑĞ¡ÓÚÖĞÊàÔªËØµÄÒÆµ½Ç°²¿·Ö£¬´óÓÚÖĞÊàÔªËØµÄÒÆµ½ºóÃæ²¿·Ö
-		//ÍË³öÌõ¼şÕâÀïÖ»¿ÉÄÜÊÇ low = high
+    /**
+     * å®ç°ä¸‰
+     *
+     * @param array å¾…æ’åºæ•°ç»„
+     * @param low   å¾…æ’åºåŒºä½æŒ‡é’ˆ
+     * @param high  å¾…æ’åºåŒºé«˜æŒ‡é’ˆ
+     * @param c     æ¯”è¾ƒå™¨
+     * @return int è°ƒæ•´åä¸­æ¢ä½ç½®
+     */
+    private int partition3(E[] array, int low, int high, Comparator<E> c) {
+        int pivot = low;//ä¸­æ¢å…ƒç´ ä½ç½®ï¼Œæˆ‘ä»¬ä»¥ç¬¬ä¸€ä¸ªå…ƒç´ ä¸ºä¸­æ¢å…ƒç´ 
+        low++;
+        //----è°ƒæ•´é«˜ä½æŒ‡é’ˆæ‰€æŒ‡å‘çš„å…ƒç´ é¡ºåºï¼ŒæŠŠå°äºä¸­æ¢å…ƒç´ çš„ç§»åˆ°å‰éƒ¨åˆ†ï¼Œå¤§äºä¸­æ¢å…ƒç´ çš„ç§»åˆ°åé¢éƒ¨åˆ†
+        //é€€å‡ºæ¡ä»¶è¿™é‡Œåªå¯èƒ½æ˜¯ low = high
 
-		while (true) {
-			//Èç¹û¸ßÖ¸ÕëÎ´³¬³öµÍÖ¸Õë
-			while (low < high) {
-				//Èç¹ûµÍÖ¸ÕëÖ¸ÏòµÄÔªËØ´óÓÚ»òµÈÓÚÖĞÊàÔªËØÊ±±íÊ¾ÕÒµ½ÁË£¬ÍË³ö£¬×¢£ºµÈÓÚÊ±Ò²ÒªºóÒÆ
-				if (c.compare(array[low], array[pivot]) >= 0) {
-					break;
-				} else {//Èç¹ûµÍÖ¸ÕëÖ¸ÏòµÄÔªËØĞ¡ÓÚÖĞÊàÔªËØÊ±¼ÌĞøÕÒ
-					low++;
-				}
-			}
+        while (true) {
+            //å¦‚æœé«˜æŒ‡é’ˆæœªè¶…å‡ºä½æŒ‡é’ˆ
+            while (low < high) {
+                //å¦‚æœä½æŒ‡é’ˆæŒ‡å‘çš„å…ƒç´ å¤§äºæˆ–ç­‰äºä¸­æ¢å…ƒç´ æ—¶è¡¨ç¤ºæ‰¾åˆ°äº†ï¼Œé€€å‡ºï¼Œæ³¨ï¼šç­‰äºæ—¶ä¹Ÿè¦åç§»
+                if (c.compare(array[low], array[pivot]) >= 0) {
+                    break;
+                } else {//å¦‚æœä½æŒ‡é’ˆæŒ‡å‘çš„å…ƒç´ å°äºä¸­æ¢å…ƒç´ æ—¶ç»§ç»­æ‰¾
+                    low++;
+                }
+            }
 
-			while (high > low) {
-				//Èç¹û¸ßÖ¸ÕëÖ¸ÏòµÄÔªËØĞ¡ÓÚÖĞÊàÔªËØÊ±±íÊ¾ÕÒµ½£¬ÍË³ö
-				if (c.compare(array[high], array[pivot]) < 0) {
-					break;
-				} else {//Èç¹û¸ßÖ¸ÕëÖ¸ÏòµÄÔªËØ´óÓÚÖĞÊàÔªËØÊ±¼ÌĞøÕÒ
-					high--;
-				}
-			}
-			//ÍË³öÉÏÃæÑ­»·Ê± low = high
-			if (low == high) {
-				break;
-			}
+            while (high > low) {
+                //å¦‚æœé«˜æŒ‡é’ˆæŒ‡å‘çš„å…ƒç´ å°äºä¸­æ¢å…ƒç´ æ—¶è¡¨ç¤ºæ‰¾åˆ°ï¼Œé€€å‡º
+                if (c.compare(array[high], array[pivot]) < 0) {
+                    break;
+                } else {//å¦‚æœé«˜æŒ‡é’ˆæŒ‡å‘çš„å…ƒç´ å¤§äºä¸­æ¢å…ƒç´ æ—¶ç»§ç»­æ‰¾
+                    high--;
+                }
+            }
+            //é€€å‡ºä¸Šé¢å¾ªç¯æ—¶ low = high
+            if (low == high) {
+                break;
+            }
 
-			swap(array, low, high);
-		}
+            swap(array, low, high);
+        }
 
-		//----¸ßµÍÖ¸ÕëËùÖ¸ÏòµÄÔªËØÅÅĞòÍê³Éºó£¬»¹µÃÒª°ÑÖĞÊàÔªËØ·Åµ½ÊÊµ±µÄÎ»ÖÃ
-		if (c.compare(array[pivot], array[low]) > 0) {
-			//Èç¹ûÍË³öÑ­»·Ê±ÖĞÊàÔªËØ´óÓÚÁËµÍÖ¸Õë»ò¸ßÖ¸ÕëÔªËØÊ±£¬ÖĞÊàÔªËØĞèÓëlowÔªËØ½»»»
-			swap(array, low, pivot);
-			pivot = low;
-		} else if (c.compare(array[pivot], array[low]) <= 0) {
-			swap(array, low - 1, pivot);
-			pivot = low - 1;
-		}
+        //----é«˜ä½æŒ‡é’ˆæ‰€æŒ‡å‘çš„å…ƒç´ æ’åºå®Œæˆåï¼Œè¿˜å¾—è¦æŠŠä¸­æ¢å…ƒç´ æ”¾åˆ°é€‚å½“çš„ä½ç½®
+        if (c.compare(array[pivot], array[low]) > 0) {
+            //å¦‚æœé€€å‡ºå¾ªç¯æ—¶ä¸­æ¢å…ƒç´ å¤§äºäº†ä½æŒ‡é’ˆæˆ–é«˜æŒ‡é’ˆå…ƒç´ æ—¶ï¼Œä¸­æ¢å…ƒç´ éœ€ä¸lowå…ƒç´ äº¤æ¢
+            swap(array, low, pivot);
+            pivot = low;
+        } else if (c.compare(array[pivot], array[low]) <= 0) {
+            swap(array, low - 1, pivot);
+            pivot = low - 1;
+        }
 
-		//·µ»ØÖĞÊàÔªËØËùÔÚÎ»ÖÃ£¬ÒÔ±ãÏÂ´Î·ÖÇø
-		return pivot;
-	}
+        //è¿”å›ä¸­æ¢å…ƒç´ æ‰€åœ¨ä½ç½®ï¼Œä»¥ä¾¿ä¸‹æ¬¡åˆ†åŒº
+        return pivot;
+    }
 
-	/**
-	* ²âÊÔ
-	* @param args
-	*/
-	public static void main(String[] args) {
-		Integer[] intgArr = { 3, 1, 1, 1, 1, 1, 1 };
-		QuickSort<Integer> sort = new QuickSort<Integer>();
-		QuickSort.testSort(sort, intgArr);
-		QuickSort.testSort(sort, null);
-	}
+    /**
+     * æµ‹è¯•
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Integer[] intgArr = {3, 1, 1, 1, 1, 1, 1};
+        QuickSort<Integer> sort = new QuickSort<Integer>();
+        QuickSort.testSort(sort, intgArr);
+        QuickSort.testSort(sort, null);
+    }
 }

@@ -123,7 +123,7 @@ public class RateCheckRedisRateLimiter extends AbstractRateLimiter<RateCheckRedi
                     .reduce(new ArrayList<Long>(), (longs, l) -> {
                         longs.addAll(l);
                         return longs;
-                    }) .map(results -> {
+                    }).map(results -> {
                         boolean allowed = results.get(0) == 1L;
                         Long tokensLeft = results.get(1);
 
@@ -134,8 +134,7 @@ public class RateCheckRedisRateLimiter extends AbstractRateLimiter<RateCheckRedi
                         }
                         return response;
                     });
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             /*
              * We don't want a hard dependency on Redis to allow traffic. Make sure to set
              * an alert so you know if this is happening too much. Stripe's observed

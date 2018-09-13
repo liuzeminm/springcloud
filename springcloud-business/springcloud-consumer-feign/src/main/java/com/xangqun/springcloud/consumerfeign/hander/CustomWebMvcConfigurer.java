@@ -28,6 +28,7 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
 
     /**
      * 配置线程池
+     *
      * @return
      */
     @Bean(name = "asyncPoolTaskExecutor")
@@ -47,7 +48,7 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
     @Override
     public void configureAsyncSupport(final AsyncSupportConfigurer configurer) {
         //处理 callable超时
-        configurer.setDefaultTimeout(60*1000);
+        configurer.setDefaultTimeout(60 * 1000);
         configurer.setTaskExecutor(getAsyncThreadPoolTaskExecutor());
     }
 }

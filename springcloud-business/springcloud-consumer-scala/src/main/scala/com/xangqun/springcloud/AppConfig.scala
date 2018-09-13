@@ -22,7 +22,7 @@ import org.springframework.context.annotation.ComponentScan
 @EnableCircuitBreaker
 @EnableHystrix
 @ServletComponentScan //针对@webFilter @WebListener扫描
-@ConditionalOnClass(value =Array(classOf[WebMvcAutoConfiguration]))
+@ConditionalOnClass(value = Array(classOf[WebMvcAutoConfiguration]))
 @ComponentScan(basePackages = Array("com.xangqun.springcloud"))
 class AppConfig {
 

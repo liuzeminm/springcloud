@@ -24,13 +24,13 @@ public class JwtCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<R
     public GatewayFilter apply(RateCheckGatewayFilterFactory.Config config) {
         return (exchange, chain) -> {
             String token = exchange.getRequest().getHeaders().getFirst("Authorization");
-            String openId =  exchange.getRequest().getQueryParams().getFirst("openId");
+            String openId = exchange.getRequest().getQueryParams().getFirst("openId");
             //check token
             if (StringUtils.isNotBlank(token)) {
                 String tokenOpenID = JWTUtils.checkToken(token).getUid();
-                if(StringUtils.isNotBlank(tokenOpenID)) {
-                    if(openId != null) {
-                        if(openId.equals(tokenOpenID)) {
+                if (StringUtils.isNotBlank(tokenOpenID)) {
+                    if (openId != null) {
+                        if (openId.equals(tokenOpenID)) {
                             return chain.filter(exchange);
                         }
                     } else {

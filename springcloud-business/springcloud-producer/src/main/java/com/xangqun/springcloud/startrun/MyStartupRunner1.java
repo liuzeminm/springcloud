@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
  * CommandLineRunner
  * ApplicationReadyEvent
  * ApplicationFailedEvent
+ *
  * @author laixiangqun
  * @since 2018-8-16
  */

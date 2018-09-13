@@ -2,6 +2,7 @@ package com.xangqun
 
 import com.xangqun.springcloud.AppConfig
 import org.springframework.boot.SpringApplication
+
 /**
   *
   *

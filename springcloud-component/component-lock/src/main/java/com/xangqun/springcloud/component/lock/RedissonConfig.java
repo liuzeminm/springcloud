@@ -5,7 +5,6 @@ package com.xangqun.springcloud.component.lock;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
-import org.redisson.codec.KryoCodec;
 import org.redisson.config.ClusterServersConfig;
 import org.redisson.config.Config;
 import org.redisson.config.SentinelServersConfig;
@@ -21,7 +20,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * redis配置类
- * 
+ *
  * @author songjie
  * @since 2018年1月17日
  */
@@ -30,80 +29,83 @@ import org.springframework.util.StringUtils;
 @EnableConfigurationProperties(RedissonProperties.class)
 public class RedissonConfig {
 
-	@Autowired
-	private RedissonProperties redissonProperties;
+    @Autowired
+    private RedissonProperties redissonProperties;
 
-	/**
-	 * 哨兵模式自动装配
-	 * @return
-	 */
-	@Bean
-	@ConditionalOnProperty(name="redisson.master-name")
-	RedissonClient redissonSentinel() {
-		Config config = new Config();
-		SentinelServersConfig serverConfig = config.setCodec(new FastJsonCodec())
-				.useSentinelServers()
-				.addSentinelAddress(redissonProperties.getSentinelAddressesNew())
-				.setMasterName(redissonProperties.getMasterName())
-				.setTimeout(redissonProperties.getTimeout())
-				.setMasterConnectionPoolSize(redissonProperties.getMasterConnectionPoolSize())
-				.setSlaveConnectionPoolSize(redissonProperties.getSlaveConnectionPoolSize());
+    /**
+     * 哨兵模式自动装配
+     *
+     * @return
+     */
+    @Bean
+    @ConditionalOnProperty(name = "redisson.master-name")
+    RedissonClient redissonSentinel() {
+        Config config = new Config();
+        SentinelServersConfig serverConfig = config.setCodec(new FastJsonCodec())
+                .useSentinelServers()
+                .addSentinelAddress(redissonProperties.getSentinelAddressesNew())
+                .setMasterName(redissonProperties.getMasterName())
+                .setTimeout(redissonProperties.getTimeout())
+                .setMasterConnectionPoolSize(redissonProperties.getMasterConnectionPoolSize())
+                .setSlaveConnectionPoolSize(redissonProperties.getSlaveConnectionPoolSize());
 
-		if(!StringUtils.isEmpty(redissonProperties.getPassword())) {
-			serverConfig.setPassword(redissonProperties.getPassword());
-		}
-		return Redisson.create(config);
-	}
+        if (!StringUtils.isEmpty(redissonProperties.getPassword())) {
+            serverConfig.setPassword(redissonProperties.getPassword());
+        }
+        return Redisson.create(config);
+    }
 
-	/**
-	 * 单机模式自动装配
-	 * @return
-	 */
-	@Bean
-	@ConditionalOnProperty(name="redisson.address")
-	RedissonClient redissonSingle() {
-		Config config = new Config();
-		SingleServerConfig serverConfig = config.setCodec(new FastJsonCodec())
-				.useSingleServer()
-				.setAddress(redissonProperties.getAddress())
-				.setTimeout(redissonProperties.getTimeout())
-				.setConnectionPoolSize(redissonProperties.getConnectionPoolSize())
-				.setConnectionMinimumIdleSize(redissonProperties.getConnectionMinimumIdleSize());
+    /**
+     * 单机模式自动装配
+     *
+     * @return
+     */
+    @Bean
+    @ConditionalOnProperty(name = "redisson.address")
+    RedissonClient redissonSingle() {
+        Config config = new Config();
+        SingleServerConfig serverConfig = config.setCodec(new FastJsonCodec())
+                .useSingleServer()
+                .setAddress(redissonProperties.getAddress())
+                .setTimeout(redissonProperties.getTimeout())
+                .setConnectionPoolSize(redissonProperties.getConnectionPoolSize())
+                .setConnectionMinimumIdleSize(redissonProperties.getConnectionMinimumIdleSize());
 
-		if(!StringUtils.isEmpty(redissonProperties.getPassword())) {
-			serverConfig.setPassword(redissonProperties.getPassword());
-		}
+        if (!StringUtils.isEmpty(redissonProperties.getPassword())) {
+            serverConfig.setPassword(redissonProperties.getPassword());
+        }
 
-		return Redisson.create(config);
-	}
+        return Redisson.create(config);
+    }
 
-	@Bean
-	@ConditionalOnProperty(name="redisson.clusterAddresses")
-	public RedissonClient redissonClient() {
-		Config config = new Config();
-		ClusterServersConfig serverConfig = config.setCodec(new FastJsonCodec())
-				.useClusterServers()
-				.addNodeAddress(redissonProperties.getClusterAddressesNew())
-				.setTimeout(redissonProperties.getTimeout())
-				.setMasterConnectionPoolSize(redissonProperties.getMasterConnectionPoolSize())
-				.setSlaveConnectionPoolSize(redissonProperties.getSlaveConnectionPoolSize());
+    @Bean
+    @ConditionalOnProperty(name = "redisson.clusterAddresses")
+    public RedissonClient redissonClient() {
+        Config config = new Config();
+        ClusterServersConfig serverConfig = config.setCodec(new FastJsonCodec())
+                .useClusterServers()
+                .addNodeAddress(redissonProperties.getClusterAddressesNew())
+                .setTimeout(redissonProperties.getTimeout())
+                .setMasterConnectionPoolSize(redissonProperties.getMasterConnectionPoolSize())
+                .setSlaveConnectionPoolSize(redissonProperties.getSlaveConnectionPoolSize());
 
-		if(!StringUtils.isEmpty(redissonProperties.getPassword())) {
-			serverConfig.setPassword(redissonProperties.getPassword());
-		}
-		return Redisson.create(config);
-	}
+        if (!StringUtils.isEmpty(redissonProperties.getPassword())) {
+            serverConfig.setPassword(redissonProperties.getPassword());
+        }
+        return Redisson.create(config);
+    }
 
-	/**
-	 * 装配locker类，并将实例注入到RedissLockUtil中
-	 * @return
-	 */
-	@Bean
-	DistributedLock distributedLocker(RedissonClient redissonClient) {
-		RedisDistributedLock locker = new RedisDistributedLock();
-		locker.setRedissonClient(redissonClient);
-		RedisLockUtil.setLocker(locker);
-		return locker;
-	}
+    /**
+     * 装配locker类，并将实例注入到RedissLockUtil中
+     *
+     * @return
+     */
+    @Bean
+    DistributedLock distributedLocker(RedissonClient redissonClient) {
+        RedisDistributedLock locker = new RedisDistributedLock();
+        locker.setRedissonClient(redissonClient);
+        RedisLockUtil.setLocker(locker);
+        return locker;
+    }
 
 }

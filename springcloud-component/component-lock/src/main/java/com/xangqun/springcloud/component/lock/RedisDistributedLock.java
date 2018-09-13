@@ -6,13 +6,14 @@ package com.xangqun.springcloud.component.lock;
 import org.redisson.RedissonMultiLock;
 import org.redisson.RedissonRedLock;
 import org.redisson.api.*;
+
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author laixiangqun
  * @since 2018-7-18
  */
-public class RedisDistributedLock implements DistributedLock{
+public class RedisDistributedLock implements DistributedLock {
     private RedissonClient redissonClient;
 
     @Override
@@ -30,7 +31,7 @@ public class RedisDistributedLock implements DistributedLock{
     }
 
     @Override
-    public RLock lock(String lockKey, TimeUnit unit ,int leaseTime) {
+    public RLock lock(String lockKey, TimeUnit unit, int leaseTime) {
         RLock lock = redissonClient.getLock(lockKey);
         lock.lock(leaseTime, unit);
         return lock;
@@ -100,52 +101,52 @@ public class RedisDistributedLock implements DistributedLock{
 
     @Override
     public RedissonMultiLock multiLock(String... lockKeys) {
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonMultiLock lock = new RedissonMultiLock(rLocks);
             lock.lock();
             return lock;
         }
-       return null;
+        return null;
     }
 
     @Override
-    public RedissonMultiLock multiLock( int leaseTime,String... lockKeys) {
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+    public RedissonMultiLock multiLock(int leaseTime, String... lockKeys) {
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonMultiLock lock = new RedissonMultiLock(rLocks);
-            lock.lock(leaseTime,TimeUnit.SECONDS);
+            lock.lock(leaseTime, TimeUnit.SECONDS);
             return lock;
         }
         return null;
     }
 
     @Override
-    public RedissonMultiLock multiLock( TimeUnit unit, int leaseTime,String... lockKeys){
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+    public RedissonMultiLock multiLock(TimeUnit unit, int leaseTime, String... lockKeys) {
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonMultiLock lock = new RedissonMultiLock(rLocks);
-            lock.lock(leaseTime,unit);
+            lock.lock(leaseTime, unit);
             return lock;
         }
         return null;
     }
 
     @Override
-    public boolean tryMultiLock(TimeUnit unit, int waitTime, int leaseTime,String... lockKeys){
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+    public boolean tryMultiLock(TimeUnit unit, int waitTime, int leaseTime, String... lockKeys) {
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonMultiLock lock = new RedissonMultiLock(rLocks);
             try {
@@ -169,10 +170,10 @@ public class RedisDistributedLock implements DistributedLock{
 
     @Override
     public RedissonRedLock redLock(String... lockKeys) {
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonRedLock lock = new RedissonRedLock(rLocks);
             lock.lock();
@@ -182,39 +183,39 @@ public class RedisDistributedLock implements DistributedLock{
     }
 
     @Override
-    public RedissonRedLock redLock( int leaseTime,String... lockKeys) {
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+    public RedissonRedLock redLock(int leaseTime, String... lockKeys) {
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonRedLock lock = new RedissonRedLock(rLocks);
-            lock.lock(leaseTime,TimeUnit.SECONDS);
+            lock.lock(leaseTime, TimeUnit.SECONDS);
             return lock;
         }
         return null;
     }
 
     @Override
-    public RedissonRedLock redLock( TimeUnit unit, int leaseTime,String... lockKeys){
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+    public RedissonRedLock redLock(TimeUnit unit, int leaseTime, String... lockKeys) {
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonRedLock lock = new RedissonRedLock(rLocks);
-            lock.lock(leaseTime,unit);
+            lock.lock(leaseTime, unit);
             return lock;
         }
         return null;
     }
 
     @Override
-    public boolean tryRedLock(TimeUnit unit, int waitTime, int leaseTime,String... lockKeys){
-        if(lockKeys !=null){
-            RLock[] rLocks=new RLock[lockKeys.length];
-            for(int index=0;index<lockKeys.length;index++){
-                rLocks[index]=redissonClient.getLock(lockKeys[index]);
+    public boolean tryRedLock(TimeUnit unit, int waitTime, int leaseTime, String... lockKeys) {
+        if (lockKeys != null) {
+            RLock[] rLocks = new RLock[lockKeys.length];
+            for (int index = 0; index < lockKeys.length; index++) {
+                rLocks[index] = redissonClient.getLock(lockKeys[index]);
             }
             RedissonRedLock lock = new RedissonRedLock(rLocks);
             try {

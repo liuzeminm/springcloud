@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 @Configuration
 public class GatewayConfiguration {
 
-    @Bean(name="apiKeyResolver")
+    @Bean(name = "apiKeyResolver")
     public KeyResolver apiKeyResolver() {
         //根据api接口来限流
         return exchange -> {

@@ -11,11 +11,11 @@ server:
     max-threads: 200
 spring:
   application:
-     name: springcloud-gateway
-#  security:
-#    user:
-#      name: "user"
-#      password: "password"
+    name: springcloud-gateway
+  #  security:
+  #    user:
+  #      name: "user"
+  #      password: "password"
   cloud:
     gateway:
       discovery:

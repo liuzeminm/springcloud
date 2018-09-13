@@ -27,7 +27,7 @@ public class RedissonProperties {
 
     private int connectionPoolSize = 64;
 
-    private int connectionMinimumIdleSize=10;
+    private int connectionMinimumIdleSize = 10;
 
     private int slaveConnectionPoolSize = 250;
 
@@ -71,11 +71,11 @@ public class RedissonProperties {
         this.sentinelAddresses = sentinelAddresses.split(",");
     }
 
-    public String[] getSentinelAddressesNew(){
-        if(sentinelAddresses!=null){
-            String[] sentinelAddressesNew=new String[sentinelAddresses.length];
-            for(int index=0; index<sentinelAddresses.length;index++){
-                sentinelAddressesNew[index]="redis://"+sentinelAddresses[index];
+    public String[] getSentinelAddressesNew() {
+        if (sentinelAddresses != null) {
+            String[] sentinelAddressesNew = new String[sentinelAddresses.length];
+            for (int index = 0; index < sentinelAddresses.length; index++) {
+                sentinelAddressesNew[index] = "redis://" + sentinelAddresses[index];
             }
             return sentinelAddressesNew;
         }
@@ -138,11 +138,11 @@ public class RedissonProperties {
         return clusterAddresses;
     }
 
-    public String[] getClusterAddressesNew(){
-        if(clusterAddresses!=null){
-            String[] clusterAddressesNew=new String[clusterAddresses.length];
-            for(int index=0; index<clusterAddresses.length;index++){
-                clusterAddressesNew[index]="redis://"+clusterAddresses[index];
+    public String[] getClusterAddressesNew() {
+        if (clusterAddresses != null) {
+            String[] clusterAddressesNew = new String[clusterAddresses.length];
+            for (int index = 0; index < clusterAddresses.length; index++) {
+                clusterAddressesNew[index] = "redis://" + clusterAddresses[index];
             }
             return clusterAddressesNew;
         }

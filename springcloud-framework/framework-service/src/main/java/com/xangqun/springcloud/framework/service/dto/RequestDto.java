@@ -8,38 +8,39 @@ import javax.validation.constraints.NotNull;
 
 /**
  * RequestDto
+ *
+ * @param <T>
  * @author wanghongben
  * @since 2018年1月24日
- * @param <T>
  */
 public class RequestDto<T extends BaseBusinessDto> {
 
-	@NotNull(message = "framework.request.head.null")
-	@Valid
-	private Header header;
+    @NotNull(message = "framework.request.head.null")
+    @Valid
+    private Header header;
 
-	@Valid
-	private T data;
+    @Valid
+    private T data;
 
-	public Header getHeader() {
-		return header;
-	}
+    public Header getHeader() {
+        return header;
+    }
 
-	public void setHeader(Header header) {
-		this.header = header;
-	}
+    public void setHeader(Header header) {
+        this.header = header;
+    }
 
-	public T getData() {
-		return data;
-	}
+    public T getData() {
+        return data;
+    }
 
-	public void setData(T data) {
-		this.data = data;
-	}
+    public void setData(T data) {
+        this.data = data;
+    }
 
-	@Override
-	public String toString() {
-		return "RequestDto [header=" + header + ", data=" + data + "]";
-	}
+    @Override
+    public String toString() {
+        return "RequestDto [header=" + header + ", data=" + data + "]";
+    }
 
 }

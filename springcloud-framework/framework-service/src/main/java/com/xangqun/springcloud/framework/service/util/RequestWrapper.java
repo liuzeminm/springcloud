@@ -20,41 +20,41 @@ import java.io.InputStreamReader;
  */
 public class RequestWrapper extends HttpServletRequestWrapper {
 
-  private final byte[] body;
+    private final byte[] body;
 
-  public RequestWrapper(HttpServletRequest request) throws IOException {
-    super(request);
-    body = StreamUtils.copyToByteArray(request.getInputStream());
-  }
+    public RequestWrapper(HttpServletRequest request) throws IOException {
+        super(request);
+        body = StreamUtils.copyToByteArray(request.getInputStream());
+    }
 
-  @Override
-  public BufferedReader getReader() throws IOException {
-    return new BufferedReader(new InputStreamReader(getInputStream()));
-  }
+    @Override
+    public BufferedReader getReader() throws IOException {
+        return new BufferedReader(new InputStreamReader(getInputStream()));
+    }
 
-  @Override
-  public ServletInputStream getInputStream() throws IOException {
-    final ByteArrayInputStream bais = new ByteArrayInputStream(body);
-    return new ServletInputStream() {
-      @Override
-      public int read() throws IOException {
-        return bais.read();
-      }
+    @Override
+    public ServletInputStream getInputStream() throws IOException {
+        final ByteArrayInputStream bais = new ByteArrayInputStream(body);
+        return new ServletInputStream() {
+            @Override
+            public int read() throws IOException {
+                return bais.read();
+            }
 
-      @Override
-      public boolean isFinished() {
-        return false;
-      }
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
 
-      @Override
-      public boolean isReady() {
-        return false;
-      }
+            @Override
+            public boolean isReady() {
+                return false;
+            }
 
-      @Override
-      public void setReadListener(ReadListener listener) {
-        // Do nothing
-      }
-    };
-  }
+            @Override
+            public void setReadListener(ReadListener listener) {
+                // Do nothing
+            }
+        };
+    }
 }

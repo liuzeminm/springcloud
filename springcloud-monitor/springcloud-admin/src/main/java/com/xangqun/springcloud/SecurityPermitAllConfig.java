@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @createTime 2018年09月12日 12:25
  */
 @Configuration
-public  class SecurityPermitAllConfig extends WebSecurityConfigurerAdapter {
+public class SecurityPermitAllConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().permitAll()

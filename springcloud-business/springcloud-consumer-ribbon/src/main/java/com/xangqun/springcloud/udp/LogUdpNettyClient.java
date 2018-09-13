@@ -20,7 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -32,8 +35,9 @@ public class LogUdpNettyClient implements DisposableBean {
 
     private static Channel ch;
     private static EventLoopGroup group;
+
     static {
-         group = new NioEventLoopGroup();
+        group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
             b.group(group)
@@ -47,13 +51,13 @@ public class LogUdpNettyClient implements DisposableBean {
                         }
                     });
             ch = b.bind(0).sync().channel();
-        }catch (Exception e){
-            log.error("启动失败:",e);
+        } catch (Exception e) {
+            log.error("启动失败:", e);
         }
     }
 
-    public void run(String data,String ip, int port) {
-      try {
+    public void run(String data, String ip, int port) {
+        try {
             // 向网段类所有机器广播发UDP
 //            String data = JsonUtil.toJsonString(logData);
             ByteBuf byteBuf = Unpooled.copiedBuffer(data, CharsetUtil.UTF_8);
@@ -65,8 +69,8 @@ public class LogUdpNettyClient implements DisposableBean {
 
             ).sync();
             ch.closeFuture();
-        }catch (Exception e){
-          log.error("发送失败:",e);
+        } catch (Exception e) {
+            log.error("发送失败:", e);
         }
     }
 
@@ -80,7 +84,7 @@ public class LogUdpNettyClient implements DisposableBean {
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable e) throws Exception {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
             ctx.close();
         }
 
@@ -95,34 +99,35 @@ public class LogUdpNettyClient implements DisposableBean {
     }
 
     public static void main(String[] args) throws Exception {
-         AtomicInteger threadNumber=new AtomicInteger();
-        AtomicInteger index=new AtomicInteger(0);
-        ThreadPoolExecutor  threadPoolExecutor = new ThreadPoolExecutor(20, 50, 200,
-                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(5000),new ThreadFactory(){
+        AtomicInteger threadNumber = new AtomicInteger();
+        AtomicInteger index = new AtomicInteger(0);
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(20, 50, 200,
+                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(5000), new ThreadFactory() {
             @Override
             public Thread newThread(Runnable r) {
                 Thread thread = new Thread(r,
-                        "udp_client-" +threadNumber.incrementAndGet());
+                        "udp_client-" + threadNumber.incrementAndGet());
                 thread.setDaemon(true);
                 return thread;
-            }});
-       long time=   System.currentTimeMillis();
-        System.err.println(time+":"+index.get());
-       int count =0;
-        while (count<1){
+            }
+        });
+        long time = System.currentTimeMillis();
+        System.err.println(time + ":" + index.get());
+        int count = 0;
+        while (count < 1) {
             count++;
-            try{
-                threadPoolExecutor.execute(()->{
+            try {
+                threadPoolExecutor.execute(() -> {
                     index.incrementAndGet();
                     int port = 8080;
-                    new LogUdpNettyClient().run(JSON.toJSONString(new User()),"172.24.11.139", port);
+                    new LogUdpNettyClient().run(JSON.toJSONString(new User()), "172.24.11.139", port);
                 });
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(index.get()%50==0){
-                long time2=System.currentTimeMillis();
-                System.err.println(time2-time);
+            if (index.get() % 50 == 0) {
+                long time2 = System.currentTimeMillis();
+                System.err.println(time2 - time);
             }
         }
 

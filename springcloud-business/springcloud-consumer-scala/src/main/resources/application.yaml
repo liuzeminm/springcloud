@@ -55,14 +55,14 @@ management:
       exposure:
         include: '*'
   endpoint:
-      health:
-        show-details: ALWAYS
+    health:
+      show-details: ALWAYS
 info:
   version: 1.0.0
 
 #日志
 logging:
-#日志配置文件位置
+  #日志配置文件位置
   config: classpath:logback.xml
-#日志打印位置，这里是默认在项目根路径下
+  #日志打印位置，这里是默认在项目根路径下
   path: log/spring-boot-log

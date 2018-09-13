@@ -1,10 +1,8 @@
 package com.xangqun.springcloud;
 
-import com.google.gson.GsonBuilder;
 import com.xangqun.springcloud.component.lock.RedisLockUtil;
 import com.xangqun.springcloud.framework.service.web.BaseWebController;
 import com.xangqun.springcloud.mapper.UserMapper;
-import com.xangqun.springcloud.mapper.entity.User;
 import com.xangqun.springcloud.message.StreamClient;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +34,11 @@ public class PortService extends BaseWebController {
 
     @RequestMapping("data")
     public String getData() {
-        RLock rLock= RedisLockUtil.lock("testXANGQUN", TimeUnit.SECONDS,5);
-        long time =  redisTemplate.getExpire("test00");
+        RLock rLock = RedisLockUtil.lock("testXANGQUN", TimeUnit.SECONDS, 5);
+        long time = redisTemplate.getExpire("test00");
         rLock.unlock();
-         userMapper.deleteByPrimaryKey(1L);
-        return "Hello World, I'm from time : "+test;// + new GsonBuilder().create().toJson(user);
+        userMapper.deleteByPrimaryKey(1L);
+        return "Hello World, I'm from time : " + test;// + new GsonBuilder().create().toJson(user);
     }
 
     @GetMapping("send")

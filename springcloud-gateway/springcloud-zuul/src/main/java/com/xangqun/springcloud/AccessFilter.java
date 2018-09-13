@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class AccessFilter extends ZuulFilter {
 
-     
 
     @Override
     public String filterType() {
@@ -33,15 +32,15 @@ public class AccessFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-       
+
         try {
-        	
-          
+
+
         } catch (Exception e) {
-           
+
         }
         return null;
     }
 
-     
+
 }

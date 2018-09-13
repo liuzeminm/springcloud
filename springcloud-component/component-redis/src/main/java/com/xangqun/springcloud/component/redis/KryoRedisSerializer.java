@@ -12,6 +12,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
 import java.io.ByteArrayOutputStream;
+
 /**
  * @author laixiangqun
  * @since 2018-8-1
@@ -63,7 +64,7 @@ public class KryoRedisSerializer<T> implements RedisSerializer<T> {
         kryo.register(clazz);
 
         try (Input input = new Input(bytes)) {
-            return kryo.readObject(input,clazz);
+            return kryo.readObject(input, clazz);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

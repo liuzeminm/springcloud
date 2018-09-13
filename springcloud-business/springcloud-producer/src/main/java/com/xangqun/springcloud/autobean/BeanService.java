@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 动态注入，删除bean
+ *
  * @author laixiangqun
  * @since 2018-8-16
  */
@@ -24,11 +25,11 @@ public class BeanService implements ApplicationContextAware {
         DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) ctx.getAutowireCapableBeanFactory();
         //创建bean信息.
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(AuoService.class);
-        beanDefinitionBuilder.addPropertyValue("name","张三");
-       //动态注册bean.
+        beanDefinitionBuilder.addPropertyValue("name", "张三");
+        //动态注册bean.
         defaultListableBeanFactory.registerBeanDefinition("testService", beanDefinitionBuilder.getBeanDefinition());
-         //获取动态注册的bean.
-        AuoService testService =ctx.getBean(AuoService.class);
+        //获取动态注册的bean.
+        AuoService testService = ctx.getBean(AuoService.class);
         testService.print();
 
         //删除bean.

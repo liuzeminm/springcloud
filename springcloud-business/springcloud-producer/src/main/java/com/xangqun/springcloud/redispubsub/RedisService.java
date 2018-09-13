@@ -18,6 +18,7 @@ public class RedisService {
 
     /**
      * 向通道发送消息的方法
+     *
      * @param channel
      * @param message
      */

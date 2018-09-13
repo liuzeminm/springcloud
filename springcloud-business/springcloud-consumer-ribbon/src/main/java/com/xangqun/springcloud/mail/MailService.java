@@ -12,6 +12,7 @@ import javax.mail.MessagingException;
 public interface MailService {
     /**
      * 发送文本邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -22,6 +23,7 @@ public interface MailService {
 
     /**
      * 发送HTML邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -29,10 +31,11 @@ public interface MailService {
      */
     public void sendHtmlMail(String to, String subject, String content) throws MessagingException;
 
-    public void sendHtmlMail(String to, String subject, String content, String... cc)throws MessagingException;
+    public void sendHtmlMail(String to, String subject, String content, String... cc) throws MessagingException;
 
     /**
      * 发送带附件的邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -41,10 +44,11 @@ public interface MailService {
      */
     public void sendAttachmentsMail(String to, String subject, String content, String filePath) throws MessagingException;
 
-    public void sendAttachmentsMail(String to, String subject, String content, String filePath, String... cc)throws MessagingException;
+    public void sendAttachmentsMail(String to, String subject, String content, String filePath, String... cc) throws MessagingException;
 
     /**
      * 发送正文中有静态资源的邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -54,6 +58,6 @@ public interface MailService {
      */
     public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId) throws MessagingException;
 
-    public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId, String... cc)throws MessagingException;
+    public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId, String... cc) throws MessagingException;
 
 }

@@ -3,7 +3,6 @@
  */
 package com.xangqun.springcloud.consumerfeign.upload;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 
 /**
@@ -29,6 +27,7 @@ import java.util.Iterator;
 public class UploadController {
     /**
      * 文件上传实现
+     *
      * @param session
      * @param request
      * @return
@@ -76,7 +75,7 @@ public class UploadController {
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iter = multiRequest.getFileNames();
             while (iter.hasNext()) {
-                MultipartFile file = multiRequest.getFile( iter.next());
+                MultipartFile file = multiRequest.getFile(iter.next());
                 if (file != null) {
                     String fileName = file.getOriginalFilename();
                     String path = "D:/" + fileName;
@@ -99,6 +98,6 @@ public class UploadController {
     @RequestMapping(value = "/process", method = RequestMethod.GET)
     public @ResponseBody
     Object process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return (ProgressEntity)request.getSession().getAttribute("status");
+        return (ProgressEntity) request.getSession().getAttribute("status");
     }
 }

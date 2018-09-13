@@ -176,7 +176,7 @@ public class PropertiesLoader {
             String currentkey = obj.toString();
             Object currentObj = map.get(obj);
             if (currentObj instanceof Map) {
-				Map currentMap = resolv((Map) currentObj);
+                Map currentMap = resolv((Map) currentObj);
                 for (Object key : currentMap.keySet()) {
                     String mapKey = currentkey + "." + key.toString();
                     values.put(mapKey, currentMap.get(key).toString());

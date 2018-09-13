@@ -1,7 +1,9 @@
 package com.xangqun.springcloud.component.base.util;
 
 import java.sql.Timestamp;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -14,6 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 1亿：4699,29,162.0344827586207%<p>
  * 1000万：480,12,40.0%<p>
  * 100万：50,10,5.0%<p>
+ *
  * @author lry
  */
 public class SystemClock {
@@ -35,12 +38,12 @@ public class SystemClock {
     }
 
     private void scheduleClockUpdating() {
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor((Runnable runnable)-> {
-                Thread thread = new Thread(runnable, "System Clock");
-                thread.setDaemon(true);
-                return thread;
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor((Runnable runnable) -> {
+            Thread thread = new Thread(runnable, "System Clock");
+            thread.setDaemon(true);
+            return thread;
         });
-        scheduler.scheduleAtFixedRate(()->
+        scheduler.scheduleAtFixedRate(() ->
                 now.set(System.currentTimeMillis()), period, period, TimeUnit.MILLISECONDS);
     }
 

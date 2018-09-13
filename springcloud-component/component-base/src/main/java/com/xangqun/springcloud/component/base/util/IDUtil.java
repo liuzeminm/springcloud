@@ -4,14 +4,14 @@ import java.util.UUID;
 
 /**
  * ID主键工具类。
- * @author Administrator
  *
+ * @author Administrator
  */
 public class IDUtil {
 
     /**
-     * 
      * 获取32位UUID。
+     *
      * @return String
      */
     public static String getUUID() {

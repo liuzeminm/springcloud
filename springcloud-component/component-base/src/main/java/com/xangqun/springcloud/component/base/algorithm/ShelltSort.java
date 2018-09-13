@@ -4,115 +4,118 @@ package com.xangqun.springcloud.component.base.algorithm;
 import java.util.Comparator;
 
 /**
- * Ï£¶ûÅÅĞòËã·¨
- * @author laixiangqun
- * @date 2009-12-5
+ * å¸Œå°”æ’åºç®—æ³•
  *
  * @param <E>
+ * @author jzj
+ * @date 2009-12-5
  */
 public class ShelltSort<E extends Comparable<E>> extends Sort<E> {
 
-	/**
-	 * ÅÅĞòËã·¨µÄÊµÏÖ£¬¶ÔÊı×éÖĞÖ¸¶¨µÄÔªËØ½øĞĞÅÅĞò
-	 * @param array ´ıÅÅĞòµÄÊı×é
-	 * @param from ´ÓÄÄÀï¿ªÊ¼ÅÅĞò
-	 * @param end ÅÅµ½ÄÄÀï
-	 * @param c ±È½ÏÆ÷
-	 */
-	@Override
-	public void sort(E[] array, int from, int end, Comparator<E> c) {
-		//³õÊ¼²½³¤£¬ÊµÖÊÎªÃ¿ÂÖµÄ·Ö×éÊı
-		int step = initialStep(end - from + 1);
+    /**
+     * æ’åºç®—æ³•çš„å®ç°ï¼Œå¯¹æ•°ç»„ä¸­æŒ‡å®šçš„å…ƒç´ è¿›è¡Œæ’åº
+     *
+     * @param array å¾…æ’åºçš„æ•°ç»„
+     * @param from  ä»å“ªé‡Œå¼€å§‹æ’åº
+     * @param end   æ’åˆ°å“ªé‡Œ
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    @Override
+    public void sort(E[] array, int from, int end, Comparator<E> c) {
+        //åˆå§‹æ­¥é•¿ï¼Œå®è´¨ä¸ºæ¯è½®çš„åˆ†ç»„æ•°
+        int step = initialStep(end - from + 1);
 
-		//µÚÒ»²ãÑ­»·ÊÇ¶ÔÅÅĞòÂÖ´Î½øĞĞÑ­»·¡£(step + 1) / 2 - 1 ÎªÏÂÒ»ÂÖ²½³¤Öµ
-		for (; step >= 1; step = (step + 1) / 2 - 1) {
-			//¶ÔÃ¿ÂÖÀïµÄÃ¿¸ö·Ö×é½øĞĞÑ­»·
-			for (int groupIndex = 0; groupIndex < step; groupIndex++) {
+        //ç¬¬ä¸€å±‚å¾ªç¯æ˜¯å¯¹æ’åºè½®æ¬¡è¿›è¡Œå¾ªç¯ã€‚(step + 1) / 2 - 1 ä¸ºä¸‹ä¸€è½®æ­¥é•¿å€¼
+        for (; step >= 1; step = (step + 1) / 2 - 1) {
+            //å¯¹æ¯è½®é‡Œçš„æ¯ä¸ªåˆ†ç»„è¿›è¡Œå¾ªç¯
+            for (int groupIndex = 0; groupIndex < step; groupIndex++) {
 
-				//¶ÔÃ¿×é½øĞĞÖ±½Ó²åÈëÅÅĞò
-				insertSort(array, groupIndex, step, end, c);
-			}
-		}
-	}
+                //å¯¹æ¯ç»„è¿›è¡Œç›´æ¥æ’å…¥æ’åº
+                insertSort(array, groupIndex, step, end, c);
+            }
+        }
+    }
 
-	/**
-	 * Ö±½Ó²åÈëÅÅĞòÊµÏÖ
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param groupIndex ¶ÔÃ¿ÂÖµÄÄÄÒ»×é½øĞĞÅÅĞò
-	 * @param step ²½³¤
-	 * @param end Õû¸öÊı×éÒªÅÅÄÄ¸öÔªËØÖ¹
-	 * @param c ±È½ÏÆ÷
-	 */
-	private void insertSort(E[] array, int groupIndex, int step, int end, Comparator<E> c) {
-		int startIndex = groupIndex;//´ÓÄÄÀï¿ªÊ¼ÅÅĞò
-		int endIndex = startIndex;//ÅÅµ½ÄÄÀï
-		/*
-		 * ÅÅµ½ÄÄÀïĞèÒª¼ÆËãµÃµ½£¬´Ó¿ªÊ¼ÅÅĞòÔªËØ¿ªÊ¼£¬ÒÔstep²½³¤£¬¿ÉÇóµÃÏÂÔªËØÊÇ·ñÔÚÊı×é·¶Î§ÄÚ£¬
-		 * Èç¹ûÔÚÊı×é·¶Î§ÄÚ£¬Ôò¼ÌĞøÑ­»·£¬Ö±µ½Ë÷Òı³¬ÏÖÊı×é·¶Î§
-		 */
-		while ((endIndex + step) <= end) {
-			endIndex += step;
-		}
+    /**
+     * ç›´æ¥æ’å…¥æ’åºå®ç°
+     *
+     * @param array      å¾…æ’åºæ•°ç»„
+     * @param groupIndex å¯¹æ¯è½®çš„å“ªä¸€ç»„è¿›è¡Œæ’åº
+     * @param step       æ­¥é•¿
+     * @param end        æ•´ä¸ªæ•°ç»„è¦æ’å“ªä¸ªå…ƒç´ æ­¢
+     * @param c          æ¯”è¾ƒå™¨
+     */
+    private void insertSort(E[] array, int groupIndex, int step, int end, Comparator<E> c) {
+        int startIndex = groupIndex;//ä»å“ªé‡Œå¼€å§‹æ’åº
+        int endIndex = startIndex;//æ’åˆ°å“ªé‡Œ
+        /*
+         * æ’åˆ°å“ªé‡Œéœ€è¦è®¡ç®—å¾—åˆ°ï¼Œä»å¼€å§‹æ’åºå…ƒç´ å¼€å§‹ï¼Œä»¥stepæ­¥é•¿ï¼Œå¯æ±‚å¾—ä¸‹å…ƒç´ æ˜¯å¦åœ¨æ•°ç»„èŒƒå›´å†…ï¼Œ
+         * å¦‚æœåœ¨æ•°ç»„èŒƒå›´å†…ï¼Œåˆ™ç»§ç»­å¾ªç¯ï¼Œç›´åˆ°ç´¢å¼•è¶…ç°æ•°ç»„èŒƒå›´
+         */
+        while ((endIndex + step) <= end) {
+            endIndex += step;
+        }
 
-		// iÎªÃ¿Ğ¡×éÀïµÄµÚ¶ş¸öÔªËØ¿ªÊ¼
-		for (int i = groupIndex + step; i <= end; i += step) {
-			for (int j = groupIndex; j < i; j += step) {
-				E insertedElem = array[i];
-				//´ÓÓĞĞòÊı×éÖĞ×îÒ»¸öÔªËØ¿ªÊ¼²éÕÒµÚÒ»¸ö´óÓÚ´ı²åÈëµÄÔªËØ
-				if (c.compare(array[j], insertedElem) >= 0) {
-					//ÕÒµ½²åÈëµãºó£¬´Ó²åÈëµã¿ªÊ¼ÏòºóËùÓĞÔªËØºóÒÆÒ»Î»
-					move(array, j, i - step, step);
-					array[j] = insertedElem;
-					break;
-				}
-			}
-		}
-	}
+        // iä¸ºæ¯å°ç»„é‡Œçš„ç¬¬äºŒä¸ªå…ƒç´ å¼€å§‹
+        for (int i = groupIndex + step; i <= end; i += step) {
+            for (int j = groupIndex; j < i; j += step) {
+                E insertedElem = array[i];
+                //ä»æœ‰åºæ•°ç»„ä¸­æœ€ä¸€ä¸ªå…ƒç´ å¼€å§‹æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå¤§äºå¾…æ’å…¥çš„å…ƒç´ 
+                if (c.compare(array[j], insertedElem) >= 0) {
+                    //æ‰¾åˆ°æ’å…¥ç‚¹åï¼Œä»æ’å…¥ç‚¹å¼€å§‹å‘åæ‰€æœ‰å…ƒç´ åç§»ä¸€ä½
+                    move(array, j, i - step, step);
+                    array[j] = insertedElem;
+                    break;
+                }
+            }
+        }
+    }
 
-	/**
-	 * ¸ù¾İÊı×é³¤¶ÈÇó³õÊ¼²½³¤
-	 *
-	 * ÎÒÃÇÑ¡Ôñ²½³¤µÄ¹«Ê½Îª£º2^k-1,2^(k-1)-1,...,15,7,3,1 £¬ÆäÖĞ2^k ¼õÒ»¼´Îª¸Ã²½³¤ĞòÁĞ£¬k
-	 * ÎªÅÅĞòÂÖ´Î
-	 *
-	 * ³õÊ¼²½³¤£ºstep = 2^k-1
-	 * ³õÊ¼²½³¤Ô¼ÊøÌõ¼ş£ºstep < len - 1 ³õÊ¼²½³¤µÄÖµÒªĞ¡ÓÚÊı×é³¤¶È»¹Òª¼õÒ»µÄÖµ£¨Òò
-	 * ÎªµÚÒ»ÂÖ·Ö×éÊ±¾¡Á¿²»Òª·ÖÎªÒ»×é£¬³ı·ÇÊı×é±¾ÉíµÄ³¤¶È¾ÍĞ¡ÓÚµÈÓÚ4£©
-	 *
-	 * ÓÉÉÏÃæÁ½¸ö¹ØÏµÊÔ¿ÉÒÔµÃÖª£º2^k - 1 < len - 1 ¹ØÏµÊ½£¬ÆäÖĞkÎªÂÖ´Î£¬Èç¹û°Ñ 2^k ±í ´ïÊ½
-	 * ×ª»»³É step ±í´ïÊ½£¬Ôò 2^k-1 ¿ÉÊ¹ÓÃ (step + 1)*2-1 Ìæ»»£¨ÒòÎª step+1 Ïàµ±ÓÚµÚk-1
-	 * ÂÖµÄ²½³¤£¬ËùÒÔÔÚ step+1 »ù´¡ÉÏ³ËÒÔ 2 ¾ÍÏàµ±ÓÚ 2^k ÁË£©£¬¼´²½³¤ÓëÊı×é³¤¶ÈµÄ¹ØÏµ²»µÈÊ½Îª
-	 * (step + 1)*2 - 1 < len -1
-	 *
-	 * @param len Êı×é³¤¶È
-	 * @return
-	 */
-	private static int initialStep(int len) {
-		/*
-		 * ³õÊ¼ÖµÉèÖÃÎª²½³¤¹«Ê½ÖĞµÄ×îĞ¡²½³¤£¬´Ó×îĞ¡²½³¤ÍÆµ¼³ö×î³¤³õÊ¼²½³¤Öµ£¬¼´°´ÕÕÒÔÏÂ¹«Ê½À´ÍÆ:
-		 * 1,3,7,15,...,2^(k-1)-1,2^k-1
-		 * Èç¹ûÊı×é³¤¶ÈĞ¡ÓÚµÈÓÚ4Ê±£¬²½³¤Îª1£¬¼´³¤¶ÈĞ¡ÓÚµÈÓÚ4µÄÊı×é²»ÇÒ·Ö×é£¬´ËÊ±Ö±½ÓÍË»¯ÎªÖ±½Ó²å
-		 * ÈëÅÅĞò
-		 */
-		int step = 1;
+    /**
+     * æ ¹æ®æ•°ç»„é•¿åº¦æ±‚åˆå§‹æ­¥é•¿
+     * <p>
+     * æˆ‘ä»¬é€‰æ‹©æ­¥é•¿çš„å…¬å¼ä¸ºï¼š2^k-1,2^(k-1)-1,...,15,7,3,1 ï¼Œå…¶ä¸­2^k å‡ä¸€å³ä¸ºè¯¥æ­¥é•¿åºåˆ—ï¼Œk
+     * ä¸ºæ’åºè½®æ¬¡
+     * <p>
+     * åˆå§‹æ­¥é•¿ï¼šstep = 2^k-1
+     * åˆå§‹æ­¥é•¿çº¦æŸæ¡ä»¶ï¼šstep < len - 1 åˆå§‹æ­¥é•¿çš„å€¼è¦å°äºæ•°ç»„é•¿åº¦è¿˜è¦å‡ä¸€çš„å€¼ï¼ˆå› 
+     * ä¸ºç¬¬ä¸€è½®åˆ†ç»„æ—¶å°½é‡ä¸è¦åˆ†ä¸ºä¸€ç»„ï¼Œé™¤éæ•°ç»„æœ¬èº«çš„é•¿åº¦å°±å°äºç­‰äº4ï¼‰
+     * <p>
+     * ç”±ä¸Šé¢ä¸¤ä¸ªå…³ç³»è¯•å¯ä»¥å¾—çŸ¥ï¼š2^k - 1 < len - 1 å…³ç³»å¼ï¼Œå…¶ä¸­kä¸ºè½®æ¬¡ï¼Œå¦‚æœæŠŠ 2^k è¡¨ è¾¾å¼
+     * è½¬æ¢æˆ step è¡¨è¾¾å¼ï¼Œåˆ™ 2^k-1 å¯ä½¿ç”¨ (step + 1)*2-1 æ›¿æ¢ï¼ˆå› ä¸º step+1 ç›¸å½“äºç¬¬k-1
+     * è½®çš„æ­¥é•¿ï¼Œæ‰€ä»¥åœ¨ step+1 åŸºç¡€ä¸Šä¹˜ä»¥ 2 å°±ç›¸å½“äº 2^k äº†ï¼‰ï¼Œå³æ­¥é•¿ä¸æ•°ç»„é•¿åº¦çš„å…³ç³»ä¸ç­‰å¼ä¸º
+     * (step + 1)*2 - 1 < len -1
+     *
+     * @param len æ•°ç»„é•¿åº¦
+     * @return
+     */
+    private static int initialStep(int len) {
+        /*
+         * åˆå§‹å€¼è®¾ç½®ä¸ºæ­¥é•¿å…¬å¼ä¸­çš„æœ€å°æ­¥é•¿ï¼Œä»æœ€å°æ­¥é•¿æ¨å¯¼å‡ºæœ€é•¿åˆå§‹æ­¥é•¿å€¼ï¼Œå³æŒ‰ç…§ä»¥ä¸‹å…¬å¼æ¥æ¨:
+         * 1,3,7,15,...,2^(k-1)-1,2^k-1
+         * å¦‚æœæ•°ç»„é•¿åº¦å°äºç­‰äº4æ—¶ï¼Œæ­¥é•¿ä¸º1ï¼Œå³é•¿åº¦å°äºç­‰äº4çš„æ•°ç»„ä¸ä¸”åˆ†ç»„ï¼Œæ­¤æ—¶ç›´æ¥é€€åŒ–ä¸ºç›´æ¥æ’
+         * å…¥æ’åº
+         */
+        int step = 1;
 
-		//ÊÔÌ½ÏÂÒ»¸ö²½³¤ÊÇ·ñÂú×ãÌõ¼ş£¬Èç¹ûÂú×ãÌõ¼ş£¬Ôò²½³¤ÖÃÎªÏÂÒ»²½³¤
-		while ((step + 1) * 2 - 1 < len - 1) {
-			step = (step + 1) * 2 - 1;
-		}
+        //è¯•æ¢ä¸‹ä¸€ä¸ªæ­¥é•¿æ˜¯å¦æ»¡è¶³æ¡ä»¶ï¼Œå¦‚æœæ»¡è¶³æ¡ä»¶ï¼Œåˆ™æ­¥é•¿ç½®ä¸ºä¸‹ä¸€æ­¥é•¿
+        while ((step + 1) * 2 - 1 < len - 1) {
+            step = (step + 1) * 2 - 1;
+        }
 
-		System.out.println("³õÊ¼²½³¤ - " + step);
-		return step;
-	}
+        System.out.println("åˆå§‹æ­¥é•¿ - " + step);
+        return step;
+    }
 
-	/**
-	 * ²âÊÔ
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Integer[] intgArr = { 5, 9, 1, 4, 8, 2, 6, 3, 7, 10 };
-		ShelltSort<Integer> shellSort = new ShelltSort<Integer>();
-		Sort.testSort(shellSort, intgArr);
-		Sort.testSort(shellSort, null);
-	}
+    /**
+     * æµ‹è¯•
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Integer[] intgArr = {5, 9, 1, 4, 8, 2, 6, 3, 7, 10};
+        ShelltSort<Integer> shellSort = new ShelltSort<Integer>();
+        Sort.testSort(shellSort, intgArr);
+        Sort.testSort(shellSort, null);
+    }
 }

@@ -86,6 +86,7 @@ public class RateCheckGatewayFilterFactory extends AbstractGatewayFilterFactory<
         public String getKeyResolver() {
             return keyResolver;
         }
+
         public void setKeyResolver(String keyResolver) {
             this.keyResolver = keyResolver;
         }

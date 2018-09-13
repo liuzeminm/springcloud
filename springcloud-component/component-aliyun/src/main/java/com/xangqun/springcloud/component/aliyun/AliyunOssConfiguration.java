@@ -57,22 +57,22 @@ public class AliyunOssConfiguration {
 
     @Bean(name = "credentialsProvider")
     @ConditionalOnMissingBean
-    public CredentialsProvider getCredentialsProvider(){
-       return new DefaultCredentialProvider(aliyunOssProperties.getAccessKeyId(), aliyunOssProperties
+    public CredentialsProvider getCredentialsProvider() {
+        return new DefaultCredentialProvider(aliyunOssProperties.getAccessKeyId(), aliyunOssProperties
                 .getAccessKeySecret());
     }
 
     @Bean(name = "ossClient")
     @Scope("prototype")
     @Autowired
-    public OSSClient ossClient(ClientConfiguration clientConfiguration,CredentialsProvider credentialsProvider) {
+    public OSSClient ossClient(ClientConfiguration clientConfiguration, CredentialsProvider credentialsProvider) {
         OSSClient ossClient = new OSSClient(aliyunOssProperties.getEndpoint(), credentialsProvider, clientConfiguration);
         return ossClient;
     }
 
     @Bean
-    public OssPoolManager ossPoolManager(){
-        OssPoolManager ossPoolManager=new OssPoolManager(applicationContext);
+    public OssPoolManager ossPoolManager() {
+        OssPoolManager ossPoolManager = new OssPoolManager(applicationContext);
         AliyunOssUtil.setOSSClient(ossPoolManager);
         return ossPoolManager;
     }

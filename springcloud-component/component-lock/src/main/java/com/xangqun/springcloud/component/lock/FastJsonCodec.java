@@ -30,20 +30,20 @@ public class FastJsonCodec extends BaseCodec {
         return encoder;
     }
 
-    private final Decoder<Object> decoder =(ByteBuf buf, State state)-> JSON.parseObject(new ByteBufInputStream(buf), Object.class);
+    private final Decoder<Object> decoder = (ByteBuf buf, State state) -> JSON.parseObject(new ByteBufInputStream(buf), Object.class);
 
-    private final Encoder encoder =(Object in)-> {
-            ByteBuf out = ByteBufAllocator.DEFAULT.buffer();
-            try {
-                ByteBufOutputStream os = new ByteBufOutputStream(out);
-                JSON.writeJSONString(os, in);
-                return os.buffer();
-            } catch (IOException e) {
-                out.release();
-                throw e;
-            } catch (Exception e) {
-                out.release();
-                throw new IOException(e);
-            }
+    private final Encoder encoder = (Object in) -> {
+        ByteBuf out = ByteBufAllocator.DEFAULT.buffer();
+        try {
+            ByteBufOutputStream os = new ByteBufOutputStream(out);
+            JSON.writeJSONString(os, in);
+            return os.buffer();
+        } catch (IOException e) {
+            out.release();
+            throw e;
+        } catch (Exception e) {
+            out.release();
+            throw new IOException(e);
+        }
     };
 }

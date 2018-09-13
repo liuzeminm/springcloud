@@ -5,18 +5,14 @@ package com.xangqun.springcloud.framework.dao.config;
 
 
 import com.alibaba.druid.support.json.JSONUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.IncorrectResultSetColumnCountException;
 import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -38,6 +34,7 @@ import java.util.List;
 
 /**
  * 多db监控重写
+ *
  * @author laixiangqun
  * @since 2018-7-12
  */
@@ -63,6 +60,7 @@ public class DataSourceHealthIndicator extends AbstractHealthIndicator implement
     /**
      * Create a new {@link org.springframework.boot.actuate.jdbc.DataSourceHealthIndicator} using the specified
      * {@link DataSource}.
+     *
      * @param dataSource the data source
      */
     public DataSourceHealthIndicator(DataSource dataSource) {
@@ -72,8 +70,9 @@ public class DataSourceHealthIndicator extends AbstractHealthIndicator implement
     /**
      * Create a new {@link org.springframework.boot.actuate.jdbc.DataSourceHealthIndicator} using the specified
      * {@link DataSource} and validation query.
+     *
      * @param dataSource the data source
-     * @param query the validation query to use (can be {@code null})
+     * @param query      the validation query to use (can be {@code null})
      */
     public DataSourceHealthIndicator(DataSource dataSource, String query) {
         super("DataSource health check failed");
@@ -92,8 +91,7 @@ public class DataSourceHealthIndicator extends AbstractHealthIndicator implement
     protected void doHealthCheck(Health.Builder builder) throws Exception {
         if (this.dataSource == null) {
             builder.up().withDetail("database", "unknown");
-        }
-        else {
+        } else {
             doDataSourceHealthCheck(builder);
         }
     }
@@ -133,6 +131,7 @@ public class DataSourceHealthIndicator extends AbstractHealthIndicator implement
 
     /**
      * Set the {@link DataSource} to use.
+     *
      * @param dataSource the data source
      */
     public void setDataSource(DataSource dataSource) {
@@ -143,6 +142,7 @@ public class DataSourceHealthIndicator extends AbstractHealthIndicator implement
     /**
      * Set a specific validation query to use to validate a connection. If none is set, a
      * default validation query is used.
+     *
      * @param query the query
      */
     public void setQuery(String query) {
@@ -151,6 +151,7 @@ public class DataSourceHealthIndicator extends AbstractHealthIndicator implement
 
     /**
      * Return the validation query or {@code null}.
+     *
      * @return the query
      */
     public String getQuery() {

@@ -26,7 +26,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     private PrintWriter writer = null;
 
 
-    public ResponseWrapper(HttpServletResponse response) throws IOException{
+    public ResponseWrapper(HttpServletResponse response) throws IOException {
         super(response);
         buffer = new ByteArrayOutputStream();
         out = new WapperedOutputStream(buffer);
@@ -69,7 +69,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
             return bytes;
         } catch (Exception e) {
             return null;
-        }finally {
+        } finally {
             buffer.close();
         }
     }

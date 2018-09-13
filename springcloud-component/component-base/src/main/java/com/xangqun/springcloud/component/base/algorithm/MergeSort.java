@@ -4,96 +4,100 @@ import java.lang.reflect.Array;
 import java.util.Comparator;
 
 /**
- * ¹é²¢ÅÅĞòËã·¨
- * @author laixiangqun
- * @date 2009-12-11
+ * å½’å¹¶æ’åºç®—æ³•
  *
  * @param <E>
+ * @author jzj
+ * @date 2009-12-11
  */
 public class MergeSort<E extends Comparable<E>> extends Sort<E> {
 
-	/**
-	 * ÅÅĞòËã·¨µÄÊµÏÖ£¬¶ÔÊı×éÖĞÖ¸¶¨µÄÔªËØ½øĞĞÅÅĞò
-	 * @param arr ´ıÅÅĞòµÄÊı×é
-	 * @param from ´ÓÄÄÀï¿ªÊ¼ÅÅĞò
-	 * @param end ÅÅµ½ÄÄÀï
-	 * @param c ±È½ÏÆ÷
-	 */
-	@Override
-	public void sort(E[] arr, int from, int end, Comparator<E> c) {
-		partition(arr, from, end, c);
-	}
+    /**
+     * æ’åºç®—æ³•çš„å®ç°ï¼Œå¯¹æ•°ç»„ä¸­æŒ‡å®šçš„å…ƒç´ è¿›è¡Œæ’åº
+     *
+     * @param array å¾…æ’åºçš„æ•°ç»„
+     * @param from  ä»å“ªé‡Œå¼€å§‹æ’åº
+     * @param end   æ’åˆ°å“ªé‡Œ
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    @Override
+    public void sort(E[] arr, int from, int end, Comparator<E> c) {
+        partition(arr, from, end, c);
+    }
 
-	/**
-	 * µİ¹é»®·ÖÊı×é
-	 * @param arr
-	 * @param from
-	 * @param end
-	 * @param c void
-	 */
-	private void partition(E[] arr, int from, int end, Comparator<E> c) {
-		//»®·Öµ½Êı×éÖ»ÓĞÒ»¸öÔªËØÊ±²Å²»½øĞĞÔÙ»®·Ö
-		if (from < end) {
-			//´ÓÖĞ¼ä»®·Ö³ÉÁ½¸öÊı×é
-			int mid = (from + end) / 2;
-			partition(arr, from, mid, c);
-			partition(arr, mid + 1, end, c);
-			//ºÏ²¢»®·ÖºóµÄÁ½¸öÊı×é
-			merge(arr, from, end, mid, c);
-		}
-	}
+    /**
+     * é€’å½’åˆ’åˆ†æ•°ç»„
+     *
+     * @param arr
+     * @param from
+     * @param end
+     * @param c    void
+     */
+    private void partition(E[] arr, int from, int end, Comparator<E> c) {
+        //åˆ’åˆ†åˆ°æ•°ç»„åªæœ‰ä¸€ä¸ªå…ƒç´ æ—¶æ‰ä¸è¿›è¡Œå†åˆ’åˆ†
+        if (from < end) {
+            //ä»ä¸­é—´åˆ’åˆ†æˆä¸¤ä¸ªæ•°ç»„
+            int mid = (from + end) / 2;
+            partition(arr, from, mid, c);
+            partition(arr, mid + 1, end, c);
+            //åˆå¹¶åˆ’åˆ†åçš„ä¸¤ä¸ªæ•°ç»„
+            merge(arr, from, end, mid, c);
+        }
+    }
 
-	/**
-	 * Êı×éºÏ²¢£¬ºÏ²¢¹ı³ÌÖĞ¶ÔÁ½²¿·ÖÊı×é½øĞĞÅÅĞò
-	 * Ç°ºóÁ½²¿·ÖÊı×éÀïÊÇÓĞĞòµÄ
-	 * @param arr
-	 * @param from
-	 * @param end
-	 * @param mid
-	 * @param c void
-	 */
-	private void merge(E[] arr, int from, int end, int mid, Comparator<E> c) {
-		E[] tmpArr = (E[]) Array.newInstance(arr[0].getClass(), end - from + 1);
-		int tmpArrIndex = 0;//Ö¸ÏòÁÙÊ±Êı×é
-		int part1ArrIndex = from;//Ö¸ÏòµÚÒ»²¿·ÖÊı×é
-		int part2ArrIndex = mid + 1;//Ö¸ÏòµÚ¶ş²¿·ÖÊı×é
+    /**
+     * æ•°ç»„åˆå¹¶ï¼Œåˆå¹¶è¿‡ç¨‹ä¸­å¯¹ä¸¤éƒ¨åˆ†æ•°ç»„è¿›è¡Œæ’åº
+     * å‰åä¸¤éƒ¨åˆ†æ•°ç»„é‡Œæ˜¯æœ‰åºçš„
+     *
+     * @param arr
+     * @param from
+     * @param end
+     * @param mid
+     * @param c    void
+     */
+    private void merge(E[] arr, int from, int end, int mid, Comparator<E> c) {
+        E[] tmpArr = (E[]) Array.newInstance(arr[0].getClass(), end - from + 1);
+        int tmpArrIndex = 0;//æŒ‡å‘ä¸´æ—¶æ•°ç»„
+        int part1ArrIndex = from;//æŒ‡å‘ç¬¬ä¸€éƒ¨åˆ†æ•°ç»„
+        int part2ArrIndex = mid + 1;//æŒ‡å‘ç¬¬äºŒéƒ¨åˆ†æ•°ç»„
 
-		//ÓÉÓÚÁ½²¿·ÖÊı×éÀïÊÇÓĞĞòµÄ£¬ËùÒÔÃ¿²¿·Ö¿ÉÒÔ´ÓµÚÒ»¸öÔªËØÒÀ´ÎÈ¡µ½×îºóÒ»¸öÔªËØ£¬ÔÙ¶ÔÁ½²¿·Ö
-		//È¡³öµÄÔªËØ½øĞĞ±È½Ï¡£Ö»ÒªÄ³²¿·ÖÊı×éÔªËØÈ¡Íêºó£¬ÍË³öÑ­»·
-		while ((part1ArrIndex <= mid) && (part2ArrIndex <= end)) {
-			//´ÓÁ½²¿·ÖÊı×éÀï¸÷È¡Ò»¸ö½øĞĞ±È½Ï£¬È¡×îĞ¡Ò»¸ö²¢·ÅÈëÁÙÊ±Êı×éÖĞ
-			if (c.compare(arr[part1ArrIndex], arr[part2ArrIndex]) < 0) {
-				//Èç¹ûµÚÒ»²¿·ÖÊı×éÔªËØĞ¡£¬Ôò½«µÚÒ»²¿·ÖÊı×éÔªËØ·ÅÈëÁÙÊ±Êı×éÖĞ£¬²¢ÇÒÁÙÊ±Êı×éÖ¸Õë
-				//tmpArrIndexÏÂÒÆÒ»¸öÒÔ×öºÃÏÂ´Î´æ´¢Î»ÖÃ×¼±¸£¬Ç°²¿·ÖÊı×éÖ¸Õëpart1ArrIndex
-				//Ò²ÒªÏÂÒÆÒ»¸öÒÔ±ãÏÂ´ÎÈ¡³öÏÂÒ»¸öÔªËØÓëºó²¿·ÖÊı×éÔªËØ±È½Ï
-				tmpArr[tmpArrIndex++] = arr[part1ArrIndex++];
-			} else {
-				//Èç¹ûµÚ¶ş²¿·ÖÊı×éÔªËØĞ¡£¬Ôò½«µÚ¶ş²¿·ÖÊı×éÔªËØ·ÅÈëÁÙÊ±Êı×éÖĞ
-				tmpArr[tmpArrIndex++] = arr[part2ArrIndex++];
-			}
-		}
-		//ÓÉÓÚÍË³öÑ­»·ºó£¬Á½²¿·ÖÊı×éÖĞ¿ÉÄÜÓĞÒ»¸öÊı×éÔªËØ»¹Î´´¦ÀíÍê£¬ËùÒÔĞèÒª¶îÍâµÄ´¦Àí£¬µ±È»²»¿É
-		//ÄÜÁ½²¿·ÖÊı×é¶¼ÓĞÎ´´¦ÀíÍêµÄÔªËØ£¬ËùÒÔÏÂÃæÁ½¸öÑ­»·×î¶àÖ»ÓĞÒ»¸ö»áÖ´ĞĞ£¬²¢ÇÒ¶¼ÊÇ´óÓÚÒÑ·ÅÈë
-		//ÁÙÊ±Êı×éÖĞµÄÔªËØ
-		while (part1ArrIndex <= mid) {
-			tmpArr[tmpArrIndex++] = arr[part1ArrIndex++];
-		}
-		while (part2ArrIndex <= end) {
-			tmpArr[tmpArrIndex++] = arr[part2ArrIndex++];
-		}
+        //ç”±äºä¸¤éƒ¨åˆ†æ•°ç»„é‡Œæ˜¯æœ‰åºçš„ï¼Œæ‰€ä»¥æ¯éƒ¨åˆ†å¯ä»¥ä»ç¬¬ä¸€ä¸ªå…ƒç´ ä¾æ¬¡å–åˆ°æœ€åä¸€ä¸ªå…ƒç´ ï¼Œå†å¯¹ä¸¤éƒ¨åˆ†
+        //å–å‡ºçš„å…ƒç´ è¿›è¡Œæ¯”è¾ƒã€‚åªè¦æŸéƒ¨åˆ†æ•°ç»„å…ƒç´ å–å®Œåï¼Œé€€å‡ºå¾ªç¯
+        while ((part1ArrIndex <= mid) && (part2ArrIndex <= end)) {
+            //ä»ä¸¤éƒ¨åˆ†æ•°ç»„é‡Œå„å–ä¸€ä¸ªè¿›è¡Œæ¯”è¾ƒï¼Œå–æœ€å°ä¸€ä¸ªå¹¶æ”¾å…¥ä¸´æ—¶æ•°ç»„ä¸­
+            if (c.compare(arr[part1ArrIndex], arr[part2ArrIndex]) < 0) {
+                //å¦‚æœç¬¬ä¸€éƒ¨åˆ†æ•°ç»„å…ƒç´ å°ï¼Œåˆ™å°†ç¬¬ä¸€éƒ¨åˆ†æ•°ç»„å…ƒç´ æ”¾å…¥ä¸´æ—¶æ•°ç»„ä¸­ï¼Œå¹¶ä¸”ä¸´æ—¶æ•°ç»„æŒ‡é’ˆ
+                //tmpArrIndexä¸‹ç§»ä¸€ä¸ªä»¥åšå¥½ä¸‹æ¬¡å­˜å‚¨ä½ç½®å‡†å¤‡ï¼Œå‰éƒ¨åˆ†æ•°ç»„æŒ‡é’ˆpart1ArrIndex
+                //ä¹Ÿè¦ä¸‹ç§»ä¸€ä¸ªä»¥ä¾¿ä¸‹æ¬¡å–å‡ºä¸‹ä¸€ä¸ªå…ƒç´ ä¸åéƒ¨åˆ†æ•°ç»„å…ƒç´ æ¯”è¾ƒ
+                tmpArr[tmpArrIndex++] = arr[part1ArrIndex++];
+            } else {
+                //å¦‚æœç¬¬äºŒéƒ¨åˆ†æ•°ç»„å…ƒç´ å°ï¼Œåˆ™å°†ç¬¬äºŒéƒ¨åˆ†æ•°ç»„å…ƒç´ æ”¾å…¥ä¸´æ—¶æ•°ç»„ä¸­
+                tmpArr[tmpArrIndex++] = arr[part2ArrIndex++];
+            }
+        }
+        //ç”±äºé€€å‡ºå¾ªç¯åï¼Œä¸¤éƒ¨åˆ†æ•°ç»„ä¸­å¯èƒ½æœ‰ä¸€ä¸ªæ•°ç»„å…ƒç´ è¿˜æœªå¤„ç†å®Œï¼Œæ‰€ä»¥éœ€è¦é¢å¤–çš„å¤„ç†ï¼Œå½“ç„¶ä¸å¯
+        //èƒ½ä¸¤éƒ¨åˆ†æ•°ç»„éƒ½æœ‰æœªå¤„ç†å®Œçš„å…ƒç´ ï¼Œæ‰€ä»¥ä¸‹é¢ä¸¤ä¸ªå¾ªç¯æœ€å¤šåªæœ‰ä¸€ä¸ªä¼šæ‰§è¡Œï¼Œå¹¶ä¸”éƒ½æ˜¯å¤§äºå·²æ”¾å…¥
+        //ä¸´æ—¶æ•°ç»„ä¸­çš„å…ƒç´ 
+        while (part1ArrIndex <= mid) {
+            tmpArr[tmpArrIndex++] = arr[part1ArrIndex++];
+        }
+        while (part2ArrIndex <= end) {
+            tmpArr[tmpArrIndex++] = arr[part2ArrIndex++];
+        }
 
-		//×îºó°ÑÁÙÊ±Êı×é¿½±´µ½Ô´Êı×éÏàÍ¬µÄÎ»ÖÃ
-		System.arraycopy(tmpArr, 0, arr, from, end - from + 1);
-	}
+        //æœ€åæŠŠä¸´æ—¶æ•°ç»„æ‹·è´åˆ°æºæ•°ç»„ç›¸åŒçš„ä½ç½®
+        System.arraycopy(tmpArr, 0, arr, from, end - from + 1);
+    }
 
-	/**
-	 * ²âÊÔ
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Integer[] intgArr = { 5, 9, 1, 4, 1, 2, 6, 3, 8, 0, 7 };
-		MergeSort<Integer> insertSort = new MergeSort<Integer>();
-		Sort.testSort(insertSort, intgArr);
-		Sort.testSort(insertSort, null);
-	}
+    /**
+     * æµ‹è¯•
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Integer[] intgArr = {5, 9, 1, 4, 1, 2, 6, 3, 8, 0, 7};
+        MergeSort<Integer> insertSort = new MergeSort<Integer>();
+        Sort.testSort(insertSort, intgArr);
+        Sort.testSort(insertSort, null);
+    }
 }

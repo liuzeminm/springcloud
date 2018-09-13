@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -28,6 +29,7 @@ public class KaptchaController {
     @Autowired
     @Qualifier("kaptcha")
     private Producer producer;
+
     /**
      * 创建验证码
      *
@@ -47,7 +49,7 @@ public class KaptchaController {
         // Set standard HTTP/1.0 no-cache header.
         response.setHeader("Pragma", "no-cache");
 
-        response.setContentType( MediaType.IMAGE_JPEG_VALUE);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         //生成文字验证码
         String text = producer.createText();
         //生成图片验证码

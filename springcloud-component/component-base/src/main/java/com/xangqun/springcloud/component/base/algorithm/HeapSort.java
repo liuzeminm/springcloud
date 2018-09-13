@@ -2,101 +2,98 @@ package com.xangqun.springcloud.component.base.algorithm;
 
 import java.util.Comparator;
 
-/**
- * ¶ÑÅÅĞòËã·¨
- * @author laixiangqun
- * @date 2009-12-9
- *
- * @param <E>
- */
 public class HeapSort<E extends Comparable<E>> extends Sort<E> {
 
-	/**
-	 * ÅÅĞòËã·¨µÄÊµÏÖ£¬¶ÔÊı×éÖĞÖ¸¶¨µÄÔªËØ½øĞĞÅÅĞò
-	 * @param array ´ıÅÅĞòµÄÊı×é
-	 * @param from ´ÓÄÄÀï¿ªÊ¼ÅÅĞò
-	 * @param end ÅÅµ½ÄÄÀï
-	 * @param c ±È½ÏÆ÷
-	 */
-	@Override
-	public void sort(E[] array, int from, int end, Comparator<E> c) {
-		//´´½¨³õÊ¼¶Ñ
-		initialHeap(array, from, end, c);
+    /**
+     * æ’åºç®—æ³•çš„å®ç°ï¼Œå¯¹æ•°ç»„ä¸­æŒ‡å®šçš„å…ƒç´ è¿›è¡Œæ’åº
+     *
+     * @param array å¾…æ’åºçš„æ•°ç»„
+     * @param from  ä»å“ªé‡Œå¼€å§‹æ’åº
+     * @param end   æ’åˆ°å“ªé‡Œ
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    @Override
+    public void sort(E[] array, int from, int end, Comparator<E> c) {
+        //åˆ›å»ºåˆå§‹å †
+        initialHeap(array, from, end, c);
 
-		/*
-		 * ¶Ô³õÊ¼¶Ñ½øĞĞÑ­»·£¬ÇÒ´Ó×îºóÒ»¸ö½Úµã¿ªÊ¼£¬Ö±½ÓÊ÷Ö»ÓĞÁ½¸ö½ÚµãÖ¹
-		 * Ã¿ÂÖÑ­»·ºó¶ªÆú×îºóÒ»¸öÒ¶×Ó½Úµã£¬ÔÙ¿´×÷Ò»¸öĞÂµÄÊ÷
-		 */
-		for (int i = end - from + 1; i >= 2; i--) {
-			//¸ù½ÚµãÓë×îºóÒ»¸öÒ¶×Ó½Úµã½»»»Î»ÖÃ£¬¼´Êı×éÖĞµÄµÚÒ»¸öÔªËØÓë×îºóÒ»¸öÔªËØ»¥»»
-			swap(array, from, i - 1);
-			//½»»»ºóĞèÒªÖØĞÂµ÷Õû¶Ñ
-			adjustNote(array, 1, i - 1, c);
-		}
+        /*
+         * å¯¹åˆå§‹å †è¿›è¡Œå¾ªç¯ï¼Œä¸”ä»æœ€åä¸€ä¸ªèŠ‚ç‚¹å¼€å§‹ï¼Œç›´æ¥æ ‘åªæœ‰ä¸¤ä¸ªèŠ‚ç‚¹æ­¢
+         * æ¯è½®å¾ªç¯åä¸¢å¼ƒæœ€åä¸€ä¸ªå¶å­èŠ‚ç‚¹ï¼Œå†çœ‹ä½œä¸€ä¸ªæ–°çš„æ ‘
+         */
+        for (int i = end - from + 1; i >= 2; i--) {
+            //æ ¹èŠ‚ç‚¹ä¸æœ€åä¸€ä¸ªå¶å­èŠ‚ç‚¹äº¤æ¢ä½ç½®ï¼Œå³æ•°ç»„ä¸­çš„ç¬¬ä¸€ä¸ªå…ƒç´ ä¸æœ€åä¸€ä¸ªå…ƒç´ äº’æ¢
+            swap(array, from, i - 1);
+            //äº¤æ¢åéœ€è¦é‡æ–°è°ƒæ•´å †
+            adjustNote(array, 1, i - 1, c);
+        }
 
-	}
+    }
 
-	/**
-	 * ³õÊ¼»¯¶Ñ
-	 * ±ÈÈçÔ­ĞòÁĞÎª£º7,2,4,3,12,1,9,6,8,5,10,11
-	 * Ôò³õÊ¼¶ÑÎª£º1,2,4,3,5,7,9,6,8,12,10,11
-	 * @param arr ÅÅĞòÊı×é
-	 * @param from ´ÓÄÄ
-	 * @param end µ½ÄÄ
-	 * @param c ±È½ÏÆ÷
-	 */
-	private void initialHeap(E[] arr, int from, int end, Comparator<E> c) {
-		int lastBranchIndex = (end - from + 1) / 2;//×îºóÒ»¸ö·ÇÒ¶×Ó½Úµã
-		//¶ÔËùÓĞµÄ·ÇÒ¶×Ó½Úµã½øĞĞÑ­»· £¬ÇÒ´Ó×îÒ»¸ö·ÇÒ¶×Ó½Úµã¿ªÊ¼
-		for (int i = lastBranchIndex; i >= 1; i--) {
-			adjustNote(arr, i, end - from + 1, c);
-		}
-	}
+    /**
+     * åˆå§‹åŒ–å †
+     * æ¯”å¦‚åŸåºåˆ—ä¸ºï¼š7,2,4,3,12,1,9,6,8,5,10,11
+     * åˆ™åˆå§‹å †ä¸ºï¼š1,2,4,3,5,7,9,6,8,12,10,11
+     *
+     * @param arr  æ’åºæ•°ç»„
+     * @param from ä»å“ª
+     * @param end  åˆ°å“ª
+     * @param c    æ¯”è¾ƒå™¨
+     */
+    private void initialHeap(E[] arr, int from, int end, Comparator<E> c) {
+        int lastBranchIndex = (end - from + 1) / 2;//æœ€åä¸€ä¸ªéå¶å­èŠ‚ç‚¹
+        //å¯¹æ‰€æœ‰çš„éå¶å­èŠ‚ç‚¹è¿›è¡Œå¾ªç¯ ï¼Œä¸”ä»æœ€ä¸€ä¸ªéå¶å­èŠ‚ç‚¹å¼€å§‹
+        for (int i = lastBranchIndex; i >= 1; i--) {
+            adjustNote(arr, i, end - from + 1, c);
+        }
+    }
 
-	/**
-	 * µ÷Õû½ÚµãË³Ğò£¬´Ó¸¸¡¢×óÓÒ×Ó½ÚµãÈı¸ö½ÚµãÖĞÑ¡ÔñÒ»¸ö×î´ó½ÚµãÓë¸¸½Úµã×ª»»
-	 * @param arr ´ıÅÅĞòÊı×é
-	 * @param parentNodeIndex Òªµ÷ÕûµÄ½Úµã£¬ÓëËüµÄ×Ó½ÚµãÒ»Æğ½øĞĞµ÷Õû
-	 * @param len Ê÷µÄ½ÚµãÊı
-	 * @param c ±È½ÏÆ÷
-	 */
-	private void adjustNote(E[] arr, int parentNodeIndex, int len, Comparator<E> c) {
-		int minNodeIndex = parentNodeIndex;
-		//Èç¹ûÓĞ×ó×ÓÊ÷£¬i * 2Îª×ó×Ó½ÚµãË÷Òı
-		if (parentNodeIndex * 2 <= len) {
-			//Èç¹û¸¸½ÚµãĞ¡ÓÚ×ó×ÓÊ÷Ê±
-			if (c.compare(arr[parentNodeIndex - 1], arr[parentNodeIndex * 2 - 1]) < 0) {
-				minNodeIndex = parentNodeIndex * 2;//¼ÇÂ¼×î´óË÷ÒıÎª×ó×Ó½ÚµãË÷Òı
-			}
+    /**
+     * è°ƒæ•´èŠ‚ç‚¹é¡ºåºï¼Œä»çˆ¶ã€å·¦å³å­èŠ‚ç‚¹ä¸‰ä¸ªèŠ‚ç‚¹ä¸­é€‰æ‹©ä¸€ä¸ªæœ€å¤§èŠ‚ç‚¹ä¸çˆ¶èŠ‚ç‚¹è½¬æ¢
+     *
+     * @param arr             å¾…æ’åºæ•°ç»„
+     * @param parentNodeIndex è¦è°ƒæ•´çš„èŠ‚ç‚¹ï¼Œä¸å®ƒçš„å­èŠ‚ç‚¹ä¸€èµ·è¿›è¡Œè°ƒæ•´
+     * @param len             æ ‘çš„èŠ‚ç‚¹æ•°
+     * @param c               æ¯”è¾ƒå™¨
+     */
+    private void adjustNote(E[] arr, int parentNodeIndex, int len, Comparator<E> c) {
+        int minNodeIndex = parentNodeIndex;
+        //å¦‚æœæœ‰å·¦å­æ ‘ï¼Œi * 2ä¸ºå·¦å­èŠ‚ç‚¹ç´¢å¼•
+        if (parentNodeIndex * 2 <= len) {
+            //å¦‚æœçˆ¶èŠ‚ç‚¹å°äºå·¦å­æ ‘æ—¶
+            if (c.compare(arr[parentNodeIndex - 1], arr[parentNodeIndex * 2 - 1]) < 0) {
+                minNodeIndex = parentNodeIndex * 2;//è®°å½•æœ€å¤§ç´¢å¼•ä¸ºå·¦å­èŠ‚ç‚¹ç´¢å¼•
+            }
 
-			// Ö»ÓĞÔÚÓĞ»ò×ÓÊ÷µÄÇ°ÌáÏÂ²Å¿ÉÄÜÓĞÓÒ×ÓÊ÷£¬ÔÙ½øÒ»²½¶ÏÅĞÊÇ·ñÓĞÓÒ×ÓÊ÷
-			if (parentNodeIndex * 2 + 1 <= len) {
-				//Èç¹ûÓÒ×ÓÊ÷±È×î´ó½Úµã¸ü´ó
-				if (c.compare(arr[minNodeIndex - 1], arr[(parentNodeIndex * 2 + 1) - 1]) < 0) {
-					minNodeIndex = parentNodeIndex * 2 + 1;//¼ÇÂ¼×î´óË÷ÒıÎªÓÒ×Ó½ÚµãË÷Òı
-				}
-			}
-		}
+            // åªæœ‰åœ¨æœ‰æˆ–å­æ ‘çš„å‰æä¸‹æ‰å¯èƒ½æœ‰å³å­æ ‘ï¼Œå†è¿›ä¸€æ­¥æ–­åˆ¤æ˜¯å¦æœ‰å³å­æ ‘
+            if (parentNodeIndex * 2 + 1 <= len) {
+                //å¦‚æœå³å­æ ‘æ¯”æœ€å¤§èŠ‚ç‚¹æ›´å¤§
+                if (c.compare(arr[minNodeIndex - 1], arr[(parentNodeIndex * 2 + 1) - 1]) < 0) {
+                    minNodeIndex = parentNodeIndex * 2 + 1;//è®°å½•æœ€å¤§ç´¢å¼•ä¸ºå³å­èŠ‚ç‚¹ç´¢å¼•
+                }
+            }
+        }
 
-		//Èç¹ûÔÚ¸¸½Úµã¡¢×ó¡¢ÓÒ×Ó½ÚµãÈı¶¼ÖĞ£¬×î´ó½Úµã²»ÊÇ¸¸½ÚµãÊ±Ğè½»»»£¬°Ñ×î´óµÄÓë¸¸½Úµã½»»»£¬´´½¨´ó¶¥¶Ñ
-		if (minNodeIndex != parentNodeIndex) {
-			swap(arr, parentNodeIndex - 1, minNodeIndex - 1);
-			//½»»»ºó¿ÉÄÜĞèÒªÖØ½¨¶Ñ£¬Ô­¸¸½Úµã¿ÉÄÜĞèÒª¼ÌĞøÏÂ³Á
-			if (minNodeIndex * 2 <= len) {//ÊÇ·ñÓĞ×Ó½Úµã£¬×¢£¬Ö»ĞèÅĞ¶ÏÊÇ·ñÓĞ×ó×ÓÊ÷¼´¿ÉÖªµÀ
-				adjustNote(arr, minNodeIndex, len, c);
-			}
-		}
-	}
+        //å¦‚æœåœ¨çˆ¶èŠ‚ç‚¹ã€å·¦ã€å³å­èŠ‚ç‚¹ä¸‰éƒ½ä¸­ï¼Œæœ€å¤§èŠ‚ç‚¹ä¸æ˜¯çˆ¶èŠ‚ç‚¹æ—¶éœ€äº¤æ¢ï¼ŒæŠŠæœ€å¤§çš„ä¸çˆ¶èŠ‚ç‚¹äº¤æ¢ï¼Œåˆ›å»ºå¤§é¡¶å †
+        if (minNodeIndex != parentNodeIndex) {
+            swap(arr, parentNodeIndex - 1, minNodeIndex - 1);
+            //äº¤æ¢åå¯èƒ½éœ€è¦é‡å»ºå †ï¼ŒåŸçˆ¶èŠ‚ç‚¹å¯èƒ½éœ€è¦ç»§ç»­ä¸‹æ²‰
+            if (minNodeIndex * 2 <= len) {//æ˜¯å¦æœ‰å­èŠ‚ç‚¹ï¼Œæ³¨ï¼Œåªéœ€åˆ¤æ–­æ˜¯å¦æœ‰å·¦å­æ ‘å³å¯çŸ¥é“
+                adjustNote(arr, minNodeIndex, len, c);
+            }
+        }
+    }
 
-	/**
-	* ²âÊÔ
-	* @param args
-	*/
-	public static void main(String[] args) {
-		Integer[] intgArr = { 7, 2, 4, 3, 12, 1, 9, 6, 8, 5, 10, 11 };
-		HeapSort<Integer> sort = new HeapSort<Integer>();
-		HeapSort.testSort(sort, intgArr);
-		HeapSort.testSort(sort, null);
-	}
+    /**
+     * æµ‹è¯•
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Integer[] intgArr = {7, 2, 4, 3, 12, 1, 9, 6, 8, 5, 10, 11};
+        HeapSort<Integer> sort = new HeapSort<Integer>();
+        HeapSort.testSort(sort, intgArr);
+        HeapSort.testSort(sort, null);
+    }
 
 }

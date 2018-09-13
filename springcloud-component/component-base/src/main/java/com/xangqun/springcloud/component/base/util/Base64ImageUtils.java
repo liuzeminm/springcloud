@@ -13,14 +13,14 @@ import java.net.URL;
  */
 public class Base64ImageUtils {
     /**
-     * @Title: GetImageStrFromUrl
-     * @Description: 将一张网络图片转化成Base64字符串
      * @param imgURL 网络资源位置
      * @return Base64字符串
+     * @Title: GetImageStrFromUrl
+     * @Description: 将一张网络图片转化成Base64字符串
      */
     public static String GetImageStrFromUrl(String imgURL) {
         byte[] data = null;
-        InputStream inStream =null;
+        InputStream inStream = null;
         try {
             // 创建URL
             URL url = new URL(imgURL);
@@ -33,7 +33,7 @@ public class Base64ImageUtils {
             inStream.read(data);
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             assert inStream != null;
             try {
                 inStream.close();
@@ -48,10 +48,10 @@ public class Base64ImageUtils {
     }
 
     /**
-     * @Title: GetImageStrFromPath
-     * @Description: (将一张本地图片转化成Base64字符串)
      * @param imgPath
      * @return
+     * @Title: GetImageStrFromPath
+     * @Description: (将一张本地图片转化成Base64字符串)
      */
     public static String GetImageStrFromPath(String imgPath) {
         InputStream in = null;
@@ -63,7 +63,7 @@ public class Base64ImageUtils {
             in.read(data);
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             assert in != null;
             try {
                 in.close();
@@ -78,17 +78,17 @@ public class Base64ImageUtils {
     }
 
     /**
+     * @param imgStr
+     * @param imgFilePath 图片文件名，如“E:/tmp.jpg”
+     * @return
      * @Title: GenerateImage
      * @Description: base64字符串转化成图片
-     * @param imgStr
-     * @param imgFilePath  图片文件名，如“E:/tmp.jpg”
-     * @return
      */
-    public static boolean saveImage(String imgStr,String imgFilePath) {
+    public static boolean saveImage(String imgStr, String imgFilePath) {
         if (imgStr == null) // 图像数据为空
             return false;
         BASE64Decoder decoder = new BASE64Decoder();
-        OutputStream out =null;
+        OutputStream out = null;
         try {
             // Base64解码
             byte[] b = decoder.decodeBuffer(imgStr);
@@ -98,14 +98,14 @@ public class Base64ImageUtils {
                 }
             }
             // 生成jpeg图片
-             out = new FileOutputStream(imgFilePath);
+            out = new FileOutputStream(imgFilePath);
             out.write(b);
             out.flush();
 
             return true;
         } catch (Exception e) {
             return false;
-        }finally {
+        } finally {
             try {
                 assert out != null;
                 out.close();

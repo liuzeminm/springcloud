@@ -16,17 +16,16 @@ import net.openhft.affinity.AffinityThreadFactory;
 import java.util.concurrent.ThreadFactory;
 
 
-
 /**
  * @author laixiangqun
  * @since 2018-6-7
  */
 public class LogUdpNettyServer {
 
-    public void run(int port) throws Exception{
+    public void run(int port) throws Exception {
         //cpu绑定 减少上下文切换
         ThreadFactory threadFactory = new AffinityThreadFactory("atf_wrk", AffinityStrategies.DIFFERENT_CORE);
-        EventLoopGroup group = new NioEventLoopGroup(3,threadFactory);
+        EventLoopGroup group = new NioEventLoopGroup(3, threadFactory);
         Bootstrap b = new Bootstrap();
         //由于我们用的是UDP协议，所以要用NioDatagramChannel来创建
         //支持广播
@@ -43,11 +42,11 @@ public class LogUdpNettyServer {
         b.bind(port).sync().channel().closeFuture().await();
     }
 
-    public static void main(String [] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         int port = 8080;
-        String data="12345.67.890";
+        String data = "12345.67.890";
         int index = data.lastIndexOf(".");
-        System.err.println(data.substring(0,index)+"."+123);
+        System.err.println(data.substring(0, index) + "." + 123);
         new LogUdpNettyServer().run(port);
     }
 
@@ -56,10 +55,11 @@ public class LogUdpNettyServer {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket packet) throws Exception {
             String req = packet.content().toString(CharsetUtil.UTF_8);
-            System.out.println("test"+req);
+            System.out.println("test" + req);
 //            ctx.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer("ok",CharsetUtil.UTF_8), packet.sender()));
             ctx.flush();
         }
+
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
             ctx.close();

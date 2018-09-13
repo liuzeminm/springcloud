@@ -33,8 +33,8 @@ public class JsonPackage {
         return JSON.toJSONString(this);
     }
 
-    public static JsonPackage getHystrixJsonPackage(){
-        JsonPackage jsonPackage=new JsonPackage();
+    public static JsonPackage getHystrixJsonPackage() {
+        JsonPackage jsonPackage = new JsonPackage();
         return jsonPackage;
     }
 }

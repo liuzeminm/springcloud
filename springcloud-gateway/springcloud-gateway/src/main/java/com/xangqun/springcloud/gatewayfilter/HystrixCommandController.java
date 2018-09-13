@@ -23,7 +23,7 @@ public class HystrixCommandController {
         return JsonPackage.getHystrixJsonPackage();
     }
 
-    @HystrixCommand(commandKey="authHystrixCommand")
+    @HystrixCommand(commandKey = "authHystrixCommand")
     public JsonPackage authHystrixCommand() {
         return JsonPackage.getHystrixJsonPackage();
     }

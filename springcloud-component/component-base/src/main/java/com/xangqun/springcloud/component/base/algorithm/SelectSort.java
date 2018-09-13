@@ -3,53 +3,55 @@ package com.xangqun.springcloud.component.base.algorithm;
 import java.util.Comparator;
 
 /**
- * ¼òµ¥Ñ¡ÔñÅÅĞòËã·¨
- * @author laixiangqun
- * @date 2009-12-5
+ * ç®€å•é€‰æ‹©æ’åºç®—æ³•
  *
  * @param <E>
+ * @author jzj
+ * @date 2009-12-5
  */
 public class SelectSort<E extends Comparable<E>> extends Sort<E> {
 
-	/**
-	 * ÅÅĞòËã·¨µÄÊµÏÖ£¬¶ÔÊı×éÖĞÖ¸¶¨µÄÔªËØ½øĞĞÅÅĞò
-	 * @param array ´ıÅÅĞòµÄÊı×é
-	 * @param from ´ÓÄÄÀï¿ªÊ¼ÅÅĞò
-	 * @param end ÅÅµ½ÄÄÀï
-	 * @param c ±È½ÏÆ÷
-	 */
-	@Override
-	public void sort(E[] array, int from, int end, Comparator<E> c) {
-		int minlIndex;//×îĞ¡Ë÷Òı
-		/*
-		 * Ñ­»·Õû¸öÊı×é£¨ÆäÊµÕâÀïµÄÉÏ½çÎª array.length - 1 ¼´¿É£¬ÒòÎªµ± i= array.length-1
-		 * Ê±£¬×îºóÒ»¸öÔªËØ¾ÍÒÑÊÇ×î´óµÄÁË£¬Èç¹ûÎªarray.lengthÊ±£¬ÄÚ²ãÑ­»·½«²»ÔÙÑ­»·£©£¬Ã¿ÂÖ¼ÙÉè
-		 * µÚÒ»¸öÔªËØÎª×îĞ¡ÔªËØ£¬Èç¹û´ÓµÚÒ»ÔªËØºóÄÜÑ¡³ö±ÈµÚÒ»¸öÔªËØ¸üĞ¡ÔªËØ£¬ÔòÈÃÈÃ×îĞ¡ÔªËØÓëµÚÒ»
-		 * ¸öÔªËØ½»»»
-		 */
-		for (int i = from; i <= end; i++) {
-			minlIndex = i;//¼ÙÉèÃ¿ÂÖµÚÒ»¸öÔªËØÎª×îĞ¡ÔªËØ
-			//´Ó¼ÙÉèµÄ×îĞ¡ÔªËØµÄÏÂÒ»ÔªËØ¿ªÊ¼Ñ­»·
-			for (int j = i + 1; j <= end; j++) {
-				//Èç¹û·¢ÏÖÓĞ±Èµ±Ç°array[smallIndex]¸üĞ¡ÔªËØ£¬Ôò¼ÇÏÂ¸ÃÔªËØµÄË÷ÒıÓÚsmallIndexÖĞ
-				if (c.compare(array[j], array[minlIndex]) < 0) {
-					minlIndex = j;
-				}
-			}
+    /**
+     * æ’åºç®—æ³•çš„å®ç°ï¼Œå¯¹æ•°ç»„ä¸­æŒ‡å®šçš„å…ƒç´ è¿›è¡Œæ’åº
+     *
+     * @param array å¾…æ’åºçš„æ•°ç»„
+     * @param from  ä»å“ªé‡Œå¼€å§‹æ’åº
+     * @param end   æ’åˆ°å“ªé‡Œ
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    @Override
+    public void sort(E[] array, int from, int end, Comparator<E> c) {
+        int minlIndex;//æœ€å°ç´¢å¼•
+        /*
+         * å¾ªç¯æ•´ä¸ªæ•°ç»„ï¼ˆå…¶å®è¿™é‡Œçš„ä¸Šç•Œä¸º array.length - 1 å³å¯ï¼Œå› ä¸ºå½“ i= array.length-1
+         * æ—¶ï¼Œæœ€åä¸€ä¸ªå…ƒç´ å°±å·²æ˜¯æœ€å¤§çš„äº†ï¼Œå¦‚æœä¸ºarray.lengthæ—¶ï¼Œå†…å±‚å¾ªç¯å°†ä¸å†å¾ªç¯ï¼‰ï¼Œæ¯è½®å‡è®¾
+         * ç¬¬ä¸€ä¸ªå…ƒç´ ä¸ºæœ€å°å…ƒç´ ï¼Œå¦‚æœä»ç¬¬ä¸€å…ƒç´ åèƒ½é€‰å‡ºæ¯”ç¬¬ä¸€ä¸ªå…ƒç´ æ›´å°å…ƒç´ ï¼Œåˆ™è®©è®©æœ€å°å…ƒç´ ä¸ç¬¬ä¸€
+         * ä¸ªå…ƒç´ äº¤æ¢
+         */
+        for (int i = from; i <= end; i++) {
+            minlIndex = i;//å‡è®¾æ¯è½®ç¬¬ä¸€ä¸ªå…ƒç´ ä¸ºæœ€å°å…ƒç´ 
+            //ä»å‡è®¾çš„æœ€å°å…ƒç´ çš„ä¸‹ä¸€å…ƒç´ å¼€å§‹å¾ªç¯
+            for (int j = i + 1; j <= end; j++) {
+                //å¦‚æœå‘ç°æœ‰æ¯”å½“å‰array[smallIndex]æ›´å°å…ƒç´ ï¼Œåˆ™è®°ä¸‹è¯¥å…ƒç´ çš„ç´¢å¼•äºsmallIndexä¸­
+                if (c.compare(array[j], array[minlIndex]) < 0) {
+                    minlIndex = j;
+                }
+            }
 
-			//ÏÈÇ°Ö»ÊÇ¼ÇÂ¼×îĞ¡ÔªËØË÷Òı£¬µ±×îĞ¡ÔªËØË÷ÒıÈ·¶¨ºó£¬ÔÙÓëÃ¿ÂÖµÄµÚÒ»¸öÔªËØ½»»»
-			swap(array, i, minlIndex);
-		}
-	}
+            //å…ˆå‰åªæ˜¯è®°å½•æœ€å°å…ƒç´ ç´¢å¼•ï¼Œå½“æœ€å°å…ƒç´ ç´¢å¼•ç¡®å®šåï¼Œå†ä¸æ¯è½®çš„ç¬¬ä¸€ä¸ªå…ƒç´ äº¤æ¢
+            swap(array, i, minlIndex);
+        }
+    }
 
-	/**
-	 * ²âÊÔ
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Integer[] intgArr = { 5, 9, 1, 4, 1, 2, 6, 3, 8, 0, 7 };
-		SelectSort<Integer> insertSort = new SelectSort<Integer>();
-		Sort.testSort(insertSort, intgArr);
-		Sort.testSort(insertSort, null);
-	}
+    /**
+     * æµ‹è¯•
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Integer[] intgArr = {5, 9, 1, 4, 1, 2, 6, 3, 8, 0, 7};
+        SelectSort<Integer> insertSort = new SelectSort<Integer>();
+        Sort.testSort(insertSort, intgArr);
+        Sort.testSort(insertSort, null);
+    }
 }

@@ -46,10 +46,10 @@ sleuth:
   enabled: false
 
 management:
-#  metrics:
-#    web:
-#      server:
-#        auto-time-requests: false
+  #  metrics:
+  #    web:
+  #      server:
+  #        auto-time-requests: false
   endpoint:
     health:
       show-details: ALWAYS
@@ -62,7 +62,7 @@ logging:
   level.com: debug
 #读写分离
 sharding:
-   jdbc:
+  jdbc:
     data-sources:
       ds_master:
         driver-class-name: com.mysql.jdbc.Driver

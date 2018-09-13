@@ -3,7 +3,6 @@ package com.xangqun.springcloud.component.base.util;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import com.google.common.net.InetAddresses;
-
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +26,11 @@ public class NetworkUtil {
 
     /**
      * 获取用户真实IP地址，不使用request.getRemoteAddr();的原因是有可能用户使用了代理软件方式避免真实IP地址,
-     *
+     * <p>
      * 可是，如果通过了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP值，究竟哪个才是真正的用户端的真实IP呢？ 答案是取X-Forwarded-For中第一个非unknown的有效IP字符串。
-     *
+     * <p>
      * 如：X-Forwarded-For：192.168.1.110, 192.168.1.120, 192.168.1.130, 192.168.1.100
-     *
+     * <p>
      * 用户真实IP为： 192.168.1.110
      *
      * @param request
@@ -92,6 +91,7 @@ public class NetworkUtil {
 
     /**
      * 获取当前服务的IP地址
+     *
      * @return
      */
     public final static String getLocalIp() {
@@ -152,8 +152,8 @@ public class NetworkUtil {
      * 判断一个ip是否在某段范围
      *
      * @param current 给定的ip
-     * @param from 范围起始地址
-     * @param to 范围结束地址
+     * @param from    范围起始地址
+     * @param to      范围结束地址
      * @return
      */
     public static boolean range(String current, String from, String to) {
@@ -165,6 +165,7 @@ public class NetworkUtil {
 
     /**
      * 判断所给ip是否是公网ip
+     *
      * @param host
      * @return
      */
@@ -176,7 +177,8 @@ public class NetworkUtil {
 
     /**
      * 根据域名获取到对应的ip
-     * @param host  域名或者ip
+     *
+     * @param host 域名或者ip
      * @return
      */
     public static String resolve(String host) {

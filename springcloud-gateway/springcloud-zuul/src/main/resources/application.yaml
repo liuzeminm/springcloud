@@ -11,7 +11,7 @@ server:
     max-threads: 200
 spring:
   application:
-     name: springcloud-gateway
+    name: springcloud-gateway
 zuul:
   host:
     connect-timeout-millis: 60000

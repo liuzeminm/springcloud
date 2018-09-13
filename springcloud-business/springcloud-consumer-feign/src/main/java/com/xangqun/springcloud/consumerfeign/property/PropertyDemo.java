@@ -53,6 +53,7 @@ public class PropertyDemo {
         String property = environment.getProperty(SPRING_BOOT_HELLO);
         System.out.println("2-1. 通过注入Environment获取值: " + property);
     }
+
     /**
      * 3. 通过@ConfigurationProperties注入对象属性获取
      */
@@ -78,10 +79,10 @@ public class PropertyDemo {
      * 5. 通过hello获取
      */
     public void getAttrByBinder() {
-            Binder binder = Binder.get(environment);
-            // 绑定简单配置
-            String hello = binder.bind("spring-boot.hello", Bindable.of(String.class)).get();
-            System.out.println(hello);
+        Binder binder = Binder.get(environment);
+        // 绑定简单配置
+        String hello = binder.bind("spring-boot.hello", Bindable.of(String.class)).get();
+        System.out.println(hello);
     }
 
     @Data

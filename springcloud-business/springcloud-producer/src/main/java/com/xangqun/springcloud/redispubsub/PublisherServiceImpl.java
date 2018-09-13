@@ -17,7 +17,7 @@ public class PublisherServiceImpl implements PublisherService {
     public String pushMsg(String params) {
         log.info(" 又开始发布消息 .......... ");
         //直接使用convertAndSend方法即可向指定的通道发布消息
-        redisService.sendChannelMess(CHANNEL,"我又开始发布消息了,你那边有没有收到呢?");
+        redisService.sendChannelMess(CHANNEL, "我又开始发布消息了,你那边有没有收到呢?");
         return "success";
     }
 }

@@ -12,8 +12,8 @@ import scala.beans.BeanProperty
   */
 class Person {
 
-    @BeanProperty var name:String = _
-    @BeanProperty var sex:String = _
-    @BeanProperty var birthday:String = _
+  @BeanProperty var name: String = _
+  @BeanProperty var sex: String = _
+  @BeanProperty var birthday: String = _
 
 }

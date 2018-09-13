@@ -37,7 +37,7 @@ public class ScheduleController {
         response.setStatus(HttpServletResponse.SC_OK);
 
         OutputStream out = response.getOutputStream();
-        out.write(JSON.toJSONString(rpcResponse,SerializerFeature.WriteMapNullValue).getBytes());
+        out.write(JSON.toJSONString(rpcResponse, SerializerFeature.WriteMapNullValue).getBytes());
         out.flush();
     }
 
@@ -45,18 +45,18 @@ public class ScheduleController {
         try {
             // deserialize request
             byte[] requestBytes = HttpClientUtil.readBytes(request);
-            new String(requestBytes,"UTF-8");
-            if (requestBytes == null || requestBytes.length==0) {
+            new String(requestBytes, "UTF-8");
+            if (requestBytes == null || requestBytes.length == 0) {
                 RpcResponse rpcResponse = new RpcResponse();
                 rpcResponse.setError("RpcRequest byte[] is null");
                 return rpcResponse;
             }
-            RpcRequest rpcRequest = JSON.parseObject(new String(requestBytes),RpcRequest.class);
+            RpcRequest rpcRequest = JSON.parseObject(new String(requestBytes), RpcRequest.class);
             Object[] params = rpcRequest.getParameters();
-            int count = params==null?0:params.length;
-            Object[] parameters =new Object[count];
-            for(int index=0;params!=null && index< params.length;index++){
-                parameters[index] = JSON.parseObject( params[index].toString(),rpcRequest.getParameterTypes()[index]);
+            int count = params == null ? 0 : params.length;
+            Object[] parameters = new Object[count];
+            for (int index = 0; params != null && index < params.length; index++) {
+                parameters[index] = JSON.parseObject(params[index].toString(), rpcRequest.getParameterTypes()[index]);
             }
             rpcRequest.setParameters(parameters);
 

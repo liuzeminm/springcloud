@@ -7,13 +7,13 @@ eureka:
     #租期到期时间（默认90秒）
     leaseExpirationDurationInSeconds: 30
     #非安全通信端口
-#    nonSecurePort: 80
+    #    nonSecurePort: 80
     #是否启用非安全端口接受请求
-#    nonSecurePortEnabled: true
+    #    nonSecurePortEnabled: true
     #安全通信端口
-#    securePort: 443
+    #    securePort: 443
     #是否启用安全端口接受请求
-#    securePortEnabled: true
+    #    securePortEnabled: true
     statusPageUrlPath: /swagger-ui.html
   client:
     serviceUrl:
@@ -201,13 +201,13 @@ sharding:
           algorithm-expression: ds${id % 2}
           sharding-column: id
       tables:
-          user:
-            actual-data-nodes: ds${0..1}.user_${0..1}
-            key-generator-column-name: id
-            table-strategy:
-              inline:
-                algorithm-expression: user_${id % 2}
-                sharding-column: id
+        user:
+          actual-data-nodes: ds${0..1}.user_${0..1}
+          key-generator-column-name: id
+          table-strategy:
+            inline:
+              algorithm-expression: user_${id % 2}
+              sharding-column: id
     data-sources:
       ds0:
         driver-class-name: com.mysql.jdbc.Driver

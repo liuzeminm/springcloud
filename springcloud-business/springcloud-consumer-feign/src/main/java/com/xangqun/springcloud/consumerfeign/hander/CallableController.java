@@ -29,32 +29,32 @@ public class CallableController {
     @RequestMapping("/callable")
     public Callable<String> callable() {
         log.info("外部线程：" + Thread.currentThread().getName());
-        return ()-> {
-                log.info("内部线程：" + Thread.currentThread().getName());
-                return "callable!";
+        return () -> {
+            log.info("内部线程：" + Thread.currentThread().getName());
+            return "callable!";
         };
     }
 
     @RequestMapping("/deferredresult")
-    public DeferredResult<String> deferredResult(){
+    public DeferredResult<String> deferredResult() {
         log.info("外部线程：" + Thread.currentThread().getName());
         //设置超时时间
-        DeferredResult<String> result = new DeferredResult<String>(60*1000L);
+        DeferredResult<String> result = new DeferredResult<String>(60 * 1000L);
         //处理超时事件 采用委托机制
-        result.onTimeout(()-> {
-                log.error("DeferredResult超时");
-                result.setResult("超时了!");
+        result.onTimeout(() -> {
+            log.error("DeferredResult超时");
+            result.setResult("超时了!");
         });
-        result.onCompletion(()-> {
-                //完成后
-                log.info("调用完成");
+        result.onCompletion(() -> {
+            //完成后
+            log.info("调用完成");
         });
-        FIXED_THREAD_POOL.execute(()-> {
+        FIXED_THREAD_POOL.execute(() -> {
 
-                //处理业务逻辑
-                log.info("内部线程：" + Thread.currentThread().getName());
-                //返回结果
-                result.setResult("DeferredResult!!");
+            //处理业务逻辑
+            log.info("内部线程：" + Thread.currentThread().getName());
+            //返回结果
+            result.setResult("DeferredResult!!");
         });
         return result;
     }
@@ -62,14 +62,14 @@ public class CallableController {
     @RequestMapping("/webAsyncTask")
     public WebAsyncTask<String> webAsyncTask() {
         log.info("外部线程：" + Thread.currentThread().getName());
-        WebAsyncTask<String> result = new WebAsyncTask<>(60*1000L, ()-> {
+        WebAsyncTask<String> result = new WebAsyncTask<>(60 * 1000L, () -> {
             log.info("内部线程：" + Thread.currentThread().getName());
             return "WebAsyncTask!!!";
         });
-        result.onTimeout(()->
-             "WebAsyncTask超时!!!"
+        result.onTimeout(() ->
+                "WebAsyncTask超时!!!"
         );
-        result.onCompletion(()-> {
+        result.onCompletion(() -> {
             //超时后 也会执行此方法
             log.info("WebAsyncTask执行结束");
         });

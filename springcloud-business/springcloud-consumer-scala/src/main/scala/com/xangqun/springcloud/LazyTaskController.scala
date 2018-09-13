@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView
   * @since 2018-8-14
   */
 @RestController
-class LazyTaskController @Autowired()(val httpApiController: HttpApiController ) {
+class LazyTaskController @Autowired()(val httpApiController: HttpApiController) {
 
   @RequestMapping(value = {
     Array("/newTask.do")
@@ -25,9 +25,11 @@ class LazyTaskController @Autowired()(val httpApiController: HttpApiController )
   def newTask(@ModelAttribute lazyTask: Person) = {
     lazyTask.setName("232")
     lazyTask.setSex("2")
-    httpApiController.debugTest("","","")
+    httpApiController.debugTest("", "", "")
   }
 
-  @RequestMapping(value = { Array("/main.do","/","/index","/home") }, method = Array(RequestMethod.GET))
+  @RequestMapping(value = {
+    Array("/main.do", "/", "/index", "/home")
+  }, method = Array(RequestMethod.GET))
   def about() = new ModelAndView("ylazy/main")
 }

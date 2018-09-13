@@ -20,5 +20,4 @@ public class MyStartupRunner2 implements ApplicationRunner {
     }
 
 
-
 }

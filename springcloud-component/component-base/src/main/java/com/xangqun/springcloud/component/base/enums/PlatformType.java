@@ -4,42 +4,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum PlatformType {
-	
-	PC("pc","PC"),
-	Wechat("wechat","微信"),
-	IPhone("iphone", "苹果"),
-	Android("Android", "安卓");
 
-	private final String value;
-	private final String desc;
+    PC("pc", "PC"),
+    Wechat("wechat", "微信"),
+    IPhone("iphone", "苹果"),
+    Android("Android", "安卓");
 
-	private PlatformType(String value, String desc) {
-		this.value = value;
-		this.desc = desc;
-	}
+    private final String value;
+    private final String desc;
 
-	public String getValue() {
-		return value;
-	}
+    private PlatformType(String value, String desc) {
+        this.value = value;
+        this.desc = desc;
+    }
 
-	public String getDesc() {
-		return this.desc;
-	}
+    public String getValue() {
+        return value;
+    }
 
-	private static final Map<String, PlatformType> ENUMMAP = new HashMap<String, PlatformType>();
-	static {
-		for (PlatformType _enum : PlatformType.values()) {
-			ENUMMAP.put(_enum.getValue(), _enum);
-		}
-	}
+    public String getDesc() {
+        return this.desc;
+    }
 
-	public static PlatformType fromValue(String value) {
-		PlatformType mType = ENUMMAP.get(value);
-		return mType;
-	}
+    private static final Map<String, PlatformType> ENUMMAP = new HashMap<String, PlatformType>();
 
-	@Override
-	public String toString() {
-		return getValue();
-	}
+    static {
+        for (PlatformType _enum : PlatformType.values()) {
+            ENUMMAP.put(_enum.getValue(), _enum);
+        }
+    }
+
+    public static PlatformType fromValue(String value) {
+        PlatformType mType = ENUMMAP.get(value);
+        return mType;
+    }
+
+    @Override
+    public String toString() {
+        return getValue();
+    }
 }

@@ -9,7 +9,7 @@ spring:
 turbine:
   instanceUrlSuffix: hystrix.stream
   # 配置 Eureka 中的 serviceId 列表，指定要监控的服务
-#  app-config: '*'
+  #  app-config: '*'
   aggregator:
     cluster-config: default
   # 指定集群名称
@@ -41,8 +41,8 @@ management:
       exposure:
         include: '*'
   endpoint:
-      health:
-        show-details: ALWAYS
+    health:
+      show-details: ALWAYS
   server:
     servlet:
       context-path: /

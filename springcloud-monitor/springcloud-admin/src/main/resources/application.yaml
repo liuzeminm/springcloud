@@ -1,6 +1,6 @@
 spring:
   application:
-     name: springcloud-admin
+    name: springcloud-admin
 #  security:
 #    user:
 #      name: "admin"

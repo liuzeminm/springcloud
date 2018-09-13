@@ -28,15 +28,16 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     private PrintWriter writer = null;
 
 
-    public ResponseWrapper(HttpServletResponse response) throws IOException{
+    public ResponseWrapper(HttpServletResponse response) throws IOException {
         super(response);
         buffer = new ByteArrayOutputStream();
         out = new WapperedOutputStream(buffer);
-        writer = new PrintWriter(new OutputStreamWriter(buffer, StringUtils.isBlank(response.getCharacterEncoding())?"UTF-8":response.getCharacterEncoding()));
+        writer = new PrintWriter(new OutputStreamWriter(buffer, StringUtils.isBlank(response.getCharacterEncoding()) ? "UTF-8" : response.getCharacterEncoding()));
     }
 
     /**
      * 重载父类获取outputstream的方法
+     *
      * @return
      * @throws IOException
      */
@@ -77,8 +78,8 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
             return bytes;
         } catch (Exception e) {
             return null;
-        }finally {
-            if (buffer!=null){
+        } finally {
+            if (buffer != null) {
                 buffer.close();
             }
         }
@@ -97,6 +98,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
 
         /**
          * 将指定字节写入输出流bos
+         *
          * @param b
          * @throws IOException
          */

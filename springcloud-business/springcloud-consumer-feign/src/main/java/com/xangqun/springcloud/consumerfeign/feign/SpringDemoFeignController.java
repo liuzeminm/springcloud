@@ -1,7 +1,6 @@
 package com.xangqun.springcloud.consumerfeign.feign;
 
 import com.xangqun.springcloud.consumerfeign.Task;
-import com.xangqun.springcloud.consumerfeign.feign.SpringDemoFeignService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -34,7 +33,7 @@ public class SpringDemoFeignController {
     private Task task;
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
-    public String port() throws Exception{
+    public String port() throws Exception {
         Future<String> futureResult = task.run();
         String result = futureResult.get(5, TimeUnit.SECONDS);
         return springDemoFeignService.hello();

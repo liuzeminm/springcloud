@@ -5,12 +5,7 @@ package com.xangqun.springcloud.consumerribbon;
 
 import com.sun.btrace.AnyType;
 import com.sun.btrace.BTraceUtils;
-import com.sun.btrace.annotations.BTrace;
-import com.sun.btrace.annotations.Kind;
-import com.sun.btrace.annotations.Location;
-import com.sun.btrace.annotations.OnMethod;
-import com.sun.btrace.annotations.ProbeClassName;
-import com.sun.btrace.annotations.ProbeMethodName;
+import com.sun.btrace.annotations.*;
 
 /**
  * @program: monitor_tuning

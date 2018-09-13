@@ -19,7 +19,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-
 import java.util.Collections;
 
 @SpringBootApplication(exclude = {WebSocketReactiveAutoConfiguration.class})
@@ -34,7 +33,7 @@ public class ConsumerFeignApplication {
     private static final String RES_KEY = "com.xangqun.springcloud.consumerfeign.feign:hello()";
 
     public static void main(String[] args) {
-        System.setProperty("csp.sentinel.dashboard.server","localhost:8082");
+        System.setProperty("csp.sentinel.dashboard.server", "localhost:8082");
         initFlowRule();
         InitExecutor.doInit();
         new SpringApplicationBuilder().sources(ConsumerFeignApplication.class).web(WebApplicationType.SERVLET).run(args);

@@ -28,7 +28,7 @@ import java.util.Properties;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties({ShardingMasterSlaveConfig.class, DruidProperties.class,ShardingConfig.class})
+@EnableConfigurationProperties({ShardingMasterSlaveConfig.class, DruidProperties.class, ShardingConfig.class})
 public class ShardingDataSourceConfiguration {
 
     @Autowired(required = false)
@@ -42,19 +42,21 @@ public class ShardingDataSourceConfiguration {
 
     @Bean("dataSource")
     @ConditionalOnMissingBean(DataSource.class)
-    @ConditionalOnProperty(name="spring.datasource.druid.url")
+    @ConditionalOnProperty(name = "spring.datasource.druid.url")
     @ConditionalOnExpression("${sharding.jdbc.shardingRule.default-database-strategy.inline.sharding-column:null} == null && ${sharding.jdbc.shardingRule.default-database-strategy.inline.sharding-column:null}==null ")
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         return DruidDataSourceBuilder.create().build();
     }
+
     /**
      * 读写分离
+     *
      * @return
      * @throws SQLException
      */
     @Bean("dataSource")
     @ConditionalOnMissingBean(DataSource.class)
-    @ConditionalOnProperty(name="sharding.jdbc.data-sources.ds_master.url")
+    @ConditionalOnProperty(name = "sharding.jdbc.data-sources.ds_master.url")
     @ConditionalOnExpression("${sharding.jdbc.shardingRule.default-database-strategy.inline.sharding-column:null} == null")
     public DataSource masterSlaveDataSource() throws SQLException {
         shardingMasterSlaveConfig.getDataSources().forEach((k, v) -> configDataSource(v));
@@ -67,6 +69,7 @@ public class ShardingDataSourceConfiguration {
 
     /**
      * 分库分表（包含读写分离支持）
+     *
      * @return
      * @throws SQLException
      */
@@ -77,7 +80,7 @@ public class ShardingDataSourceConfiguration {
         shardingConfig.getDataSources().forEach((k, v) -> configDataSource(v));
         Map<String, DataSource> dataSourceMap = Maps.newHashMap();
         dataSourceMap.putAll(shardingConfig.getDataSources());
-        DataSource dataSource = ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingConfig.getShardingRule().getShardingRuleConfiguration(), Maps.newHashMap(),new Properties());
+        DataSource dataSource = ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingConfig.getShardingRule().getShardingRuleConfiguration(), Maps.newHashMap(), new Properties());
         log.info("shardingConfigDataSource config complete");
         return dataSource;
     }

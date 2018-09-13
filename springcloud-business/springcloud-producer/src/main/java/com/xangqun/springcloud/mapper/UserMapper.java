@@ -2,9 +2,10 @@ package com.xangqun.springcloud.mapper;
 
 import com.xangqun.springcloud.mapper.entity.User;
 import com.xangqun.springcloud.mapper.entity.UserCriteria;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
 
 public interface UserMapper {
     long countByExample(UserCriteria example);

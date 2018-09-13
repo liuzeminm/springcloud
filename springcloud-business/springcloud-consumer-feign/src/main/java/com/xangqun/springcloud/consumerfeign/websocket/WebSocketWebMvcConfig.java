@@ -16,6 +16,7 @@ public class WebSocketWebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 添加cors支持
+     *
      * @param registry
      */
     @Override

@@ -15,11 +15,12 @@ public class PublisherController {
 
     /**
      * push 消息
+     *
      * @param params
      * @return
      */
     @PostMapping("pushMsg")
-    public String pushMsg(String params){
+    public String pushMsg(String params) {
         return publisherService.pushMsg(params);
     }
 }

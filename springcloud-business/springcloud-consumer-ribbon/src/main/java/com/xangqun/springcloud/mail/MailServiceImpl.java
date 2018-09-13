@@ -29,13 +29,14 @@ public class MailServiceImpl implements MailService {
 
     /**
      * 发送文本邮件
+     *
      * @param to
      * @param subject
      * @param content
      */
     @Override
     public void sendSimpleMail(String to, String subject, String content) {
-        sendSimpleMail(to,subject,content,null);
+        sendSimpleMail(to, subject, content, null);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
-        if(cc!=null){
+        if (cc != null) {
             message.setCc(cc);
         }
         message.setSubject(subject);
@@ -53,23 +54,24 @@ public class MailServiceImpl implements MailService {
 
     /**
      * 发送HTML邮件
+     *
      * @param to
      * @param subject
      * @param content
      */
     @Override
     public void sendHtmlMail(String to, String subject, String content) throws MessagingException {
-        sendHtmlMail(to,subject,content,null);
+        sendHtmlMail(to, subject, content, null);
 
     }
 
     @Override
-    public void sendHtmlMail(String to, String subject, String content, String... cc) throws MessagingException{
+    public void sendHtmlMail(String to, String subject, String content, String... cc) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(from);
         helper.setTo(to);
-        if(cc!=null){
+        if (cc != null) {
             helper.setCc(cc);
         }
         helper.setSubject(subject);
@@ -80,6 +82,7 @@ public class MailServiceImpl implements MailService {
 
     /**
      * 发送带附件的邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -87,17 +90,17 @@ public class MailServiceImpl implements MailService {
      */
     @Override
     public void sendAttachmentsMail(String to, String subject, String content, String filePath) throws MessagingException {
-        sendAttachmentsMail(to,subject,content,filePath,null);
+        sendAttachmentsMail(to, subject, content, filePath, null);
     }
 
     @Override
-    public void sendAttachmentsMail(String to, String subject, String content, String filePath, String... cc) throws MessagingException{
+    public void sendAttachmentsMail(String to, String subject, String content, String filePath, String... cc) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(from);
         helper.setTo(to);
-        if(cc!=null){
+        if (cc != null) {
             helper.setCc(cc);
         }
         helper.setSubject(subject);
@@ -112,6 +115,7 @@ public class MailServiceImpl implements MailService {
 
     /**
      * 发送正文中有静态资源的邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -120,17 +124,17 @@ public class MailServiceImpl implements MailService {
      */
     @Override
     public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId) throws MessagingException {
-        sendResourceMail(to,subject,content,rscPath,rscId,null);
+        sendResourceMail(to, subject, content, rscPath, rscId, null);
     }
 
     @Override
-    public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId, String... cc)throws MessagingException {
+    public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId, String... cc) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(from);
         helper.setTo(to);
-        if(cc!=null){
+        if (cc != null) {
             helper.setCc(cc);
         }
         helper.setSubject(subject);

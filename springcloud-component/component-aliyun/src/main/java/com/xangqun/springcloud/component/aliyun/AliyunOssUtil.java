@@ -27,47 +27,48 @@ public class AliyunOssUtil {
 
     protected static OssPoolManager ossPoolManager;
 
-    public static void setOSSClient(OssPoolManager ossPoolManager){
-        AliyunOssUtil.ossPoolManager=ossPoolManager;
+    public static void setOSSClient(OssPoolManager ossPoolManager) {
+        AliyunOssUtil.ossPoolManager = ossPoolManager;
     }
 
     /**
      * 上传文件
+     *
      * @param file
      * @param bucketName
      * @param fileHost
      * @return
      */
-    public static String upload(File file,String bucketName,String fileHost)throws Exception{
-        log.info("=========>OSS文件上传开始："+file.getName());
-        if(null == file){
+    public static String upload(File file, String bucketName, String fileHost) throws Exception {
+        log.info("=========>OSS文件上传开始：" + file.getName());
+        if (null == file) {
             return null;
         }
         String dateStr = TIMESTAMP_FORMAT.format(new Date());
-        OSSClient ossClient=ossPoolManager.pool.borrowObject();
+        OSSClient ossClient = ossPoolManager.pool.borrowObject();
         try {
             //容器不存在，就创建
-            if(! ossClient.doesBucketExist(bucketName)){
+            if (!ossClient.doesBucketExist(bucketName)) {
                 ossClient.createBucket(bucketName);
                 CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
                 createBucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
                 ossClient.createBucket(createBucketRequest);
             }
             //创建文件路径
-            String fileUrl = fileHost+"/"+(dateStr + "/" + UUID.randomUUID().toString().replace("-","")+"-"+file.getName());
+            String fileUrl = fileHost + "/" + (dateStr + "/" + UUID.randomUUID().toString().replace("-", "") + "-" + file.getName());
             //上传文件
             PutObjectResult result = ossClient.putObject(new PutObjectRequest(bucketName, fileUrl, file));
             //设置权限 这里是公开读
-            ossClient.setBucketAcl(bucketName,CannedAccessControlList.PublicRead);
-            if(null != result){
-                log.info("==========>OSS文件上传成功,OSS地址："+fileUrl);
+            ossClient.setBucketAcl(bucketName, CannedAccessControlList.PublicRead);
+            if (null != result) {
+                log.info("==========>OSS文件上传成功,OSS地址：" + fileUrl);
                 return fileUrl;
             }
-        }catch (OSSException oe){
+        } catch (OSSException oe) {
             log.error(oe.getMessage());
-        }catch (ClientException ce){
+        } catch (ClientException ce) {
             log.error(ce.getMessage());
-        }finally {
+        } finally {
             ossPoolManager.pool.returnObject(ossClient);
         }
         return null;
@@ -75,52 +76,54 @@ public class AliyunOssUtil {
 
     /**
      * 删除Object
+     *
      * @param fileKey
      * @return
      */
-    public static String deleteBlog(String fileKey,String bucketName)throws Exception{
+    public static String deleteBlog(String fileKey, String bucketName) throws Exception {
         log.info("=========>OSS文件删除开始");
-        OSSClient ossClient=ossPoolManager.pool.borrowObject();
+        OSSClient ossClient = ossPoolManager.pool.borrowObject();
         try {
-            if(!ossClient.doesBucketExist(bucketName)){
+            if (!ossClient.doesBucketExist(bucketName)) {
                 log.info("==============>您的Bucket不存在");
                 return "您的Bucket不存在";
-            }else {
+            } else {
                 log.info("==============>开始删除Object");
-                ossClient.deleteObject(bucketName,fileKey);
-                log.info("==============>Object删除成功："+fileKey);
-                return "==============>Object删除成功："+fileKey;
+                ossClient.deleteObject(bucketName, fileKey);
+                log.info("==============>Object删除成功：" + fileKey);
+                return "==============>Object删除成功：" + fileKey;
             }
-        }catch (Exception ex){
-            log.info("删除Object失败",ex);
+        } catch (Exception ex) {
+            log.info("删除Object失败", ex);
             return "删除Object失败";
-        }finally {
+        } finally {
             ossPoolManager.pool.returnObject(ossClient);
         }
     }
 
     /**
      * 查询文件名列表
+     *
      * @param bucketName
      * @return
      */
-    public static List<String> getObjectList(String bucketName)throws Exception{
+    public static List<String> getObjectList(String bucketName) throws Exception {
         List<String> listRe = new ArrayList<>();
-        OSSClient ossClient=ossPoolManager.pool.borrowObject();
+        OSSClient ossClient = ossPoolManager.pool.borrowObject();
         try {
             log.info("===========>查询文件名列表");
             ListObjectsRequest listObjectsRequest = new ListObjectsRequest(bucketName);
             //列出blog目录下今天所有文件
-            listObjectsRequest.setPrefix(TIMESTAMP_FORMAT.format(new Date())+"/");
+            listObjectsRequest.setPrefix(TIMESTAMP_FORMAT.format(new Date()) + "/");
             ObjectListing list = ossClient.listObjects(listObjectsRequest);
-            for(OSSObjectSummary objectSummary : list.getObjectSummaries()){
+            for (OSSObjectSummary objectSummary : list.getObjectSummaries()) {
                 listRe.add(objectSummary.getKey());
             }
             return listRe;
-        }catch (Exception ex){
-            log.info("==========>查询列表失败",ex);
+        } catch (Exception ex) {
+            log.info("==========>查询列表失败", ex);
             return new ArrayList<>();
-        }finally {
+        } finally {
             ossPoolManager.pool.returnObject(ossClient);
         }
     }

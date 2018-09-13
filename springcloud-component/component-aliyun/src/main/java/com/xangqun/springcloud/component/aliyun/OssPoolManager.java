@@ -23,24 +23,24 @@ public class OssPoolManager extends BasePooledObjectFactory<OSSClient> {
 
     public GenericObjectPool<OSSClient> pool;
 
-  public OssPoolManager(ApplicationContext applicationContext){
-      this.applicationContext = applicationContext;
-     GenericObjectPoolConfig config = new GenericObjectPoolConfig();
-     config.setMaxTotal(12);
-     AbandonedConfig abandonedConfig = new AbandonedConfig();
-     pool = new GenericObjectPool(this, config, abandonedConfig);
-  }
+    public OssPoolManager(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+        GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+        config.setMaxTotal(12);
+        AbandonedConfig abandonedConfig = new AbandonedConfig();
+        pool = new GenericObjectPool(this, config, abandonedConfig);
+    }
 
 
-   @Override
-   public OSSClient create() throws Exception {
-      return applicationContext.getBean("ossClient",OSSClient.class);
-   }
+    @Override
+    public OSSClient create() throws Exception {
+        return applicationContext.getBean("ossClient", OSSClient.class);
+    }
 
-   @Override
-   public PooledObject wrap(OSSClient obj) {
-      return new DefaultPooledObject<>(obj);
-   }
+    @Override
+    public PooledObject wrap(OSSClient obj) {
+        return new DefaultPooledObject<>(obj);
+    }
 
 
 }

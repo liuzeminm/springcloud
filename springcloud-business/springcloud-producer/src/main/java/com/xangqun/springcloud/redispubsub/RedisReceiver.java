@@ -22,7 +22,8 @@ public class RedisReceiver {
 
 
     /**
-     *  收到通道的消息之后执行的方法
+     * 收到通道的消息之后执行的方法
+     *
      * @param message
      */
     public void receiveMessage(String message) {

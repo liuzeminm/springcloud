@@ -1,17 +1,17 @@
 package com.xangqun.springcloud;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.gateway.discovery.DiscoveryClientRouteDefinitionLocator;
 import org.springframework.cloud.gateway.discovery.DiscoveryLocatorProperties;
-//import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
-import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
+import org.springframework.context.annotation.Bean;
+
+//import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 //import org.springframework.cloud.gateway.route.RouteLocator;
 //import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.context.annotation.Bean;
 //import org.springframework.security.config.web.server.ServerHttpSecurity;
 //import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 //import org.springframework.security.core.userdetails.User;
@@ -19,21 +19,20 @@ import org.springframework.context.annotation.Bean;
 //import org.springframework.security.web.server.SecurityWebFilterChain;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RestController;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 //@RestController
 public class GateWayApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GateWayApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GateWayApplication.class, args);
+    }
 
-	@Bean
-	public RouteDefinitionLocator discoveryClientRouteDefinitionLocator(DiscoveryClient discoveryClient, DiscoveryLocatorProperties discoveryLocatorProperties) {
-		return new DiscoveryClientRouteDefinitionLocator(discoveryClient,discoveryLocatorProperties);
-	}
+    @Bean
+    public RouteDefinitionLocator discoveryClientRouteDefinitionLocator(DiscoveryClient discoveryClient, DiscoveryLocatorProperties discoveryLocatorProperties) {
+        return new DiscoveryClientRouteDefinitionLocator(discoveryClient, discoveryLocatorProperties);
+    }
 
 //	@RequestMapping("/hystrixfallback")
 //	public String hystrixfallback() {

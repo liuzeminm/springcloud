@@ -5,139 +5,145 @@ import java.util.Comparator;
 import java.util.Random;
 
 /**
- * ÅÅĞò½Ó¿Ú£¬ËùÓĞµÄÅÅĞòËã·¨¶¼Òª¼Ì³Ğ¸Ã³éÏóÀà£¬²¢ÇÒÒªÇóÊı×éÖĞµÄ
- * ÔªËØÒª¾ßÓĞ±È½ÏÄÜÁ¦£¬¼´Êı×éÔªËØÒÑÊµÏÖÁËComparable½Ó¿Ú
- *
- * @author laixiangqun
- * @date 2009-12-5
+ * æ’åºæ¥å£ï¼Œæ‰€æœ‰çš„æ’åºç®—æ³•éƒ½è¦ç»§æ‰¿è¯¥æŠ½è±¡ç±»ï¼Œå¹¶ä¸”è¦æ±‚æ•°ç»„ä¸­çš„
+ * å…ƒç´ è¦å…·æœ‰æ¯”è¾ƒèƒ½åŠ›ï¼Œå³æ•°ç»„å…ƒç´ å·²å®ç°äº†Comparableæ¥å£
  *
  * @param <E>
+ * @author jzj
+ * @date 2009-12-5
  */
 public abstract class Sort<E extends Comparable<E>> {
 
-	public final Comparator<E> DEFAULT_ORDER = new DefaultComparator();
-	public final Comparator<E> REVERSE_ORDER = new ReverseComparator();
+    public final Comparator<E> DEFAULT_ORDER = new DefaultComparator();
+    public final Comparator<E> REVERSE_ORDER = new ReverseComparator();
 
-	/**
-	 * ÅÅĞòËã·¨£¬ĞèÊµÏÖ£¬¶ÔÊı×éÖĞÖ¸¶¨µÄÔªËØ½øĞĞÅÅĞò
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param from ´ÓÄÄÀï
-	 * @param end ÅÅµ½ÄÄÀï
-	 * @param c
-	 */
-	public abstract void sort(E[] array, int from, int end, Comparator<E> c);
+    /**
+     * æ’åºç®—æ³•ï¼Œéœ€å®ç°ï¼Œå¯¹æ•°ç»„ä¸­æŒ‡å®šçš„å…ƒç´ è¿›è¡Œæ’åº
+     *
+     * @param array å¾…æ’åºæ•°ç»„
+     * @param from  ä»å“ªé‡Œ
+     * @param end   æ’åˆ°å“ªé‡Œ
+     * @param c
+     */
+    public abstract void sort(E[] array, int from, int end, Comparator<E> c);
 
-	/**
-	 * ¶ÔÊı×éÖĞÖ¸¶¨²¿·Ö½øĞĞÅÅĞò
-	 * @param from ´ÓÄÄÀï
-	 * @param len ÅÅµ½ÄÄÀï
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param c ±È½ÏÆ÷
-	 */
-	public void sort(int from, int len, E[] array, Comparator<E> c) {
-		sort(array, 0, array.length - 1, c);
-	}
+    /**
+     * å¯¹æ•°ç»„ä¸­æŒ‡å®šéƒ¨åˆ†è¿›è¡Œæ’åº
+     *
+     * @param from  ä»å“ªé‡Œ
+     * @param len   æ’åˆ°å“ªé‡Œ
+     * @param array å¾…æ’åºæ•°ç»„
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    public void sort(int from, int len, E[] array, Comparator<E> c) {
+        sort(array, 0, array.length - 1, c);
+    }
 
-	/**
-	 * ¶ÔÕû¸öÊı×é½øĞĞÅÅĞò£¬¿ÉÒÔÊ¹ÓÃ×Ô¼ºµÄÅÅĞò±È½ÏÆ÷£¬Ò²¿ÉÊ¹ÓÃ¸ÃÀàÌá¹©µÄÁ½¸ö±È½ÏÆ÷
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param c ±È½ÏÆ÷
-	 */
-	public final void sort(E[] array, Comparator<E> c) {
-		sort(0, array.length, array, c);
-	}
+    /**
+     * å¯¹æ•´ä¸ªæ•°ç»„è¿›è¡Œæ’åºï¼Œå¯ä»¥ä½¿ç”¨è‡ªå·±çš„æ’åºæ¯”è¾ƒå™¨ï¼Œä¹Ÿå¯ä½¿ç”¨è¯¥ç±»æä¾›çš„ä¸¤ä¸ªæ¯”è¾ƒå™¨
+     *
+     * @param array å¾…æ’åºæ•°ç»„
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    public final void sort(E[] array, Comparator<E> c) {
+        sort(0, array.length, array, c);
+    }
 
-	/**
-	 * ¶ÔÕû¸öÊı×é½øĞĞÅÅĞò£¬²ÉÓÃÄ¬ÈÏÅÅĞò±È½ÏÆ÷
-	 * @param array ´ıÅÅĞòÊı×é
-	 */
-	public final void sort(E[] array) {
-		sort(0, array.length, array, this.DEFAULT_ORDER);
-	}
+    /**
+     * å¯¹æ•´ä¸ªæ•°ç»„è¿›è¡Œæ’åºï¼Œé‡‡ç”¨é»˜è®¤æ’åºæ¯”è¾ƒå™¨
+     *
+     * @param array å¾…æ’åºæ•°ç»„
+     */
+    public final void sort(E[] array) {
+        sort(0, array.length, array, this.DEFAULT_ORDER);
+    }
 
-	//Ä¬ÈÏ±È½ÏÆ÷£¨Ò»°ãÎªÉıĞò£¬µ«ÊÇ·ñÕæÕæÊÇÉıĞò»¹µÃ¿´EÊÇÔõÑùÊµÏÖComparable½Ó¿ÚµÄ£©
-	private class DefaultComparator implements Comparator<E> {
-		@Override
-		public int compare(E o1, E o2) {
-			return o1.compareTo(o2);
-		}
-	}
+    //é»˜è®¤æ¯”è¾ƒå™¨ï¼ˆä¸€èˆ¬ä¸ºå‡åºï¼Œä½†æ˜¯å¦çœŸçœŸæ˜¯å‡åºè¿˜å¾—çœ‹Eæ˜¯æ€æ ·å®ç°Comparableæ¥å£çš„ï¼‰
+    private class DefaultComparator implements Comparator<E> {
+        @Override
+        public int compare(E o1, E o2) {
+            return o1.compareTo(o2);
+        }
+    }
 
-	//·´Ğò±È½ÏÆ÷£¬ÅÅĞò¸ÕºÃÓëÄ¬ÈÏ±È½ÏÆ÷Ïà·´
-	private class ReverseComparator implements Comparator<E> {
-		@Override
-		public int compare(E o1, E o2) {
-			return o2.compareTo(o1);
-		}
-	}
+    //ååºæ¯”è¾ƒå™¨ï¼Œæ’åºåˆšå¥½ä¸é»˜è®¤æ¯”è¾ƒå™¨ç›¸å
+    private class ReverseComparator implements Comparator<E> {
+        @Override
+        public int compare(E o1, E o2) {
+            return o2.compareTo(o1);
+        }
+    }
 
-	/**
-	 * ½»»»Êı×éÖĞµÄÁ½¸öÔªËØµÄÎ»ÖÃ
-	 * @param array ´ı½»»»µÄÊı×é
-	 * @param i µÚÒ»¸öÔªËØ
-	 * @param j µÚ¶ş¸öÔªËØ
-	 */
-	protected final void swap(E[] array, int i, int j) {
-		if (i != j) {//Ö»ÓĞ²»ÊÇÍ¬Ò»Î»ÖÃÊ±²ÅĞè½»»»
-			E tmp = array[i];
-			array[i] = array[j];
-			array[j] = tmp;
-		}
-	}
+    /**
+     * äº¤æ¢æ•°ç»„ä¸­çš„ä¸¤ä¸ªå…ƒç´ çš„ä½ç½®
+     *
+     * @param array å¾…äº¤æ¢çš„æ•°ç»„
+     * @param i     ç¬¬ä¸€ä¸ªå…ƒç´ 
+     * @param j     ç¬¬äºŒä¸ªå…ƒç´ 
+     */
+    protected final void swap(E[] array, int i, int j) {
+        if (i != j) {//åªæœ‰ä¸æ˜¯åŒä¸€ä½ç½®æ—¶æ‰éœ€äº¤æ¢
+            E tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+        }
+    }
 
-	/**
-	 * Êı×éÔªËØºóÒÆ
-	 * @param array ´ıÒÆ¶¯µÄÊı×é
-	 * @param startIndex ´ÓÄÄ¸ö¿ªÊ¼ÒÆ
-	 * @param endIndex µ½ÄÄ¸öÔªËØÖ¹
-	 */
-	protected final void move(E[] array, int startIndex, int endIndex) {
-		for (int i = endIndex; i >= startIndex; i--) {
-			array[i + 1] = array[i];
-		}
-	}
+    /**
+     * æ•°ç»„å…ƒç´ åç§»
+     *
+     * @param array      å¾…ç§»åŠ¨çš„æ•°ç»„
+     * @param startIndex ä»å“ªä¸ªå¼€å§‹ç§»
+     * @param endIndex   åˆ°å“ªä¸ªå…ƒç´ æ­¢
+     */
+    protected final void move(E[] array, int startIndex, int endIndex) {
+        for (int i = endIndex; i >= startIndex; i--) {
+            array[i + 1] = array[i];
+        }
+    }
 
-	/**
-	 * ÒÔÖ¸¶¨µÄ²½³¤½«Êı×éÔªËØºóÒÆ£¬²½³¤Ö¸¶¨Ã¿¸öÔªËØ¼äµÄ¼ä¸ô
-	 * @param array ´ıÅÅĞòÊı×é
-	 * @param startIndex ´ÓÄÄÀï¿ªÊ¼ÒÆ
-	 * @param endIndex µ½ÄÄ¸öÔªËØÖ¹
-	 * @param step ²½³¤
-	 */
-	protected final void move(E[] array, int startIndex, int endIndex, int step) {
-		for (int i = endIndex; i >= startIndex; i -= step) {
-			array[i + step] = array[i];
-		}
-	}
+    /**
+     * ä»¥æŒ‡å®šçš„æ­¥é•¿å°†æ•°ç»„å…ƒç´ åç§»ï¼Œæ­¥é•¿æŒ‡å®šæ¯ä¸ªå…ƒç´ é—´çš„é—´éš”
+     *
+     * @param array      å¾…æ’åºæ•°ç»„
+     * @param startIndex ä»å“ªé‡Œå¼€å§‹ç§»
+     * @param endIndex   åˆ°å“ªä¸ªå…ƒç´ æ­¢
+     * @param step       æ­¥é•¿
+     */
+    protected final void move(E[] array, int startIndex, int endIndex, int step) {
+        for (int i = endIndex; i >= startIndex; i -= step) {
+            array[i + step] = array[i];
+        }
+    }
 
-	//²âÊÔ·½·¨
-	@SuppressWarnings("unchecked")
-	public static final <E extends Comparable<E>> void testSort(Sort<E> sorter, E[] array) {
+    //æµ‹è¯•æ–¹æ³•
+    @SuppressWarnings("unchecked")
+    public static final <E extends Comparable<E>> void testSort(Sort<E> sorter, E[] array) {
 
-		if (array == null) {
-			array = randomArray();
-		}
-		//ÎªÁËµÚ¶ş´ÎÅÅĞò£¬Ğè¿½±´Ò»·İ
-		E[] tmpArr = (E[]) new Comparable[array.length];
-		System.arraycopy(array, 0, tmpArr, 0, array.length);
+        if (array == null) {
+            array = randomArray();
+        }
+        //ä¸ºäº†ç¬¬äºŒæ¬¡æ’åºï¼Œéœ€æ‹·è´ä¸€ä»½
+        E[] tmpArr = (E[]) new Comparable[array.length];
+        System.arraycopy(array, 0, tmpArr, 0, array.length);
 
-		System.out.println("Ô´ - " + Arrays.toString(tmpArr));
+        System.out.println("æº - " + Arrays.toString(tmpArr));
 
-		sorter.sort(array, sorter.REVERSE_ORDER);
-		System.out.println("½µ - " + Arrays.toString(array));
+        sorter.sort(array, sorter.REVERSE_ORDER);
+        System.out.println("é™ - " + Arrays.toString(array));
 
-		sorter.sort(tmpArr, sorter.DEFAULT_ORDER);
-		System.out.println("Éı - " + Arrays.toString(tmpArr));
-	}
+        sorter.sort(tmpArr, sorter.DEFAULT_ORDER);
+        System.out.println("å‡ - " + Arrays.toString(tmpArr));
+    }
 
-	//Éú³ÉËæ»úÊı×é
-	@SuppressWarnings("unchecked")
-	private static <E extends Comparable<E>> E[] randomArray() {
-		Random r = new Random(System.currentTimeMillis());
-		Integer[] a = new Integer[r.nextInt(30)];
-		for (int i = 0; i < a.length; i++) {
-			a[i] = new Integer(r.nextInt(100));
-		}
-		return (E[]) a;
-	}
+    //ç”Ÿæˆéšæœºæ•°ç»„
+    @SuppressWarnings("unchecked")
+    private static <E extends Comparable<E>> E[] randomArray() {
+        Random r = new Random(System.currentTimeMillis());
+        Integer[] a = new Integer[r.nextInt(30)];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = new Integer(r.nextInt(100));
+        }
+        return (E[]) a;
+    }
 }

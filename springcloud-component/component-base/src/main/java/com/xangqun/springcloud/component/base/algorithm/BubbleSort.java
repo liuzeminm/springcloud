@@ -1,47 +1,48 @@
 package com.xangqun.springcloud.component.base.algorithm;
 
-
 import java.util.Comparator;
 
 /**
- * Ã°ÅİÅÅĞòËã·¨
- * @author laixiangqun
- * @date 2009-12-9
+ * å†’æ³¡æ’åºç®—æ³•
  *
  * @param <E>
+ * @author jzj
+ * @date 2009-12-9
  */
 public class BubbleSort<E extends Comparable<E>> extends Sort<E> {
 
-	/**
-	 * ÅÅĞòËã·¨µÄÊµÏÖ£¬¶ÔÊı×éÖĞÖ¸¶¨µÄÔªËØ½øĞĞÅÅĞò
-	 * @param array ´ıÅÅĞòµÄÊı×é
-	 * @param from ´ÓÄÄÀï¿ªÊ¼ÅÅĞò
-	 * @param end ÅÅµ½ÄÄÀï
-	 * @param c ±È½ÏÆ÷
-	 */
-	@Override
-	public void sort(E[] array, int from, int end, Comparator<E> c) {
-		//Ğèarray.length - 1ÂÖ±È½Ï
-		for (int k = 1; k < end - from + 1; k++) {
-			//Ã¿ÂÖÑ­»·ÖĞ´Ó×îºóÒ»¸öÔªËØ¿ªÊ¼ÏòÇ°ÆğÅİ£¬Ö±µ½i=kÖ¹£¬¼´iµÈÓÚÂÖ´ÎÖ¹
-			for (int i = end - from; i >= k; i--) {
-				//°´ÕÕÒ»ÖÖ¹æÔò£¨ºóÃæÔªËØ²»ÄÜĞ¡ÓÚÇ°ÃæÔªËØ£©ÅÅĞò
-				if (c.compare(array[i], array[i - 1]) < 0) {
-					//Èç¹ûºóÃæÔªËØĞ¡ÓÚÁË£¨µ±È»ÊÇ´óÓÚ»¹ÊÇĞ¡ÓÚÒª¿´±È½ÏÆ÷ÊµÏÖÁË£©Ç°ÃæµÄÔªËØ£¬ÔòÇ°ºó½»»»
-					swap(array, i, i - 1);
-				}
-			}
-		}
-	}
+    /**
+     * æ’åºç®—æ³•çš„å®ç°ï¼Œå¯¹æ•°ç»„ä¸­æŒ‡å®šçš„å…ƒç´ è¿›è¡Œæ’åº
+     *
+     * @param array å¾…æ’åºçš„æ•°ç»„
+     * @param from  ä»å“ªé‡Œå¼€å§‹æ’åº
+     * @param end   æ’åˆ°å“ªé‡Œ
+     * @param c     æ¯”è¾ƒå™¨
+     */
+    @Override
+    public void sort(E[] array, int from, int end, Comparator<E> c) {
+        //éœ€array.length - 1è½®æ¯”è¾ƒ
+        for (int k = 1; k < end - from + 1; k++) {
+            //æ¯è½®å¾ªç¯ä¸­ä»æœ€åä¸€ä¸ªå…ƒç´ å¼€å§‹å‘å‰èµ·æ³¡ï¼Œç›´åˆ°i=kæ­¢ï¼Œå³iç­‰äºè½®æ¬¡æ­¢
+            for (int i = end - from; i >= k; i--) {
+                //æŒ‰ç…§ä¸€ç§è§„åˆ™ï¼ˆåé¢å…ƒç´ ä¸èƒ½å°äºå‰é¢å…ƒç´ ï¼‰æ’åº
+                if (c.compare(array[i], array[i - 1]) < 0) {
+                    //å¦‚æœåé¢å…ƒç´ å°äºäº†ï¼ˆå½“ç„¶æ˜¯å¤§äºè¿˜æ˜¯å°äºè¦çœ‹æ¯”è¾ƒå™¨å®ç°äº†ï¼‰å‰é¢çš„å…ƒç´ ï¼Œåˆ™å‰åäº¤æ¢
+                    swap(array, i, i - 1);
+                }
+            }
+        }
+    }
 
-	/**
-	* ²âÊÔ
-	* @param args
-	*/
-	public static void main(String[] args) {
-		Integer[] intgArr = { 7, 2, 4, 3, 12, 1, 9, 6, 8, 5, 11, 10 };
-		BubbleSort<Integer> sort = new BubbleSort<Integer>();
-		BubbleSort.testSort(sort, intgArr);
-		BubbleSort.testSort(sort, null);
-	}
+    /**
+     * æµ‹è¯•
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Integer[] intgArr = {7, 2, 4, 3, 12, 1, 9, 6, 8, 5, 11, 10};
+        BubbleSort<Integer> sort = new BubbleSort<Integer>();
+        BubbleSort.testSort(sort, intgArr);
+        BubbleSort.testSort(sort, null);
+    }
 }

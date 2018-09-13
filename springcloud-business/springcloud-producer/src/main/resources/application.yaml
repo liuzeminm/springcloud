@@ -37,7 +37,7 @@ spring:
     port: 5672
     username: guest
     password: guest
-#    mq发送应答
+    #    mq发送应答
     publisherConfirms: true
     #connection closed异常需要加配置
     cache:
@@ -70,7 +70,7 @@ spring:
     #屏蔽虚拟机ip
     inetutils:
       ignoredInterfaces:
-        - VMware*
+      - VMware*
   #zipkin配置
   zipkin:
     #Zipkin Server 的 ip:port，这里换成自己的 Zipkin Server 的 IP 即可
@@ -105,8 +105,8 @@ management:
       exposure:
         include: '*'
   endpoint:
-      health:
-        show-details: ALWAYS
+    health:
+      show-details: ALWAYS
 #redisson配置
 redisson:
   timeout: 3000
