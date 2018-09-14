@@ -1,5 +1,7 @@
 package com.xxl.job.admin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.xxl.job.admin.core.model.XxlJobGroup;
 import com.xxl.job.admin.core.model.XxlJobInfo;
 import com.xxl.job.admin.core.model.XxlJobLog;
@@ -111,7 +113,7 @@ public class JobLogController {
         model.addAttribute("triggerCode", jobLog.getTriggerCode());
         model.addAttribute("handleCode", jobLog.getHandleCode());
         model.addAttribute("executorAddress", jobLog.getExecutorAddress());
-        model.addAttribute("triggerTime", jobLog.getTriggerTime().getTime());
+        model.addAttribute("triggerTime", jobLog.getTriggerTime().getTime()+"");
         model.addAttribute("logId", jobLog.getId());
 		return "joblog/joblog.detail";
 	}
@@ -121,15 +123,31 @@ public class JobLogController {
 	public ReturnT<LogResult> logDetailCat(String executorAddress, long triggerTime, int logId, int fromLineNum){
 		try {
 			ExecutorBiz executorBiz = XxlJobDynamicScheduler.getExecutorBiz(executorAddress);
-			ReturnT<LogResult> logResult = executorBiz.log(triggerTime, logId, fromLineNum);
+			ReturnT logResult = executorBiz.log(triggerTime, logId, fromLineNum);
 
 			// is end
-            if (logResult.getContent()!=null && logResult.getContent().getFromLineNum() > logResult.getContent().getToLineNum()) {
-                XxlJobLog jobLog = xxlJobLogDao.load(logId);
-                if (jobLog.getHandleCode() > 0) {
-                    logResult.getContent().setEnd(true);
-                }
-            }
+			if (logResult.getContent() != null) {
+				if (logResult.getContent() instanceof JSONObject) {
+					JSONObject content = (JSONObject) logResult.getContent();
+					if (content.getInteger("fromLineNum") > content.getInteger("toLineNum")) {
+						XxlJobLog jobLog = xxlJobLogDao.load(logId);
+						if (jobLog.getHandleCode() > 0) {
+							content.put("end", true);
+						}
+						LogResult logResult1 = JSON.parseObject(content.toJSONString(), LogResult.class);
+						logResult.setContent(logResult1);
+					}
+				} else if (logResult.getContent() instanceof LogResult) {
+					LogResult content = (LogResult) logResult.getContent();
+					if (content.getFromLineNum() > content.getToLineNum()) {
+						XxlJobLog jobLog = xxlJobLogDao.load(logId);
+						if (jobLog.getHandleCode() > 0) {
+							content.setEnd(true);
+							logResult.setContent(content);
+						}
+					}
+				}
+			}
 
 			return logResult;
 		} catch (Exception e) {

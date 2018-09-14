@@ -124,6 +124,11 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>spring-boot-starter-schedule</artifactId>
+            <version>1.9.2-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 
