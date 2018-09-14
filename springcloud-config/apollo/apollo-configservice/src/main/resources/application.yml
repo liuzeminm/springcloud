@@ -1,17 +1,42 @@
-spring:
-  application:
-    name: apollo-configservice
-  profiles:
-    active: ${apollo_profile}
-  jpa:
-    hibernate:
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 ctrip:
   appid: 100003171
   
 server:
   port: 8761
+  servlet:
+    context-path: /
   
 logging:
   file: /opt/logs/100003171/apollo-configservice.log
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    #    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    #  如果项目配置有 server.servlet.context-path 属性，想要被 spring boot admin 监控，就要配置以下属性
+    metadata-map:
+      management:
+        context-path: ${server.servlet.context-path}actuator
+    health-check-url: http://localhost:${server.port}${server.servlet.context-path}actuator/health
+    status-page-url: http://localhost:${server.port}${server.servlet.context-path}actuator/info
+    home-page-url: http://localhost:${server.port}${server.servlet.context-path}
+    ip-address: 192.168.0.1
+    appname: ${spring.application.name}
+  client:
+    # 表示是否注册自身到eureka服务器
+    register-with-eureka: true
+    # 是否从eureka上获取注册信息
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka
+  server:
+    #（设为false，关闭自我保护主要）
+    enable-self-preservation: true
+    #留存的服务示例低于多少比例进入保护模式
+    renewal-percent-threshold: 0.5
+    #清理间隔（单位毫秒，默认是60*1000）
+    eviction-interval-timer-in-ms: 4000
+  dashboard:
+    path: /
+    enabled: true

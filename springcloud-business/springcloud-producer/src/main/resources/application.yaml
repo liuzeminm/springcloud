@@ -112,12 +112,11 @@ redisson:
   timeout: 3000
   clusterAddresses: ${spring.redis.cluster.nodes}
 
-env: dev
-dev_meta: http://${eureka.instance.hostname}:8761
+
 apollo:
   bootstrap:
     enabled: true
-    namespaces: testxt #product.yaml
+    namespaces: application
 #日志
 logging:
   #日志配置文件位置

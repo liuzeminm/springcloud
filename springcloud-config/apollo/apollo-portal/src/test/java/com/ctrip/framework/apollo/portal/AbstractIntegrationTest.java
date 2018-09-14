@@ -15,13 +15,13 @@ import javax.annotation.PostConstruct;
 //@WebIntegrationTest(randomPort = true)
 public abstract class AbstractIntegrationTest {
 
-//  RestTemplate restTemplate = new TestRestTemplate();
-//
-//  @PostConstruct
-//  private void postConstruct() {
-//    System.setProperty("spring.profiles.active", "test");
-//    restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
-//  }
+  RestTemplate restTemplate = new TestRestTemplate().getRestTemplate();
+
+  @PostConstruct
+  private void postConstruct() {
+    System.setProperty("spring.profiles.active", "test");
+    restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
+  }
 
   @Value("${local.server.port}")
   int port;

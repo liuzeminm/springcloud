@@ -34,10 +34,10 @@ public class PortService extends BaseWebController {
 
     @RequestMapping("data")
     public String getData() {
-        RLock rLock = RedisLockUtil.lock("testXANGQUN", TimeUnit.SECONDS, 5);
-        long time = redisTemplate.getExpire("test00");
-        rLock.unlock();
-        userMapper.deleteByPrimaryKey(1L);
+//        RLock rLock = RedisLockUtil.lock("testXANGQUN", TimeUnit.SECONDS, 5);
+//        long time = redisTemplate.getExpire("test00");
+//        rLock.unlock();
+//        userMapper.deleteByPrimaryKey(1L);
         return "Hello World, I'm from time : " + test;// + new GsonBuilder().create().toJson(user);
     }
 
@@ -52,4 +52,5 @@ public class PortService extends BaseWebController {
     public String getPort() {
         return "Hello World, I'm from port : " + port;
     }
+
 }

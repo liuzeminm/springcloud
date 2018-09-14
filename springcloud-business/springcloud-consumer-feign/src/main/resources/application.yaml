@@ -105,3 +105,9 @@ csp:
   sentinel:
     dashboard:
       server: http://127.0.0.1:8082
+
+apollo:
+  bootstrap:
+    enabled: true
+    # will inject 'application' and 'TEST1.apollo' namespaces in bootstrap phase
+    namespaces: application

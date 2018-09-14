@@ -100,7 +100,7 @@ public class ConsumerServiceTest extends AbstractUnitTest {
     when(consumerRepository.findById(someConsumerId).get()).thenReturn(someConsumer);
 
     assertEquals(someConsumer, consumerService.getConsumerByConsumerId(someConsumerId));
-    verify(consumerRepository, times(1)).findById(someConsumerId).get();
+    verify(consumerRepository, times(1)).findById(someConsumerId);
   }
 
   @Test

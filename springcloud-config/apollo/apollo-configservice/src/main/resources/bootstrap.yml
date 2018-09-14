@@ -1,24 +1,24 @@
-eureka:
-  instance:
-    hostname: ${hostname:localhost}
-    preferIpAddress: true
-  server:
-    peerEurekaNodesUpdateIntervalMs: 60000
-    enableSelfPreservation: false
-  client:
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
-    healthcheck:
-      enabled: true
-    eurekaServiceUrlPollIntervalSeconds: 60
-
-endpoints:
-  health:
-    sensitive: false
+spring:
+  application:
+    name: apollo-configservice
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 123456
+      jdbcUrl: jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database: mysql
 
 management:
-  security:
-    enabled: false
   endpoints:
     web:
       exposure:
@@ -26,12 +26,8 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-
-spring:
-  datasource:
-    password: 123456
-    username: root
-    driver-class-name: com.mysql.jdbc.Driver
-    hikari:
-      maximum-pool-size: 5
-    url: jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8&useSSL=false
+  security:
+    enabled: true
+endpoints:
+  health:
+    sensitive: false

@@ -2,14 +2,20 @@ spring:
   profiles:
     active: github
   datasource:
-    url: jdbc:mysql://localhost:3306/apolloconfigdb? characterEncoding=utf8
-    username: root
     password: 123456
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8&useSSL=false
+    hikari:
+      maximum-pool-size: 5
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 123456
+      jdbc-url: jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8&useSSL=false
   jpa:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
 logging:
   file: /data/logs/apollo-assembly.log
-server:
-  port: 8761

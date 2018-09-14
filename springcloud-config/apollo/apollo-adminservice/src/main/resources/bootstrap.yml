@@ -1,17 +1,22 @@
-eureka:
-  instance:
-    hostname: ${hostname:localhost}
-    preferIpAddress: true
-  client:
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
-    healthcheck:
-      enabled: true
-    eurekaServiceUrlPollIntervalSeconds: 60
+server:
+  port: 8090
+  servlet:
+    context-path: /
 
 endpoints:
   health:
     sensitive: false
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 spring:
   datasource:
@@ -25,15 +30,3 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-
-
-management:
-  security:
-    enabled: false
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: ALWAYS

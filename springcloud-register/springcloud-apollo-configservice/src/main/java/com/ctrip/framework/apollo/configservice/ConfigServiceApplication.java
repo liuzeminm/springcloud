@@ -15,9 +15,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-//import org.springframework.boot.actuate.system.ApplicationPidFileWriter;
-//import org.springframework.boot.actuate.system.EmbeddedServerPortFileWriter;
-
 /**
  * Spring boot application entry point
  *

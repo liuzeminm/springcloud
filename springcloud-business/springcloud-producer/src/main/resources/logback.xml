@@ -165,9 +165,9 @@
         </filter>
     </appender>
 
-    <logger name="org.springframework" level="debug"/>
+    <logger name="org.springframework" level="Info"/>
 
-    <root level="debug">
+    <root level="Info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DEBUG_FILE"/>
         <appender-ref ref="INFO_FILE"/>

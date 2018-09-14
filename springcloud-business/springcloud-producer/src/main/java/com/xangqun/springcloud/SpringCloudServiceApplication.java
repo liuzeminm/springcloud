@@ -1,7 +1,8 @@
 package com.xangqun.springcloud;
 
-//import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 
+
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @EnableHystrix
 @MapperScan("com.xangqun.springcloud.mapper")
 @SpringBootApplication(scanBasePackages = {"com.xangqun.springcloud"})
+//@EnableApolloConfig({"testxt"})
 public class SpringCloudServiceApplication {
 
     public static void main(String[] args) {

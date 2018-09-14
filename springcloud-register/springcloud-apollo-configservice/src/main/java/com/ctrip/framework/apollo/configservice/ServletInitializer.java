@@ -3,8 +3,6 @@ package com.ctrip.framework.apollo.configservice;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-//import org.springframework.boot.context.web.SpringBootServletInitializer;
-
 /**
  * Entry point for traditional web app
  *
