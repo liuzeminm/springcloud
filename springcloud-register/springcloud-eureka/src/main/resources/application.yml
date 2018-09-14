@@ -12,7 +12,7 @@ spring:
       preferred-networks: 192.168
 eureka:
   instance:
-    prefer-ip-address: false
+    prefer-ip-address: true
     #  如果项目配置有 server.servlet.context-path 属性，想要被 spring boot admin 监控，就要配置以下属性
     metadata-map:
       management:
