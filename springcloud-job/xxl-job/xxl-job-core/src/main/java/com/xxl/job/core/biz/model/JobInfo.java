@@ -2,7 +2,7 @@ package com.xxl.job.core.biz.model;
 
 /**
  * @Class Name JobInfo
- * @Author wangzhijie
+ * @Author laixiangqun
  * @Create In 2018年7月16日
  */
 public class JobInfo {

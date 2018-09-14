@@ -58,7 +58,7 @@ public interface AdminBiz {
      * 给其他应用动态添加job的接口
      *
      * @Methods Name addJob
-     * @Create In 2018年7月16日 By wangzhijie
+     * @Create In 2018年7月16日 By laixiangqun
      * @param jobInfo
      * @return ReturnT<String>
      */
@@ -71,7 +71,7 @@ public interface AdminBiz {
      *
      * 动态删除Job的接口
      * @Methods Name removeJob
-     * @Create In 2018年7月20日 By wangzhijie
+     * @Create In 2018年7月20日 By laixiangqun
      * @param jobId
      * @return ReturnT<String>
      */
@@ -85,7 +85,7 @@ public interface AdminBiz {
     /**
      * 暂停Job
      * @Methods Name pause
-     * @Create In 2018年7月21日 By wangzhijie
+     * @Create In 2018年7月21日 By laixiangqun
      * @param jobParam
      * @return ReturnT<String>
      */
@@ -94,7 +94,7 @@ public interface AdminBiz {
     /**
      * 恢复执行job
      * @Methods Name reuse
-     * @Create In 2018年7月21日 By wangzhijie
+     * @Create In 2018年7月21日 By laixiangqun
      * @param jobParam
      * @return ReturnT<String>
      */

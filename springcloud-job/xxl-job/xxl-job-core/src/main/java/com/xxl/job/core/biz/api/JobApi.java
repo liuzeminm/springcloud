@@ -21,7 +21,7 @@ import org.springframework.beans.factory.FactoryBean;
 /**
  * 动态创建，修改，删除调度任务
  * @Class Name JobApi
- * @Author wangzhijie
+ * @Author laixiangqun
  * @Create In 2018年7月19日
  */
 public class JobApi {

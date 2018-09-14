@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * @Class Name JobParam
- * @Author wangzhijie
+ * @Author laixiangqun
  * @Create In 2018年7月20日
  */
 public class JobParam implements Serializable {

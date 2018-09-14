@@ -11,7 +11,7 @@ import com.xxl.job.core.biz.model.JobInfo;
 
 /**
  * @Class Name JobInfoBuilder
- * @Author wangzhijie
+ * @Author laixiangqun
  * @Create In 2018年7月19日
  */
 public class JobInfoBuilder {
