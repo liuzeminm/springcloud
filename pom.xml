@@ -70,6 +70,7 @@
         <module>springcloud-gateway</module><!-- 网关 -->
         <module>springcloud-config</module><!-- 配置管理中心 -->
         <module>springcloud-job</module><!-- 分布式调度 -->
+        <module>springcloud-oauth</module>
         <module>springcloud-starter</module>
         <module>springcloud-business</module>
     </modules>

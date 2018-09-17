@@ -55,6 +55,9 @@ public class SpringContextUtil implements ApplicationContextAware {
         return applicationContext.getBean(requiredType);
     }
 
+    public static <T> T getBean(String name, Class<T> cal) {
+        return applicationContext.getBean(name, cal);
+    }
     /**
      * 查询受管Bean。
      *
