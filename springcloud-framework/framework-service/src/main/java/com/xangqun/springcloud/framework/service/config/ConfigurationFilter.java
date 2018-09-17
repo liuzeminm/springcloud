@@ -111,22 +111,4 @@ public class ConfigurationFilter {
         log.debug("autoconfig requestContextListener ...");
         return new RequestContextListener();
     }
-
-    /**
-     * 覆盖@Async下的线程池实现，防止线程创建数量过多
-     *
-     * @return
-     */
-    @Bean
-    public AsyncTaskExecutor asyncTaskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setThreadNamePrefix("async-task-executor-");
-        executor.setMaxPoolSize(10);
-        executor.setCorePoolSize(3);
-        executor.setQueueCapacity(0);
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
-        return executor;
-    }
-
-
 }
