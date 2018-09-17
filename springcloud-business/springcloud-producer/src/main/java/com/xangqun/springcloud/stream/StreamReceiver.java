@@ -1,4 +1,4 @@
-package com.xangqun.springcloud.message;
+package com.xangqun.springcloud.stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

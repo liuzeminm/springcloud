@@ -1,4 +1,4 @@
-package com.xangqun.springcloud.message;
+package com.xangqun.springcloud.stream;
 
 
 /**

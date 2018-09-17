@@ -37,12 +37,22 @@ spring:
     port: 5672
     username: guest
     password: guest
-    #    mq发送应答
-    publisherConfirms: true
+    #支持发布确认
+    publisher-confirms: true
+    #支持发布返回
+    publisher-returns: true
     #connection closed异常需要加配置
     cache:
       channel:
         size: 200
+    listener:
+      simple:
+        acknowledge-mode: manual #采用手动应答
+        concurrency: 1 #指定最小的消费者数量
+        max-concurrency: 1 #指定最大的消费者数量
+        retry:
+          enabled: true #是否支持重试
+
   #stream配置
   cloud:
     stream:
