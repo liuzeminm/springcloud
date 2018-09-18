@@ -10,6 +10,12 @@ import java.util.regex.Pattern;
 
 public final class VerifyUtil {
 
+    private static String REGEX = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
+    private static Pattern PHONE_PATTERN = Pattern.compile(REGEX);
+
+    private static String EMAIL_REGEX =  "^[0-9a-zA-Z\\.\\-_]+@[0-9a-zA-Z\\-\\_]+\\.[a-zA-Z0-9_\\-\\.]+$";
+    private static Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+
     public final static boolean isNumberNotLower0(Number number) {
         if (number == null) {
             return false;
@@ -31,6 +37,10 @@ public final class VerifyUtil {
         if (!phone.startsWith("1")) {
             return false;
         }
+        Matcher matcher = PHONE_PATTERN.matcher(phone);
+        if (!matcher.matches()) {
+            return false;
+        }
         return true;
     }
 
@@ -38,9 +48,7 @@ public final class VerifyUtil {
         if (StringUtils.isEmpty(email)) {
             return false;
         }
-        String check = "^[0-9a-zA-Z\\.\\-_]+@[0-9a-zA-Z\\-\\_]+\\.[a-zA-Z0-9_\\-\\.]+$";
-        Pattern regex = Pattern.compile(check);
-        Matcher matcher = regex.matcher(email);
+        Matcher matcher = EMAIL_PATTERN.matcher(email);
         if (!matcher.matches()) {
             return false;
         }
