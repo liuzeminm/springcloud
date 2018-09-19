@@ -100,6 +100,7 @@ public class OAuth2ServerConfig {
 
 		@Autowired(required = false)
 		private JwtTokenStore jwtTokenStore;
+
 		@Autowired(required = false)
 		private JwtAccessTokenConverter jwtAccessTokenConverter;
 
@@ -113,6 +114,7 @@ public class OAuth2ServerConfig {
 		private RandomValueAuthorizationCodeServices authorizationCodeServices;
 
 		// 配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
+		@Override
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
 			if (jwtTokenStore != null) {

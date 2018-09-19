@@ -37,20 +37,20 @@
                                class="layui-input">
                     </div>
                 </div>
-                <!--<div class="layui-form-item">-->
-                    <!--<label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i></label>-->
-                    <!--<div class="layui-input-block">-->
-                        <!--<div class="layui-row inline-block">-->
-                            <!--<div class="layui-col-xs7">-->
-                                <!--<input name="code" type="text" lay-verify="required" placeholder="验证码"-->
-                                       <!--class="layui-input">-->
-                            <!--</div>-->
-                            <!--<div class="layui-col-xs5" style="padding-left: 10px;">-->
-                                <!--<img class="login-captcha" src="https://www.oschina.net/action/user/captcha">-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i></label>
+                    <div class="layui-input-block">
+                        <div class="layui-row inline-block">
+                            <div class="layui-col-xs7">
+                                <input name="code" type="text" lay-verify="required" placeholder="验证码"
+                                       class="layui-input">
+                            </div>
+                            <div class="layui-col-xs5" style="padding-left: 10px;">
+                                <img class="login-captcha" src="http://127.0.0.1:9210/api-auth/oauth/code/image?random=45678233">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <button lay-filter="login-submit" class="layui-btn layui-btn-fluid" lay-submit>登 录</button>
                 </div>
@@ -95,6 +95,7 @@ layui.config({
         field.scope = 'app';
         field.client_id = 'webApp';
         field.client_secret = 'webApp';
+        field.random=45678233
 
         layer.load(2);
         $.ajax({
@@ -121,6 +122,8 @@ layui.config({
                     layer.msg('账号或密码错误', {icon: 5});
                 }else if( xhr.status  == 500){
                     layer.msg('服务器异常,请联系管理员', {icon: 5});
+                }else if( xhr.status  == 401){
+                    layer.msg(xhr.responseJSON.rsp_msg, {icon: 5});
                 }
             }
         });

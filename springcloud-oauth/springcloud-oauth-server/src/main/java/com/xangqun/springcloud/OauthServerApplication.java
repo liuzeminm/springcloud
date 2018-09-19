@@ -8,6 +8,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 
 //@EnableApolloConfig({"product.yaml"}) //或者配置文件里加
@@ -15,6 +16,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableEurekaClient
 //@EnableCircuitBreaker
 //@EnableHystrix
+@EnableRedisHttpSession
 @MapperScan("com.xangqun.springcloud")
 @SpringBootApplication(scanBasePackages = {"com.xangqun.springcloud"})
 //@EnableApolloConfig({"testxt"})

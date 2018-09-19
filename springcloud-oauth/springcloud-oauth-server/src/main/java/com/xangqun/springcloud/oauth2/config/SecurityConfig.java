@@ -1,9 +1,12 @@
 package com.xangqun.springcloud.oauth2.config;
 
+import com.xangqun.springcloud.oauth2.filter.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +20,8 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
+import javax.servlet.ServletException;
+
 /**
  * spring security配置
  *
@@ -27,7 +32,7 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 @Configuration
 //@EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableConfigurationProperties(PermitUrlProperties.class)
+@EnableConfigurationProperties({PermitUrlProperties.class,ValidateCodeProperties.class})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -48,6 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private OauthLogoutHandler oauthLogoutHandler;
 	@Autowired
 	private PermitUrlProperties permitUrlProperties ;
+
+	@Autowired
+	private ValidateCodeProperties validateCodeProperties;
+	@Autowired
+	private RedisTemplate<String,Object> redisTemplate;
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -77,10 +87,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//关闭跨站请求防护
 		http.csrf().disable();
-
-		http.authorizeRequests().antMatchers( permitUrlProperties.getHttp_urls() ).permitAll()
+		//请求授权
+		http.authorizeRequests()
+		//不需要权限认证的url
+				.antMatchers( permitUrlProperties.getHttp_urls() ).permitAll()
+		//需要身份认证
 				.anyRequest().authenticated();
+
+
+
 		http.formLogin().loginPage("/login.html").loginProcessingUrl("/user/login")
 				.successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler);
 
@@ -118,5 +135,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 	}
 
-
+	/**
+	 * 创建 验证码 过滤器 ，并将该过滤器的Handler 设置成自定义登录失败处理器
+	 */
+	@Bean
+	public FilterRegistrationBean<ValidateCodeFilter> validateCodeFilterFilter() throws ServletException {
+		ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
+		validateCodeFilter.setFailureHandler(authenticationFailureHandler);
+		validateCodeFilter.setValidateCodeProperties(validateCodeProperties);
+		validateCodeFilter.setRedisTemplate(redisTemplate);
+		//调用 装配 需要图片验证码的 url 的初始化方法
+		validateCodeFilter.afterPropertiesSet();
+		FilterRegistrationBean<ValidateCodeFilter> bean = new FilterRegistrationBean(validateCodeFilter);
+		// 这个顺序很重要哦，为避免麻烦请设置在最前
+		bean.setOrder(0);
+		bean.addUrlPatterns("/*");
+		return bean;
+	}
 }

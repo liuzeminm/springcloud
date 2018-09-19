@@ -140,6 +140,7 @@ security:
     token:
       store:
         type: redis
+      signingKey: neusoft
 
 permit:
   http_urls:  /users-anon/**  , /doc.html   ,/document.html

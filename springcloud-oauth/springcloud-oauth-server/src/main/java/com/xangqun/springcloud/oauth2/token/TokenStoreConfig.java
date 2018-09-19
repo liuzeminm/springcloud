@@ -2,6 +2,7 @@ package com.xangqun.springcloud.oauth2.token;
 
 import com.xangqun.springcloud.oauth2.token.store.RedisTemplateTokenStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,7 @@ public class TokenStoreConfig  {
 	private RedisTemplate<String, Object> redisTemplate ;
 
 
+
 	@Bean
 	@ConditionalOnProperty(prefix="security.oauth2.token.store",name="type" ,havingValue="jdbc" ,matchIfMissing=false)
 	public JdbcTokenStore jdbcTokenStore(){
@@ -58,6 +60,9 @@ public class TokenStoreConfig  {
 	@Configuration
 	@ConditionalOnProperty(prefix="security.oauth2.token.store",name="type" ,havingValue="jwt" ,matchIfMissing=false)
 	public static class JWTTokenConfig {
+		@Value("${security.oauth2.token.signingKey:neusoft}")
+		private String signingKey;
+
 		@Bean
 		public JwtTokenStore jwtTokenStore(){
 			return new JwtTokenStore( jwtAccessTokenConverter() ) ;
@@ -66,7 +71,7 @@ public class TokenStoreConfig  {
 		@Bean
 		public JwtAccessTokenConverter jwtAccessTokenConverter(){
 			JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-			accessTokenConverter.setSigningKey("neusoft");
+			accessTokenConverter.setSigningKey(signingKey);
 			return accessTokenConverter ;
 		}
 	}
