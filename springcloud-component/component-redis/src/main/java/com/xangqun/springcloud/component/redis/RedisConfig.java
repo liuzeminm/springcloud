@@ -3,6 +3,10 @@
  */
 package com.xangqun.springcloud.component.redis;
 
+import com.alibaba.fastjson.parser.ParserConfig;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -35,8 +40,8 @@ public class RedisConfig {
     @Bean
     @ConditionalOnMissingBean(RedisTemplate.class)
     @Autowired
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
 
 //        使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
@@ -45,20 +50,22 @@ public class RedisConfig {
 //        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
 //        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 //        serializer.setObjectMapper(mapper);
-//
 //        template.setValueSerializer(serializer);
-//        //使用StringRedisSerializer来序列化和反序列化redis的key值
-//        template.setKeySerializer(new StringRedisSerializer());
+//        template.setHashValueSerializer(serializer);
 
-        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
+//        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
         // 全局开启AutoType，不建议使用
-        // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+//         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
         // 建议使用这种方式，小范围指定白名单
 //        ParserConfig.getGlobalInstance().addAccept("com.xangqun.");
-
         // 设置值（value）的序列化采用FastJsonRedisSerializer。
-        template.setValueSerializer(fastJsonRedisSerializer);
-        template.setHashValueSerializer(fastJsonRedisSerializer);
+//        template.setValueSerializer(fastJsonRedisSerializer);
+//        template.setHashValueSerializer(fastJsonRedisSerializer);
+
+//        KryoRedisSerializer<Object> kryoRedisSerializer=new KryoRedisSerializer<>(Object.class);
+//        template.setValueSerializer(kryoRedisSerializer);
+//        template.setHashValueSerializer(kryoRedisSerializer);
+
         // 设置键（key）的序列化采用StringRedisSerializer。
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
@@ -87,20 +94,22 @@ public class RedisConfig {
 //        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
 //        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 //        serializer.setObjectMapper(mapper);
-//
 //        template.setValueSerializer(serializer);
-//        //使用StringRedisSerializer来序列化和反序列化redis的key值
-//        template.setKeySerializer(new StringRedisSerializer());
+//        template.setHashValueSerializer(serializer);
 
-        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
+//        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
         // 全局开启AutoType，不建议使用
-        // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+//         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
         // 建议使用这种方式，小范围指定白名单
 //        ParserConfig.getGlobalInstance().addAccept("com.xangqun.");
 
         // 设置值（value）的序列化采用FastJsonRedisSerializer。
-        template.setValueSerializer(fastJsonRedisSerializer);
-        template.setHashValueSerializer(fastJsonRedisSerializer);
+//        template.setValueSerializer(fastJsonRedisSerializer);
+//        template.setHashValueSerializer(fastJsonRedisSerializer);
+
+//        KryoRedisSerializer<Object> kryoRedisSerializer=new KryoRedisSerializer<>(Object.class);
+//        template.setValueSerializer(kryoRedisSerializer);
+//        template.setHashValueSerializer(kryoRedisSerializer);
         // 设置键（key）的序列化采用StringRedisSerializer。
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());

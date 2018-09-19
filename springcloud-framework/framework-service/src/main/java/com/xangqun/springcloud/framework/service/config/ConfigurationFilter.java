@@ -45,12 +45,16 @@ public class ConfigurationFilter {
     public FilterRegistrationBean<CorsFilter> corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
+        // 允许cookies跨域
         config.setAllowCredentials(true);
         // 设置你要允许的网站域名，如果全允许则设为 *
         config.addAllowedOrigin("*");
         // 如果要限制 HEADER 或 METHOD 请自行更改
         config.addAllowedHeader("*");
+        // 允许提交请求的方法，*表示全部允许
         config.addAllowedMethod("*");
+        // 预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了
+        config.setMaxAge(18000L);
         source.registerCorsConfiguration("/**", config);
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean(new CorsFilter(source));
         // 这个顺序很重要哦，为避免麻烦请设置在最前

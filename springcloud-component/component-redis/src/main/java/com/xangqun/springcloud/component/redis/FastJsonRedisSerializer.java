@@ -11,6 +11,8 @@ import org.springframework.data.redis.serializer.SerializationException;
 import java.nio.charset.Charset;
 
 /**
+ * 对于需要序列化类的，注意没有默认构造器的会报错
+ * https://blog.csdn.net/wgzhl2008/article/details/82184240
  * @author laixiangqun
  * @since 2018-8-1
  */

@@ -1,5 +1,5 @@
 server:
-  port: 8762
+  port: 9210
   servlet:
     context-path: /
   http2:
@@ -12,7 +12,27 @@ server:
 spring:
   application:
     name: springcloud-gateway
+  redis:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+    cluster:
+      nodes: 10.101.70.158:7000,10.101.70.158:7001,10.101.70.158:7002,10.101.70.158:7003,10.101.70.158:7004,10.101.70.158:7005
+
 zuul:
+  include:
+    debug:
+      header: true
+  debug:
+    request: true
+    parameter: debugRequest
+  retryable: false    #关闭重试
+  sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+  custom-sensitive-headers: true #http://blog.didispace.com/spring-cloud-zuul-cookie-redirect/ zuul授权码跳转问题
+  add-host-header: true
   host:
     connect-timeout-millis: 60000
     max-per-route-connections: 200
@@ -25,6 +45,14 @@ zuul:
     semaphore:
       maxSemaphores: 1000
 
+#设置最大超时时间
+ribbon:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  ReadTimeout: 90000
+  ConnectTimeout: 90000
 
 #熔断配置
 hystrix:
@@ -33,7 +61,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 30000
+            timeoutInMilliseconds: 90000
 
 
 eureka:
@@ -73,4 +101,14 @@ management:
     health:
       show-details: ALWAYS
 
+security:
+  oauth2:
+    token:
+      store:
+        type: redis
+
+
+permit:
+  http_urls:  /test163/** , /api-auth/** , /health ,/doc.html,/test111 ,/api-user/users-anon/login ,/user-center/users-anon/login,/document.html,**/v2/api-docs
+  oauth_urls: /test163/** , /api-auth/** , /doc.html ,/test111 ,/api-user/users-anon/login,/user-center/users-anon/login,/document.html,**/v2/api-docs
 
