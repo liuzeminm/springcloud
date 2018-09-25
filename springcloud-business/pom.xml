@@ -23,6 +23,7 @@
         <module>springcloud-consumer-feign</module>
         <module>springcloud-consumer-scala</module>
         <module>springcloud-consumer-webflux</module>
+        <module>springcloud-consumer-webflux-kotlin</module>
     </modules>
 
 </project>
